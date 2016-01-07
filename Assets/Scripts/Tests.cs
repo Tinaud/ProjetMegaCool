@@ -5,20 +5,22 @@ public class Tests : MonoBehaviour
 {
     Dé ScriptDe;
     GameObject ObjetInstancie;
-    Transform Parent;
+    Transform CameraPos,
+              Parent;
    
     public GameObject Prefab;
 
     void Start()
     {
         Parent = transform;
+        CameraPos = Camera.main.transform;
     }
 
 	void Update () 
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            ObjetInstancie = Instantiate(Prefab);
+            ObjetInstancie = (GameObject)Instantiate(Prefab, new Vector3(CameraPos.position.x - 14, CameraPos.position.y, CameraPos.position.z + 5), Random.rotation);
             ObjetInstancie.transform.parent = Parent;
 
             ScriptDe = GetComponentInChildren<Dé>();

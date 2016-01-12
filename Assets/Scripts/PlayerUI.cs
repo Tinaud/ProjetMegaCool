@@ -10,7 +10,7 @@ public class PlayerUI : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        Info = GetComponent<GUIText>();
+        //Info = GetComponent<GUIText>();
         InfoMenu.GetComponent<PlayBouton>();
         switch (InfoMenu.nbJoueur)
         {

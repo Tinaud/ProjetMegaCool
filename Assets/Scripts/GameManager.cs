@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NewBehaviourScript : MonoBehaviour 
+public class GameManager : MonoBehaviour
 {
+    enum Phase { Evenement, Revenu, Construction, Fin };
+    
 	void Start () 
     {
-        Debug.Log(0);
+	
 	}
 
 	void Update () 

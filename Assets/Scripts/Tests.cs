@@ -18,7 +18,7 @@ public class Tests : MonoBehaviour
 
 	void Update () 
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             ObjetInstancie = (GameObject)Instantiate(Prefab, new Vector3(CameraPos.position.x - 14, CameraPos.position.y, CameraPos.position.z + 5), Random.rotation);
             ObjetInstancie.transform.parent = Parent;

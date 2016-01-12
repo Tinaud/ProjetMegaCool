@@ -4,7 +4,6 @@ using System.Collections;
 public class Dé : MonoBehaviour 
 {
     public float Patate;
-    public int ChiffreDe;
     public GameObject Plateforme;
 
     private Rigidbody rb;

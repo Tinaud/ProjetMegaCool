@@ -5,7 +5,14 @@ public class MenuPlayers : MonoBehaviour {
 
 	public int NbPlayer;
 	public int NbTurns;
-	public GameObject play;
+    public GameObject play;
+    public GameObject players2;
+    public GameObject players3;
+    public GameObject players4;
+    public GameObject turns10;
+    public GameObject turns15;
+    public GameObject turns20;
+    public GameObject topTable;
 
 	// Use this for initialization
 	void Start () {
@@ -22,26 +29,53 @@ public class MenuPlayers : MonoBehaviour {
 
 	public void player2 ()	{
 		NbPlayer = 2;
+        players2.SetActive(true);
+        players3.SetActive(false);
+        players4.SetActive(false);
 		Debug.Log("2 players");
 	}
 
 	public void player3 ()	{
-		NbPlayer = 3;
+        NbPlayer = 3;
+        players2.SetActive(false);
+        players3.SetActive(true);
+        players4.SetActive(false);
+        Debug.Log("3 players");
 	}
 
 	public void player4 ()	{
-		NbPlayer = 4;
+        NbPlayer = 4;
+        players2.SetActive(false);
+        players3.SetActive(false);
+        players4.SetActive(true);
+        Debug.Log("4 players");
 	}
 
-	public void turns10 ()	{
-		NbTurns = 10;
+	public void turn10 ()	{
+        NbTurns = 10;
+        turns10.SetActive(true);
+        turns15.SetActive(false);
+        turns20.SetActive(false);
+        Debug.Log("10 turns");
 	}
 
-	public void turns15 ()	{
-		NbTurns = 15;
+	public void turn15 ()	{
+        NbTurns = 15;
+        turns10.SetActive(false);
+        turns15.SetActive(true);
+        turns20.SetActive(false);
+        Debug.Log("15 turns");
 	}
 
-	public void turns20 ()	{
-		NbTurns = 20;
+	public void turn20 ()	{
+        NbTurns = 20;
+        turns10.SetActive(false);
+        turns15.SetActive(false);
+        turns20.SetActive(true);
+        Debug.Log("20 turns");
 	}
+
+    public void PlayButton ()    {
+        topTable.SetActive(false);
+    }
 }

@@ -8,16 +8,21 @@ public class GameManager : MonoBehaviour
     public GameObject prefab;
 
     private Dice diceScript;
+    private Events eventManager;
     private GameObject intanciatedObject;
     private int activePlayer,
                 actualPhase,
                 playerNumber;
+    private string currentEvent,
+                   eventName,
+                   eventBody;
     private Transform cameraPos, parent;
 
 	void Start () 
     {
-        actualPhase = (int)Phase.Breach;
+        actualPhase = (int)Phase.Event;
         cameraPos = Camera.main.transform;
+        eventManager = GetComponent<Events>();
         parent = transform;
 	}
 
@@ -26,6 +31,12 @@ public class GameManager : MonoBehaviour
 	    switch(actualPhase)
         {
             case (int)Phase.Event:
+                if(Input.GetKeyDown(KeyCode.A))
+                {
+                    currentEvent = eventManager.getEvent();
+                    Debug.Log(currentEvent);
+                }
+                    
                 break;
             case (int)Phase.Income:
                 break;

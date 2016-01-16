@@ -98,7 +98,7 @@ public class ParcManager : MonoBehaviour {
                     Debug.Log("il n'existe qu'un seul kiosque d'espionnage");
                     return success = false;
                 }
-            case default:
+            default:
                 return success = false;
         }
     }

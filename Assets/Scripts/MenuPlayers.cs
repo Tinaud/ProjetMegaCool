@@ -3,9 +3,13 @@ using System.Collections;
 
 public class MenuPlayers : MonoBehaviour {
 
-	public int NbPlayer;
-	public int NbTurns;
+    public int NbPlayer, NbTurns;
+    float X, Y, Z;
+    public bool playable;
+    public float patate;
     public GameObject play;
+    public GameObject menu;
+    public GameObject option;
     public GameObject players2;
     public GameObject players3;
     public GameObject players4;
@@ -13,17 +17,37 @@ public class MenuPlayers : MonoBehaviour {
     public GameObject turns15;
     public GameObject turns20;
     public GameObject topTable;
+    public Camera mainCamera;
 
 	// Use this for initialization
 	void Start () {
 		NbPlayer = 0;
 		NbTurns = 0	;
+        playable = false;
+        patate = 40F;
+        X = 0F;
+        Y = 0F;
+        Z = 0F;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (NbPlayer != 0 && NbTurns != 0)
 			play.SetActive(true);
+        if (playable)
+        {
+            mainCamera.transform.Rotate(Vector3.right * patate * Time.deltaTime);
+            if (mainCamera.transform.rotation.x >= .7)
+            {
+                playable = false;
+            }
+            if (X > -1F){
+                X += -1F;
+                Y += 5.9F;
+                Z += -1.67F;
+                mainCamera.transform.position = new Vector3(X, Y, Z);
+            }                
+        }
 			
 	}
 
@@ -77,5 +101,19 @@ public class MenuPlayers : MonoBehaviour {
 
     public void PlayButton ()    {
         topTable.SetActive(false);
+        playable = true;
+        Debug.Log("rotation863");
+    }
+
+    public void optionsmenu()
+    {
+        menu.SetActive(false);
+        option.SetActive(true);
+    }
+
+    public void backbutton()
+    {
+        menu.SetActive(true);
+        option.SetActive(false);
     }
 }

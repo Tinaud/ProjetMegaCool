@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 
     private Dice diceScript;
     private Events eventManager;
+
     private GameObject intanciatedObject;
     private int activePlayer,
                 actualPhase,
@@ -20,9 +21,10 @@ public class GameManager : MonoBehaviour
 
 	void Start () 
     {
-        actualPhase = (int)Phase.Event;
+        actualPhase = (int)Phase.Breach;
         cameraPos = Camera.main.transform;
         eventManager = GetComponent<Events>();
+        playerNumber = 4; //GetComponent<MenuPlayers>().NbPlayer;
         parent = transform;
 	}
 
@@ -52,6 +54,7 @@ public class GameManager : MonoBehaviour
                     diceScript = GetComponentInChildren<Dice>();
                     diceScript.ThrowDice();
                 }
+  
                 break;
 
             case (int)Phase.End:

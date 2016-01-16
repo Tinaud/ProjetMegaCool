@@ -76,7 +76,7 @@ public class MenuPlayers : MonoBehaviour {
         players3.SetActive(false);
         players4.SetActive(true);
         Debug.Log("4 players");
-        boardManager.nbPlayers = 3;
+        boardManager.nbPlayers = 4;
     }
 
 	public void turn10 ()	{

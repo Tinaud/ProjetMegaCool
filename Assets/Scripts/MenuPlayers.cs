@@ -17,6 +17,7 @@ public class MenuPlayers : MonoBehaviour {
     public GameObject turns15;
     public GameObject turns20;
     public GameObject topTable;
+    public GameObject gameInterface;
     public Camera mainCamera;
 
 	// Use this for initialization
@@ -28,6 +29,7 @@ public class MenuPlayers : MonoBehaviour {
         X = 0F;
         Y = 0F;
         Z = 0F;
+        gameInterface.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -40,13 +42,14 @@ public class MenuPlayers : MonoBehaviour {
             if (mainCamera.transform.rotation.x >= .7)
             {
                 playable = false;
+                gameInterface.SetActive(true);
             }
             if (X > -1F){
                 X += -1F;
-                Y += 5.9F;
+                Y += 6.9F;
                 Z += -1.67F;
                 mainCamera.transform.position = new Vector3(X, Y, Z);
-            }                
+            }        
         }
 			
 	}
@@ -57,6 +60,7 @@ public class MenuPlayers : MonoBehaviour {
         players3.SetActive(false);
         players4.SetActive(false);
 		Debug.Log("2 players");
+        boardManager.nbPlayers = 2;
 	}
 
 	public void player3 ()	{
@@ -66,6 +70,8 @@ public class MenuPlayers : MonoBehaviour {
         players4.SetActive(false);
         Debug.Log("3 players");
 	}
+        boardManager.nbPlayers = 3;
+    }
 
 	public void player4 ()	{
         NbPlayer = 4;
@@ -74,6 +80,8 @@ public class MenuPlayers : MonoBehaviour {
         players4.SetActive(true);
         Debug.Log("4 players");
 	}
+        boardManager.nbPlayers = 3;
+    }
 
 	public void turn10 ()	{
         NbTurns = 10;

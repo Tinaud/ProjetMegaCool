@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour
     private GameObject intanciatedObject;
     private int activePlayer,
                 actualPhase,
-                playerNumber;
+                playerNumber,
+                nbTurns;
     private string currentEvent,
                    eventName,
                    eventBody;
@@ -24,7 +25,8 @@ public class GameManager : MonoBehaviour
         actualPhase = (int)Phase.Breach;
         cameraPos = Camera.main.transform;
         eventManager = GetComponent<Events>();
-        playerNumber = 4; //GetComponent<MenuPlayers>().NbPlayer;
+        playerNumber = GetComponent<MenuPlayers>().NbPlayer;
+        nbTurns = GetComponent<MenuPlayers>().NbTurns;
         parent = transform;
 	}
 

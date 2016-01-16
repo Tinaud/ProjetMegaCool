@@ -57,9 +57,9 @@ public class Events : MonoBehaviour
         allEvents.Add( "Archaeological research : Triceratops,Spectacular discoveries have happened in the archaeological world. Triceratops's price is reduced by 5$ only for this turn.");
         allEvents.Add( "Archaeological research : Triceratops,Spectacular discoveries have happened in the archaeological world. Triceratops's price is reduced by 5$ only for this turn.");
         allEvents.Add( "Archaeological research : Triceratops,Spectacular discoveries have happened in the archaeological world. Triceratops's price is reduced by 5$ only for this turn.");
-        allEvents.Add( "Archaeological research : Tyrannosaurus,Spectacular discoveries have happened in the archaeological world. Tyrannosaurus's price is reduced by 5$ only for this turn.");
-        allEvents.Add( "Archaeological research : Tyrannosaurus,Spectacular discoveries have happened in the archaeological world. Tyrannosaurus's price is reduced by 5$ only for this turn.");
-        allEvents.Add( "Archaeological research : Tyrannosaurus,Spectacular discoveries have happened in the archaeological world. Tyrannosaurus's price is reduced by 5$ only for this turn.");
+        allEvents.Add( "Archaeological research : Tyrannosaurus,Spectacular discoveries have happened in the archaeological world. Tyrannosaurus's price is reduced by 10$ only for this turn.");
+        allEvents.Add( "Archaeological research : Tyrannosaurus,Spectacular discoveries have happened in the archaeological world. Tyrannosaurus's price is reduced by 10$ only for this turn.");
+        allEvents.Add( "Archaeological research : Tyrannosaurus,Spectacular discoveries have happened in the archaeological world. Tyrannosaurus's price is reduced by 10$ only for this turn.");
 	}
 	
 	void Update () 

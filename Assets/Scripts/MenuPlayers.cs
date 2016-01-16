@@ -18,17 +18,18 @@ public class MenuPlayers : MonoBehaviour {
     public GameObject turns20;
     public GameObject topTable;
     public Camera mainCamera;
+    public BoardManager boardManager;
 
-	// Use this for initialization
-	void Start () {
-		NbPlayer = 0;
-		NbTurns = 0	;
+    // Use this for initialization
+    void Start() {
+        NbPlayer = 0;
+        NbTurns = 0;
         playable = false;
         patate = 40F;
         X = 0F;
         Y = 0F;
         Z = 0F;
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -57,6 +58,7 @@ public class MenuPlayers : MonoBehaviour {
         players3.SetActive(false);
         players4.SetActive(false);
 		Debug.Log("2 players");
+        boardManager.nbPlayers = 2;
 	}
 
 	public void player3 ()	{
@@ -65,7 +67,8 @@ public class MenuPlayers : MonoBehaviour {
         players3.SetActive(true);
         players4.SetActive(false);
         Debug.Log("3 players");
-	}
+        boardManager.nbPlayers = 3;
+    }
 
 	public void player4 ()	{
         NbPlayer = 4;
@@ -73,7 +76,8 @@ public class MenuPlayers : MonoBehaviour {
         players3.SetActive(false);
         players4.SetActive(true);
         Debug.Log("4 players");
-	}
+        boardManager.nbPlayers = 3;
+    }
 
 	public void turn10 ()	{
         NbTurns = 10;

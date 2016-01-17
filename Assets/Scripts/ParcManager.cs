@@ -5,6 +5,7 @@ public class ParcManager : MonoBehaviour {
     public int cage;
     public int cash;
     public int visitors;
+    public int cashPerTurn;
     private enum Danger {High, Medium_high, Medium, Medium_low, Low};
     private enum Booth {Restaurant, Security, Bathroom, Casino, Spy, Paleontologist};
     private enum Dino { Brontosaurus, Velociraptor, Triceratops, Tyrannosaurus };
@@ -26,8 +27,8 @@ public class ParcManager : MonoBehaviour {
         cash = 15;
         visitors = 0;
         danger = Danger.Medium;
+        cashPerTurn = 0;
 
-	
 	}
 	
 	// Update is called once per frame
@@ -66,9 +67,11 @@ public class ParcManager : MonoBehaviour {
         switch (booth) {
             case Booth.Bathroom:
                 booths[2]++;
+                visitors = +3;
                 return success = true;
             case Booth.Casino:
                 booths[3]++;
+                cashPerTurn = +3;
                 return success = true;
             case Booth.Paleontologist:
                 if (booths[5] == 0 && paleontologist == false)
@@ -84,9 +87,12 @@ public class ParcManager : MonoBehaviour {
                 }
             case Booth.Restaurant:
                 booths[0]++;
+                visitors = +1;
+                cashPerTurn = +2;
                 return success = true;
             case Booth.Security:
                 booths[1]++;
+                danger = danger--;
                 return success = true;
             case Booth.Spy:
                 if (booths[4] == 0)

@@ -4,6 +4,7 @@ using System.Collections;
 public class BaseDinosaur : MovableTile {
 
 	protected int nbVisitorsAdded;  // nombre de visiteurs generes 
+    protected int nbVisitorsEaten;	// nombre de visiteurs pouvant etre manges par le dino
 
     public enum Dino {Brontosaurus, Velociraptor, Triceratop, Tyrannosaurus}; 
 	protected Dino type;			// enum ou classes derivees pour les differents types de dino
@@ -16,8 +17,6 @@ public class BaseDinosaur : MovableTile {
 		get {return nbVisitorsAdded;}
 		set {VisitorsAdded = value;}
 	}
-
-	protected int nbVisitorsEaten;	// nombre de visiteurs pouvant etre manges par le dino
 
 	public BaseDinosaur(int price, int space) : base(price, space) {}
 

@@ -18,5 +18,10 @@ public abstract class MovableTile {
 		space = new Tile[nbTiles]; 
 	}
 
+    public MovableTile(int nbTiles)
+    {
+        space = new Tile[nbTiles];
+    }
+
 	public abstract void ShowDetails ();
 }

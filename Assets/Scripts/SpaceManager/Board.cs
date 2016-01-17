@@ -7,17 +7,13 @@ public class Board {
 	int width;
 
 	public int Width {
-		get {
-			return width;
-		}
+		get {return width;}
 	}
 
 	int height;
 
 	public int Height {
-		get {
-			return height;
-		}
+		get {return height;}
 	}
 
 	public Board(int width = 15, int height = 10) {

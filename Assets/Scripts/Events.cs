@@ -40,8 +40,8 @@ public class Events : MonoBehaviour
         allEvents.Add( "Proliferation,Your dinosaurs will have new born soon! You can buy a second dinosaur only for this turn if you already have that same dinosaur in your park.");
         allEvents.Add( "Proliferation,Your dinosaurs will have new born soon! You can buy a second dinosaur only for this turn if you already have that same dinosaur in your park.");
         allEvents.Add( "Proliferation,Your dinosaurs will have new born soon! You can buy a second dinosaur only for this turn if you already have that same dinosaur in your park.");
-        allEvents.Add( "The mysterious men in white,     ");///TEMP  --TO DO--
-        allEvents.Add( "Know-it-all Joe,     ");            ///TEMP  --TO DO--
+        allEvents.Add( "The mysterious men in white,A mysterious man in a white suit is interested by your growing business. Every players may choose a free booth for his park! Starting with the player which has the least visitors, every player build one of the face-up booth. If there is a tie, you proceed clock-wise from the active first player. The event ends when all the players have built a free booth or there is no more face-up booths available. Three new face-up booths are revealed.");
+        allEvents.Add( "Know-it-all Joe,A mad know-it-all Joe enters your park angry. He is upset because, he says, you don't treat your dinosaurs respectfully. He then proceed to sabotage one of your cage this turn. You suffer immediately the effect of a breach in your park (but you will skip the breach phase this turn). Ignore this event if you have a paleontologist booth in your park or if you have no dinosaurs in your park.");
         allEvents.Add( "Summer camp,Some school buses are visiting your park! You gain 5 new guests and you receive 5$.");
         allEvents.Add( "Summer camp,Some school buses are visiting your park! You gain 5 new guests and you receive 5$.");
         allEvents.Add( "Summer camp,Some school buses are visiting your park! You gain 5 new guests and you receive 5$.");

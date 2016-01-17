@@ -3,9 +3,9 @@ using System.Collections;
 
 public class BaseDinosaur : MovableTile {
 
-	protected int nbVisitorsAdded; 	// nombre de visiteurs generes 
+	protected int nbVisitorsAdded;  // nombre de visiteurs generes 
 
-	public enum Dino {Brontosaurus, Velociraptor, Triceratop, Tyrannosaurus}; 
+    public enum Dino {Brontosaurus, Velociraptor, Triceratop, Tyrannosaurus}; 
 	protected Dino type;			// enum ou classes derivees pour les differents types de dino
 									// penser aux specificites de chaque type
 	public Dino Type {
@@ -22,7 +22,8 @@ public class BaseDinosaur : MovableTile {
 	public BaseDinosaur(int price, int space) : base(price, space) {}
 
 	// Pour afficher les specificites propres a chaque dinosaure au moment de l'achat
-	public override virtual void ShowDetails () {}
+	public override void ShowDetails () {}
+
 
 	// Convertit l'enum en string
 	public string DinoTypeToString(Dino type) {

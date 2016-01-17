@@ -19,6 +19,7 @@ public class MenuPlayers : MonoBehaviour {
     public GameObject topTable;
     public GameObject gameInterface;
     public Camera mainCamera;
+    public BoardManager boardManager; 
 
 	// Use this for initialization
 	void Start () {
@@ -69,7 +70,6 @@ public class MenuPlayers : MonoBehaviour {
         players3.SetActive(true);
         players4.SetActive(false);
         Debug.Log("3 players");
-	}
         boardManager.nbPlayers = 3;
     }
 
@@ -79,7 +79,7 @@ public class MenuPlayers : MonoBehaviour {
         players3.SetActive(false);
         players4.SetActive(true);
         Debug.Log("4 players");
-        boardManager.nbPlayers = 4;
+        boardManager.nbPlayers =4 ;
     }
 
 	public void turn10 ()	{

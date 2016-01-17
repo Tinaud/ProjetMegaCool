@@ -5,37 +5,52 @@ public class Tile : MonoBehaviour {
 
 	bool IsSelected = false;
 
-	public bool isAvailable = false;
+	bool isAvailable;
+
+	public enum ObjType {Cage, Dinosaur, Booth, Other};
+	ObjType type;
+
+	public bool IsAvailable {
+		get { return isAvailable; }
+		set { isAvailable = value; }
+	}
 
 	Board board;
 
-	int x;
-	public int X {
+	float x;
+	public float X {
 		get {return x;}
 	}
 
-	int z;
-	public int Z {
+	float z;
+	public float Z {
 		get {return z;}
 	}
 
-	public Tile(Board board, int x, int z) {
+	public Tile(Board board, float x, float z) {
 		this.board = board;
 		this.x = x;
 		this.z = z;
 	}
 		
+	void Start () {
+		this.isAvailable = true;
+	}
+
 	void Update () {
-		if (GetComponent<Renderer>().isVisible && Input.GetMouseButtonUp (0)) {
+
+		/* Pour la selection des tuiles
+		 * if (GetComponent<Renderer>().isVisible && Input.GetMouseButtonUp (0)) {
 			Vector3 camPos = Camera.main.WorldToScreenPoint (transform.position);
 			camPos.y = CameraOperator.InvertMouseY (camPos.y);
 			IsSelected = CameraOperator.selection.Contains (camPos);
 		}
+		*/
 
-		if (IsSelected)
-			GetComponent<Renderer>().material.color = Color.green;
-		else
+		if (isAvailable)
 			GetComponent<Renderer>().material.color = Color.white;
+		else
+			GetComponent<Renderer>().material.color = Color.red;
 
 	}
 }

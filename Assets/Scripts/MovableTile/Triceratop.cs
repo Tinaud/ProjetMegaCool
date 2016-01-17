@@ -11,7 +11,7 @@ public class Triceratop : BaseDinosaur {
 		Debug.Log ("Incredible! You have a triceratop in your park!");
 	}
 
-	public override virtual void ShowDetails () {
+	public override void ShowDetails () {
 		// Coute 10$ et 4 tuile, +5 visitors, -2 victims
 	}
 }

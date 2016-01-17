@@ -11,7 +11,7 @@ public class Velociraptor : BaseDinosaur {
 		Debug.Log ("Woaaaw ! You have a velociraptor in your park!");
 	}
 
-	public override virtual void ShowDetails () {
+	public override void ShowDetails () {
 		// Coute 5$ et 1 tuile, +2 visitors, -2 victims
 	}
 }

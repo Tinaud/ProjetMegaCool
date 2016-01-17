@@ -11,7 +11,7 @@ public class Brontosaurus : BaseDinosaur {
 		Debug.Log ("Amazing ! You have a brontosaurus in your park!");
 	}
 
-	public override virtual void ShowDetails () {
+	public override void ShowDetails () {
 		// Coute 2$ et 2 tuiles, +1 visitors, 0 victims
 	}
 

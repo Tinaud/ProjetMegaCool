@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Tile : MonoBehaviour {
 
-	bool IsSelected = false;
+	//bool IsSelected = false;
 
 	bool isAvailable;
 

@@ -33,9 +33,9 @@ public class SnappingTool : MonoBehaviour {
 				transform.position = rayPoint;
 
 				for (float x = X - 1; x < X + 2; x++) {
-					if (x != 0) {
+					if (x != 0 && x < 11) {
 						for (float z = Z - 1; z < Z + 2; z++) {
-							if (z != 0) {
+							if (z != 0 && z < 15) {
 								tile = GameObject.Find ("Board_P" + playerNo + "/Tile_" + x + "_" + z);
 								tile.GetComponent<Tile> ().IsAvailable = false;
 							}

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject prefab;
 
+    private bool isFinish;
     private Dice diceScript;
     private Events eventManager;
 
@@ -15,6 +17,7 @@ public class GameManager : MonoBehaviour
                 actualPhase,
                 playerNumber,
                 nbTurns;
+    private List<ParcManager> playerList = new List<ParcManager>();
     private string currentEvent,
                    eventName,
                    eventBody;
@@ -22,45 +25,79 @@ public class GameManager : MonoBehaviour
 
 	void Start () 
     {
-        actualPhase = (int)Phase.Breach;
+        actualPhase = (int)Phase.Event;
         cameraPos = Camera.main.transform;
         eventManager = GetComponent<Events>();
-        playerNumber = GetComponent<MenuPlayers>().NbPlayer;
-        nbTurns = GetComponent<MenuPlayers>().NbTurns;
+        playerNumber = 4;//GetComponent<MenuPlayers>().NbPlayer;
+        nbTurns = 10;// GetComponent<MenuPlayers>().NbTurns;
         parent = transform;
+        isFinish = false;
+
+        for (int i = 0; i < playerNumber; i++)
+        {
+            Debug.Log("Player created! :D");
+            ParcManager player = new ParcManager();
+            playerList.Add(player);
+        }
+
+        StartCoroutine(myCoroutine());
 	}
 
-	void Update () 
+    IEnumerator myCoroutine()
     {
-	    switch(actualPhase)
+        while (nbTurns > 0)
         {
-            case (int)Phase.Event:
-                if(Input.GetKeyDown(KeyCode.A))
-                {
+            switch (actualPhase)
+            {
+                case (int)Phase.Event:
+                    Debug.Log("Event phase");
+                    yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.A));
+
                     currentEvent = eventManager.getEvent();
                     Debug.Log(currentEvent);
-                }
                     
-                break;
-            case (int)Phase.Income:
-                break;
-            case (int)Phase.Building:
-                break;
+                    actualPhase++;
 
-            case (int)Phase.Breach:
-                if (Input.GetKeyDown(KeyCode.A))
-                {
-                    intanciatedObject = (GameObject)Instantiate(prefab, new Vector3(cameraPos.position.x, cameraPos.position.y, cameraPos.position.z + 10), Quaternion.identity);
-                    intanciatedObject.transform.parent = parent;
+                    break;
+                case (int)Phase.Income:
+                    for (int i = 0; i < playerNumber; i++)
+                        playerList[i].cash += playerList[i].cashPerTurn;
+                    actualPhase++;
+                    break;
+                case (int)Phase.Building:
+                    Debug.Log("Build Phase");
+                    actualPhase++;
+                    break;
 
-                    diceScript = GetComponentInChildren<Dice>();
-                    diceScript.ThrowDice();
-                }
-  
-                break;
+                case (int)Phase.Breach:
+                    for (int i = 0; i < playerNumber; i++)
+                    {
+                        Debug.Log("Dice part!");
+                        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.A));
+                        {
+                            intanciatedObject = (GameObject)Instantiate(prefab, new Vector3(cameraPos.position.x, cameraPos.position.y, cameraPos.position.z + 10), Quaternion.identity);
+                            intanciatedObject.transform.parent = parent;
 
-            case (int)Phase.End:
-                break;
+                            diceScript = GetComponentInChildren<Dice>();
+                            //diceScript.ThrowDice();
+
+                            yield return new WaitWhile(() => diceScript.isSpinning);
+                            Debug.Log(diceScript.diceResult);
+                            if (diceScript.diceResult == 1)
+                                playerList[i].Breach();
+                        }
+                    }
+                    actualPhase++;
+
+                    break;
+
+                case (int)Phase.End:
+                    actualPhase = 0;
+                    nbTurns--;
+                    break;
+            }
+
+            yield return new WaitForSeconds(1f);
         }
-	}
+    }
 }

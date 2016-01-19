@@ -20,7 +20,7 @@ public class SnappingTool : MonoBehaviour {
 		rayPoint.x = Mathf.Round(rayPoint.x);
 		rayPoint.z = Mathf.Round(rayPoint.z);
 
-		GameObject tile = GameObject.Find ("Tile_" + (int)rayPoint.x + "_" + (int)rayPoint.z);
+		GameObject tile = GameObject.Find ("Tile_" + Mathf.Round(rayPoint.x*2) + "_" + Mathf.Round(rayPoint.z*2));
 		rayPoint = tile.transform.position;
 		rayPoint.y = 20.1f;
 		transform.position = rayPoint;

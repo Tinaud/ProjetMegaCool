@@ -3,33 +3,32 @@ using System.Collections;
 
 public class Dice : MonoBehaviour 
 {
+    public bool isSpinning;
+    public int diceResult;
     private Transform dice;
-    private bool isSpinning;
     private int patate;  //Random Number
 
-    void Start()
+    void Awake()
     {
         dice = GetComponent<Transform>();
-        isSpinning = false;
+        isSpinning = true;
+        StartCoroutine(MyCoroutine());
     }
 
     void Update()
     {
         if (isSpinning)
             dice.Rotate(20 * Random.value, 20 * Random.value, 20 * Random.value);
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (isSpinning)
-                StopDice();
-            else
-                ThrowDice();
-        }
     }
 
     IEnumerator MyCoroutine()
     {
+        ThrowDice();
+        yield return new WaitForSeconds(2F);
+        StopDice();
+
         patate = Random.Range(1, 7);
+        diceResult = patate;
 
         switch (patate)
         {
@@ -63,14 +62,13 @@ public class Dice : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    public void ThrowDice()
+    void ThrowDice()
     {
         isSpinning = true;
     }
 
-    public void StopDice()
+    void StopDice()
     {
         isSpinning = false;
-        StartCoroutine(MyCoroutine());
     }
 }

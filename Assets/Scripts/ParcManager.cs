@@ -20,7 +20,6 @@ public class ParcManager : MonoBehaviour {
     private int[] booths;
     private bool tyrannosaurusDanger;
 
-    // Use this for initialization
     void Start () {
 
         dinos = new int[] { 0, 0, 0, 0 };
@@ -33,127 +32,136 @@ public class ParcManager : MonoBehaviour {
         paleontologist = false;
         tyrannosaurusDanger = false;
         spy = false;
-
     }
 	
-	// Update is called once per frame
-	void Update () {
-    }
-
-    bool addDino(Dino dinosaurs) { // trouver un moyen d'aller chercher le prix des dinosaures directement dans l'objet du dinosaure.
-        switch (dinosaurs) {
+    bool addDino(Dino dinosaurs) // trouver un moyen d'aller chercher le prix des dinosaures directement dans l'objet du dinosaure.
+    { 
+        switch (dinosaurs) 
+        {
             case Dino.Brontosaurus:
-                if (cash - 2 >= 0)
+                if (cash >= 2)
                 {
-                    visitors = +1;
-                    cash = -2;
+                    visitors += 1;
+                    cash -= 2;
                     dinos[0]++;
-                    return success = true;
+                    return true;
                 }
-                else {
+                else 
+                {
                     Debug.Log("Not enough funds!");
-                    return success = false;
+                    return false;
                 }
             case Dino.Triceratops:
-                if (cash - 5 >= 0)
+                if (cash >= 5)
                 {
-                    visitors = +5;
-                    cash = -5;
+                    visitors += 5;
+                    cash -= 5;
                     dinos[2]++;
-                    return success = true;
+                    return true;
                 }
-                else {
+                else 
+                {
                     Debug.Log("Not enough funds!");
-                    return success = false;
+                    return false;
                 }
             case Dino.Tyrannosaurus:
-                if (cash - 25 >= 0)
+                if (cash >= 25)
                 {
-                    cash = -25;
-                    visitors = +10;
+                    cash -= 25;
+                    visitors += 10;
                     dinos[3]++;
                     if (tyrannosaurusDanger == false)
                     {
                         tyrannosaurusDanger = true;
                         danger--;
                     }
-                    return success = true;
+                    return true;
                 }
-                else {
+                else 
+                {
                     Debug.Log("Not enough funds!");
-                    return success = false;
+                    return false;
                 }
             case Dino.Velociraptor:
-                if (cash - 5 <= 0)
+                if (cash >= 5)
                 {
-                    cash = -5;
-                    visitors = +2;
+                    cash -= 5;
+                    visitors += 2;
                     dinos[1]++;
-                    return success = true;
+                    return true;
                 }
                 else {
                     Debug.Log("Not enough funds!");
-                    return success = false;
+                    return false;
                 }
-            default: Debug.Log("Dinosaure type not recognized"); return success = false; 
+            default: Debug.Log("Dinosaure type not recognized"); return false; 
         }
     }
 
-    bool addBooth(Booth booth) {
-        switch (booth) {
-            case Booth.Bathroom:
-                booths[2]++;
-                visitors = +3;
-                cash = cash - 3; //aller chercher le officialPrice() au lieu du 3
-                return success = true;
-            case Booth.Casino:
-                booths[3]++;
-                cashPerTurn = +3;
-                cash = cash - 3; //aller chercher le officialPrice() au lieu du 3
-                return success = true;
-            case Booth.Paleontologist:
-                if (booths[5] == 0 && paleontologist == false)
-                {
-                    booths[5] = 1;
-                    paleontologist = true;
-                    cash = cash - 3; //aller chercher le officialPrice() au lieu du 3
-                    return success = true;
-                }
-                else
-                {
-                    Debug.Log("déjà un kiosque de paléontologue");
-                    return success = false;
-                }
+    bool addBooth(Booth booth) 
+    {
+        switch (booth) 
+        {
             case Booth.Restaurant:
                 booths[0]++;
-                visitors = +1;
-                cashPerTurn = +2;
-                cash = cash - 3; //aller chercher le officialPrice() au lieu du 3
-                return success = true;
+                visitors += 1;
+                cashPerTurn += 2;
+                cash -= 3; //aller chercher le officialPrice() au lieu du 3
+                return true;
             case Booth.Security:
                 booths[1]++;
-                danger = danger++;
-                cash = cash - 3; //aller chercher le officialPrice() au lieu du 3
-                return success = true;
+                danger++;
+                cash -= 3; //aller chercher le officialPrice() au lieu du 3
+                return true;
+            case Booth.Bathroom:
+                booths[2]++;
+                visitors += 3;
+                cash -= 3; //aller chercher le officialPrice() au lieu du 3
+                return true;
+            case Booth.Casino:
+                booths[3]++;
+                cashPerTurn += 3;
+                cash -= 3; //aller chercher le officialPrice() au lieu du 3
+                return true;
             case Booth.Spy:
                 if (booths[4] == 0)
                 {
                     booths[4] = 1;
                     spy = true;
-                    cash = cash - 3; //aller chercher le officialPrice() au lieu du 3
-                    return success = true;
+                    cash -= 3; //aller chercher le officialPrice() au lieu du 3
+                    return true;
                 }
-                else {
+                else
+                {
                     Debug.Log("il n'existe qu'un seul kiosque d'espionnage");
-                    return success = false;
+                    return false;
+                }
+            case Booth.Paleontologist:
+                if (booths[5] == 0 && paleontologist == false)
+                {
+                    booths[5] = 1;
+                    paleontologist = true;
+                    cash -= 3; //aller chercher le officialPrice() au lieu du 3
+                    return true;
+                }
+                else
+                {
+                    Debug.Log("déjà un kiosque de paléontologue");
+                    return false;
                 }
             default:
-                Debug.Log("Booth type not recognized"); return success = false;
+                Debug.Log("Booth type not recognized"); return false;
         }
     }
 
-    public void Spying() {
+    public void Spying() 
+    {
         //copier un dinosaure dans un parc adverse
         spy = false;
+    }
+
+    public void Breach()
+    {
+        Debug.Log("BREACH!!!");
     }
 }

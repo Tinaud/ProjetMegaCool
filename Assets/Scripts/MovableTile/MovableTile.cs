@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class MovableTile {
+public abstract class MovableTile : MonoBehaviour{
 
 	Tile[] space;
 	protected int price;

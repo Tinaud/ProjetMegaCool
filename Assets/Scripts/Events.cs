@@ -6,7 +6,7 @@ public class Events : MonoBehaviour
 {
     public List<string> allEvents = new List<string>();
 
-	void Start () 
+	void Awake () 
     {
         allEvents.Add("Endangered species,Scientists want to help endangered species! The player that pocess the most dinosaur loses his most expensive (only one). If two or more players are equals, every of them must do this event. Ignore this event if no one have dinosaur."); 
 		allEvents.Add( "Pay day!,Every player receive 10$!");
@@ -60,11 +60,6 @@ public class Events : MonoBehaviour
         allEvents.Add( "Archaeological research : Tyrannosaurus,Spectacular discoveries have happened in the archaeological world. Tyrannosaurus's price is reduced by 10$ only for this turn.");
         allEvents.Add( "Archaeological research : Tyrannosaurus,Spectacular discoveries have happened in the archaeological world. Tyrannosaurus's price is reduced by 10$ only for this turn.");
         allEvents.Add( "Archaeological research : Tyrannosaurus,Spectacular discoveries have happened in the archaeological world. Tyrannosaurus's price is reduced by 10$ only for this turn.");
-	}
-	
-	void Update () 
-    {
-	
 	}
 
     public string getEvent()

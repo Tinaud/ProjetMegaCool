@@ -44,16 +44,15 @@ public class Board {
 		}
 
 		Debug.Log ("Board created with " + (width * height) + " tiles.");
-		Debug.Log ("blabla : " + Mathf.Round (3.25f * 2));
 	}
 
-	public Tile GetTileAt(int x, int z) {
+	public bool GetTileAt(int x, int z) {
 		if (x > width || x < 0 || z > height || z < 0) {
 			Debug.LogError ("Tile (" + x + "," + z + ") is out of range.");
-			return null;
+			return false;
 		}
 
-		return tiles [x, z];
+		return true;
 	}
 
 }

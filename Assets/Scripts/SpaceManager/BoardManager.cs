@@ -25,19 +25,22 @@ public class BoardManager : MonoBehaviour {
 				for (float z = 0.5f; countZ < boards[n].Width; z += 0.55f) {
 					if (countX > 2 || countZ > 3) {
 						GameObject tile = (GameObject)Instantiate (plane);
-						tile.name = "Tile_" + countX + "_" + countZ;
 						tile.transform.parent = board.transform;
 						switch (n) {
 						case 0: 
+							tile.name = "Tile_" + countX + "_" + countZ;
 							tile.transform.position = new Vector3 (transform.position.x + x, transform.position.y, transform.position.z + z);
 							break;
 						case 1:
+							tile.name = "Tile_" + -countX + "_" + countZ;
 							tile.transform.position = new Vector3 (transform.position.x - x, transform.position.y, transform.position.z + z);
 							break;
 						case 2:
+							tile.name = "Tile_" + -countX + "_" + -countZ;
 							tile.transform.position = new Vector3 (transform.position.x - x, transform.position.y, transform.position.z - z);
 							break;
 						case 3:
+							tile.name = "Tile_" + countX + "_" + -countZ;
 							tile.transform.position = new Vector3 (transform.position.x + x, transform.position.y, transform.position.z - z);
 							break;
 						}
@@ -47,15 +50,6 @@ public class BoardManager : MonoBehaviour {
 				countX++;
 			}
 		}
-	}
-
-	public string GetTileAt(int b, int x, int z) {
-		if (x > boards[b].Width || x < 0 || z > boards[b].Height || z < 0) {
-			Debug.LogError ("Tile (" + x + "," + z + ") is out of range.");
-			return null;
-		}
-
-		return "Tile_" + boards [b].GetTileAt (x, z).X + "_" + boards [b].GetTileAt (x, z).Z ;
 	}
 
 	// Update is called once per frame

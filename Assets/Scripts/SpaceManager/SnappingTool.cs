@@ -5,6 +5,10 @@ public class SnappingTool : MonoBehaviour {
 	private Color mouseOverColor = Color.green;
 	private float distance;
 
+	bool isGood;
+	public int playerNo = 1;
+	GameObject board;
+
 	void OnMouseDown()
 	{
 		distance = Vector3.Distance(transform.position, Camera.main.transform.position);
@@ -12,35 +16,43 @@ public class SnappingTool : MonoBehaviour {
 		
 	void OnMouseDrag()
 	{
-		GetComponent<Renderer>().material.color = mouseOverColor;
+		board = GameObject.Find ("Board_P" + playerNo);
+		GetComponent<Renderer> ().material.color = mouseOverColor;
 
-		GameObject board = GameObject.Find ("Board");
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		Vector3 rayPoint = ray.GetPoint(distance);
-		//rayPoint.x = Mathf.Round(rayPoint.x);
-		//rayPoint.z = Mathf.Round(rayPoint.z);
+		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+		Vector3 rayPoint = ray.GetPoint (distance);
+		float X = Mathf.Round (rayPoint.x * 2f);
+		float Z = Mathf.Round (rayPoint.z * 2f);
 
-		GameObject tile = GameObject.Find ("Tile_" + Mathf.Round(rayPoint.x*2f) + "_" + Mathf.Round(rayPoint.z*2f));
-		rayPoint = tile.transform.position;
-		rayPoint.y = 20.1f;
-		transform.position = rayPoint;
+		if (Mathf.Abs (X) >= 3 || Mathf.Abs (Z) >= 4) {
+			if (Mathf.Abs (X) < 11 && Mathf.Abs (Z) < 15) {
+				//Debug.Log ("tile_" + X + "_" + Z);
+				GameObject tile = GameObject.Find ("Board_P" + playerNo + "/Tile_" + X + "_" + Z);
+				rayPoint = tile.transform.position;
+				rayPoint.y = 20.1f;
+				transform.position = rayPoint;
 
-		/*for (int x = ((int)rayPoint.x) - 1; x <= ((int)rayPoint.x) + 1; x++) {
-			if (x != 0) {
-				for (int z = ((int)rayPoint.z) - 1; z <= ((int)rayPoint.z) + 1; z++) {
-					if (z != 0) {
-						tile = GameObject.Find ("Tile_" + x + "_" + z);
-						if(tile != null)
-							tile.GetComponent<Tile> ().IsAvailable = false;
+				for (float x = X - 1; x < X + 2; x++) {
+					if (x != 0) {
+						for (float z = Z - 1; z < Z + 2; z++) {
+							if (z != 0) {
+								tile = GameObject.Find ("Board_P" + playerNo + "/Tile_" + x + "_" + z);
+								tile.GetComponent<Tile> ().IsAvailable = false;
+							}
+						}
 					}
 				}
 			}
-		}*/
-		tile.GetComponent<Tile> ().IsAvailable = false;
+		}
 	}
 
 	void Update()
 	{
 		
 	}
+
+	void Start() {
+
+	}
+				
 }

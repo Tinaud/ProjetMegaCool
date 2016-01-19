@@ -17,10 +17,10 @@ public class SnappingTool : MonoBehaviour {
 		GameObject board = GameObject.Find ("Board");
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		Vector3 rayPoint = ray.GetPoint(distance);
-		rayPoint.x = Mathf.Round(rayPoint.x);
-		rayPoint.z = Mathf.Round(rayPoint.z);
+		//rayPoint.x = Mathf.Round(rayPoint.x);
+		//rayPoint.z = Mathf.Round(rayPoint.z);
 
-		GameObject tile = GameObject.Find ("Tile_" + Mathf.Round(rayPoint.x*2) + "_" + Mathf.Round(rayPoint.z*2));
+		GameObject tile = GameObject.Find ("Tile_" + Mathf.Round(rayPoint.x*2f) + "_" + Mathf.Round(rayPoint.z*2f));
 		rayPoint = tile.transform.position;
 		rayPoint.y = 20.1f;
 		transform.position = rayPoint;

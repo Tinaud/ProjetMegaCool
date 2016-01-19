@@ -44,6 +44,7 @@ public class Board {
 		}
 
 		Debug.Log ("Board created with " + (width * height) + " tiles.");
+		Debug.Log ("blabla : " + Mathf.Round (3.25f * 2));
 	}
 
 	public Tile GetTileAt(int x, int z) {

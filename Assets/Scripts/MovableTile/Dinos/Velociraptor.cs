@@ -18,7 +18,4 @@ public class Velociraptor : BaseDinosaur
         // Coute 5$ et 1 tuile, +2 visitors, -2 victims
     }
 
-    void Start()
-    {
-    }
 }

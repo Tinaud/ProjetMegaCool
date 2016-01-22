@@ -5,9 +5,10 @@ public class Dice : MonoBehaviour
 {
     public bool isSpinning;
     public int diceResult;
-    private Transform dice;
-    private int patate;  //Random Number
 
+    private int patate;  //Random Number
+    private Transform dice;
+    
     void Awake()
     {
         dice = GetComponent<Transform>();

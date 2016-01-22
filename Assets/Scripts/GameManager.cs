@@ -7,20 +7,19 @@ public class GameManager : MonoBehaviour
     enum Phase { Event, Income, Building, Breach, End };
 
     public GameObject prefab;
+    public GameObject park;
 
     private bool isFinish;
+    private Component[] tempList;
     private Dice diceScript;
     private Events eventManager;
-
     private GameObject intanciatedObject;
     private int activePlayer,
                 actualPhase,
-                playerNumber,
-                nbTurns;
+                nbTurns,
+                playerNumber;
     private List<ParcManager> playerList = new List<ParcManager>();
-    private string currentEvent,
-                   eventName,
-                   eventBody;
+    private string currentEvent;
     private Transform cameraPos, parent;
 
 	void Start () 
@@ -36,14 +35,19 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < playerNumber; i++)
         {
             Debug.Log("Player created! :D");
-            ParcManager player = new ParcManager();
-            playerList.Add(player);
+            intanciatedObject = (GameObject)Instantiate(park, new Vector3(cameraPos.position.x, cameraPos.position.y, cameraPos.position.z + 10), Quaternion.identity);
+            intanciatedObject.transform.parent = parent;
         }
 
-        StartCoroutine(myCoroutine());
+        tempList = GetComponentsInChildren<ParcManager>();
+
+        foreach (ParcManager players in tempList)
+            playerList.Add(players);
+
+        StartCoroutine(gameTurn());
 	}
 
-    IEnumerator myCoroutine()
+    IEnumerator gameTurn()
     {
         while (nbTurns > 0)
         {
@@ -52,16 +56,17 @@ public class GameManager : MonoBehaviour
                 case (int)Phase.Event:
                     Debug.Log("Event phase");
                     yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.A));
-
-                    currentEvent = eventManager.getEvent();
+                    int test = eventManager.getEvent();
+                    eventManager.applyEventEffect(test, ref playerList);
                     Debug.Log(currentEvent);
                     
                     actualPhase++;
 
                     break;
                 case (int)Phase.Income:
-                    for (int i = 0; i < playerNumber; i++)
+                    for(int i = 0; i < playerNumber; i++)
                         playerList[i].cash += playerList[i].cashPerTurn;
+  
                     actualPhase++;
                     break;
                 case (int)Phase.Building:
@@ -79,7 +84,6 @@ public class GameManager : MonoBehaviour
                             intanciatedObject.transform.parent = parent;
 
                             diceScript = GetComponentInChildren<Dice>();
-                            //diceScript.ThrowDice();
 
                             yield return new WaitWhile(() => diceScript.isSpinning);
                             Debug.Log(diceScript.diceResult);
@@ -88,7 +92,6 @@ public class GameManager : MonoBehaviour
                         }
                     }
                     actualPhase++;
-
                     break;
 
                 case (int)Phase.End:

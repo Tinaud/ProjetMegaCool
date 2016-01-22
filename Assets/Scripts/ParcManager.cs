@@ -6,7 +6,6 @@ public class ParcManager : MonoBehaviour {
     public int cash;
     public int visitors;
     public int cashPerTurn;
-    public bool success;
     public bool paleontologist;
     public bool spy;
     public int playerIdentity;
@@ -15,12 +14,11 @@ public class ParcManager : MonoBehaviour {
     private enum Dino { Brontosaurus, Velociraptor, Triceratops, Tyrannosaurus };
     private Dino dinosaurs;
     private Booth booth;
-    private Danger danger;
+    public Danger danger;
     private int[] dinos;
     private int[] booths;
-    private bool tyrannosaurusDanger;
 
-    void Start () {
+    void Awake () {
 
         dinos = new int[] { 0, 0, 0, 0 };
         booths = new int[] { 0, 0, 0, 0, 0, 0 };
@@ -30,7 +28,6 @@ public class ParcManager : MonoBehaviour {
         danger = Danger.Medium;
         cashPerTurn = 0;
         paleontologist = false;
-        tyrannosaurusDanger = false;
         spy = false;
     }
 	
@@ -70,11 +67,7 @@ public class ParcManager : MonoBehaviour {
                     cash -= 25;
                     visitors += 10;
                     dinos[3]++;
-                    if (tyrannosaurusDanger == false)
-                    {
-                        tyrannosaurusDanger = true;
-                        danger--;
-                    }
+                    danger--;
                     return true;
                 }
                 else 

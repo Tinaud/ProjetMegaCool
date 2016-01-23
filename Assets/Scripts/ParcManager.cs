@@ -9,17 +9,17 @@ public class ParcManager : MonoBehaviour {
     public bool paleontologist;
     public bool spy;
     public int playerIdentity;
-    private enum Danger { High, Medium_high, Medium, Medium_low, Low };
+    public enum Danger { High, Medium_high, Medium, Medium_low, Low };
     private enum Booth { Restaurant, Security, Bathroom, Casino, Spy, Paleontologist };
     private enum Dino { Brontosaurus, Velociraptor, Triceratops, Tyrannosaurus };
     private Dino dinosaurs;
     private Booth booth;
-    private Danger danger;
+    public Danger danger;
     private int[] dinos;
     private int[] booths;
-    private BoardManager SpaceManager;
+    private GameObject Board;
 
-    void Awake () {
+    void Awake(int identity) {
 
         dinos = new int[] { 0, 0, 0, 0 };
         booths = new int[] { 0, 0, 0, 0, 0, 0 };
@@ -30,9 +30,35 @@ public class ParcManager : MonoBehaviour {
         cashPerTurn = 0;
         paleontologist = false;
         spy = false;
-        SpaceManager = GetComponent<BoardManager>();
+        Board = new GameObject();
+        Board.AddComponent<BoardManager>();
+        playerIdentity = identity;
     }
-	
+
+    public Danger dangerLevel
+    {
+        get { return danger; }
+        set { danger = value; }
+    }
+
+    public int CashFlow
+    {
+        get { return cashPerTurn; }
+        set { cashPerTurn = value; }
+    }
+
+    public int CashMoney
+    {
+        get { return cash; }
+        set { cash = value; }
+    }
+
+    public int nbVisitors
+    {
+        get { return visitors; }
+        set { visitors = value; }
+    }
+
     bool addDino(Dino dinosaurs) // trouver un moyen d'aller chercher le prix des dinosaures directement dans l'objet du dinosaure.
     { 
         switch (dinosaurs) 
@@ -188,5 +214,37 @@ public class ParcManager : MonoBehaviour {
                 Debug.Log("il n'y a aucun dinosaure dans votre parc...");
                 break;
         }
+    }
+
+    bool noDinosaurs()
+    {
+        int temp = 0;
+        for (int i = 1; i < 4; i++)
+        {
+            if (dinos[i] != 0)
+            {
+                temp += dinos[i];
+            }
+        }
+        if (temp == 0)
+            return true; //aucun dinosaures dans le parc
+        else
+            return false; // des dinosaures dans le parc.
+    }
+
+    int mostDangerous()
+    {
+        int temp = 9;
+        for (int i = 1; i < 4; i++)
+        {
+            if (dinos[i] != 0)
+            {
+                temp = i;
+            }
+        }
+        if (temp != 9)
+            return temp; // 0 = bronto, 1 = velo, 2 = trice, 3 = Tyra
+        else
+            return -1; //aucun dinosaur dans le parc
     }
 }

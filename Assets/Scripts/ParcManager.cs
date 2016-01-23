@@ -14,9 +14,10 @@ public class ParcManager : MonoBehaviour {
     private enum Dino { Brontosaurus, Velociraptor, Triceratops, Tyrannosaurus };
     private Dino dinosaurs;
     private Booth booth;
-    public Danger danger;
+    private Danger danger;
     private int[] dinos;
     private int[] booths;
+    private BoardManager SpaceManager;
 
     void Awake () {
 
@@ -29,6 +30,7 @@ public class ParcManager : MonoBehaviour {
         cashPerTurn = 0;
         paleontologist = false;
         spy = false;
+        SpaceManager = GetComponent<BoardManager>();
     }
 	
     bool addDino(Dino dinosaurs) // trouver un moyen d'aller chercher le prix des dinosaures directement dans l'objet du dinosaure.
@@ -155,6 +157,36 @@ public class ParcManager : MonoBehaviour {
 
     public void Breach()
     {
+        int temp = 9;
+        for (int i = 1; i < 4; i++)
+        {
+            if (dinos[i] != 0)
+            {
+                temp = i;
+            }
+        }
         Debug.Log("BREACH!!!");
+        switch (temp)
+        {
+            case 0:
+                Debug.Log("Un brontosaure s'est échappé de sa cage! OK.");
+                visitors -= 0;
+                break;
+            case 1:
+                Debug.Log("Yikes! un vélociraptor s'est échappé de sa cage!");
+                visitors -= 1;
+                break;
+            case 2:
+                Debug.Log("Ouch! Un tricératops s'est échappé de sa cage!");
+                visitors -= 2;
+                break;
+            case 3:
+                Debug.Log("OMFG! Un tyranosaure s'est échappé de sa cage!");
+                visitors -= 5;
+                break;
+            default:
+                Debug.Log("il n'y a aucun dinosaure dans votre parc...");
+                break;
+        }
     }
 }

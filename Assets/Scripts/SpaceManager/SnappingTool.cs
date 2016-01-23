@@ -37,7 +37,7 @@ public class SnappingTool : MonoBehaviour {
 						for (float z = Z - 1; z < Z + 2; z++) {
 							if (z != 0 && z < 15) {
 								tile = GameObject.Find ("Board_P" + playerNo + "/Tile_" + x + "_" + z);
-								tile.GetComponent<Tile> ().IsAvailable = false;
+								tile.GetComponent<Tile> ().SetUnavailable ();
 							}
 						}
 					}

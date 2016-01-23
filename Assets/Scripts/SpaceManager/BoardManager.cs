@@ -5,55 +5,65 @@ public class BoardManager : MonoBehaviour {
 
 	public GameObject plane;
 
+	ParcManager parc;
 
-	public int nbPlayers = 2;
+	int width;
+	int height;
 
-	Board[] boards;
+	GameObject[,] tiles;
+
 	// Use this for initialization
 	void Start () {
-		boards = new Board[nbPlayers];
-
-		for (int n = 0; n < nbPlayers; n++) {
-			boards [n] = new Board ();
-			GameObject board = new GameObject ();
-			board.name = "Board_P" + (n + 1);
-			board.transform.parent = transform;
-			// Creer un carre (plane) pour chaque tuile
-			int countX = 1;		
-			for (float x = 0.5f; countX < boards[n].Height; x += 0.55f) {
-				int countZ = 1;
-				for (float z = 0.5f; countZ < boards[n].Width; z += 0.55f) {
-					if (countX > 2 || countZ > 3) {
-						GameObject tile = (GameObject)Instantiate (plane);
-						tile.transform.parent = board.transform;
-						switch (n) {
-						case 0: 
-							tile.name = "Tile_" + countX + "_" + countZ;
-							tile.transform.position = new Vector3 (transform.position.x + x, transform.position.y, transform.position.z + z);
-							break;
-						case 1:
-							tile.name = "Tile_" + -countX + "_" + countZ;
-							tile.transform.position = new Vector3 (transform.position.x - x, transform.position.y, transform.position.z + z);
-							break;
-						case 2:
-							tile.name = "Tile_" + -countX + "_" + -countZ;
-							tile.transform.position = new Vector3 (transform.position.x - x, transform.position.y, transform.position.z - z);
-							break;
-						case 3:
-							tile.name = "Tile_" + countX + "_" + -countZ;
-							tile.transform.position = new Vector3 (transform.position.x + x, transform.position.y, transform.position.z - z);
-							break;
-						}
-					}
-					countZ++;
-				}
-				countX++;
-			}
-		}
+		transform.name = "Game Board";
+		width = 12; height = 16;
+		tiles = new GameObject[width, height];
+		GenerateBoard();
+		//SetInactive ();
 	}
 
 	// Update is called once per frame
 	void Update () {
 
+	}
+
+	public BoardManager(ParcManager parc) {
+		this.parc = parc;
+	}
+		
+	public void GenerateBoard() {
+
+		GameObject board = new GameObject("Board_" + "P1"); //P1 = parc.ID
+		board.transform.parent = transform;
+		for (int x = 1; x < width; x++) {
+			for (int z = 1; z < height ; z++) {
+				if (x > 2 || z > 3) {
+					tiles [x, z] = (GameObject)Instantiate (plane);
+					tiles [x, z].transform.name = "Tile_" + x + "_" + z;
+					tiles [x, z].AddComponent<Tile> ();
+					tiles [x, z].transform.parent = board.transform;
+
+					tiles [x, z].transform.position = new Vector3 (transform.position.x + (float)x / 2, 20.1f, transform.position.z + (float)z / 2);
+					tiles [x, z].transform.localScale = Vector3.one * 0.042f;
+					//Debug.Log ("Tile (" + (int)x + "," + (int)z + ") is out of range.");
+				}
+			}
+		}
+		//Debug.Log ("Board created with " + (width * height) + " tiles.");
+	}
+
+	public void SetActive() {
+		for (int x = 0; x < height; x++) {
+			for (int z = 0; z < width; z++) {
+				tiles [x, z].GetComponent<Tile>().IsActive = true;
+			}
+		}
+	}
+
+	public void SetInactive() {
+		for (int x = 0; x < height; x++) {
+			for (int z = 0; z < width; z++) {
+				tiles [x, z].GetComponent<Tile> ().IsActive = false;
+			}
+		}
 	}
 }

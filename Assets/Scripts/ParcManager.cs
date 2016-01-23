@@ -6,7 +6,6 @@ public class ParcManager : MonoBehaviour {
     public int cash;
     public int visitors;
     public int cashPerTurn;
-    public bool success;
     public bool paleontologist;
     public bool spy;
     public int playerIdentity;
@@ -18,9 +17,9 @@ public class ParcManager : MonoBehaviour {
     private Danger danger;
     private int[] dinos;
     private int[] booths;
-    private bool tyrannosaurusDanger;
+    private BoardManager SpaceManager;
 
-    void Start () {
+    void Awake () {
 
         dinos = new int[] { 0, 0, 0, 0 };
         booths = new int[] { 0, 0, 0, 0, 0, 0 };
@@ -30,8 +29,8 @@ public class ParcManager : MonoBehaviour {
         danger = Danger.Medium;
         cashPerTurn = 0;
         paleontologist = false;
-        tyrannosaurusDanger = false;
         spy = false;
+        SpaceManager = GetComponent<BoardManager>();
     }
 	
     bool addDino(Dino dinosaurs) // trouver un moyen d'aller chercher le prix des dinosaures directement dans l'objet du dinosaure.
@@ -70,11 +69,7 @@ public class ParcManager : MonoBehaviour {
                     cash -= 25;
                     visitors += 10;
                     dinos[3]++;
-                    if (tyrannosaurusDanger == false)
-                    {
-                        tyrannosaurusDanger = true;
-                        danger--;
-                    }
+                    danger--;
                     return true;
                 }
                 else 
@@ -162,6 +157,36 @@ public class ParcManager : MonoBehaviour {
 
     public void Breach()
     {
+        int temp = 9;
+        for (int i = 1; i < 4; i++)
+        {
+            if (dinos[i] != 0)
+            {
+                temp = i;
+            }
+        }
         Debug.Log("BREACH!!!");
+        switch (temp)
+        {
+            case 0:
+                Debug.Log("Un brontosaure s'est échappé de sa cage! OK.");
+                visitors -= 0;
+                break;
+            case 1:
+                Debug.Log("Yikes! un vélociraptor s'est échappé de sa cage!");
+                visitors -= 1;
+                break;
+            case 2:
+                Debug.Log("Ouch! Un tricératops s'est échappé de sa cage!");
+                visitors -= 2;
+                break;
+            case 3:
+                Debug.Log("OMFG! Un tyranosaure s'est échappé de sa cage!");
+                visitors -= 5;
+                break;
+            default:
+                Debug.Log("il n'y a aucun dinosaure dans votre parc...");
+                break;
+        }
     }
 }

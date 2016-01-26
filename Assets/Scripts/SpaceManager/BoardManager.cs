@@ -90,7 +90,7 @@ public class BoardManager : MonoBehaviour {
 	}
 
 	Vector3 BoardPosition(float x, float z) {
-		switch (noPlayer) {
+		switch (noBoard) {
 		case 2:
 			return new Vector3 (transform.position.x - x, 20.1f, transform.position.z + z);
 		case 3:

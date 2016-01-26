@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     private int activePlayer,
                 actualPhase,
                 diceResult,
-                nbTurns,
+                turnNumber,
                 playerNumber;
     private List<ParcManager> playerList = new List<ParcManager>();
     private string currentEvent;
@@ -29,11 +29,11 @@ public class GameManager : MonoBehaviour
         actualPhase = (int)Phase.Event;
         cameraPos = Camera.main.transform;
         eventManager = GetComponent<Events>();
-        playerNumber = 4;//GetComponent<MenuPlayers>().NbPlayer;
-        nbTurns = 10;// GetComponent<MenuPlayers>().NbTurns;
         parent = transform;
         isFinish = false;
         diceFinished = true;
+        prefab = (GameObject)Resources.Load("Dé Prefab");
+        park = (GameObject)Resources.Load("Joueur");
 
         for (int i = 0; i < playerNumber; i++)
         {
@@ -47,12 +47,15 @@ public class GameManager : MonoBehaviour
         foreach (ParcManager players in tempList)
             playerList.Add(players);
 
+        for (int i = 0; i < playerList.Count; i++)
+            playerList[i].setID(i + 1);
+
         StartCoroutine(gameTurn());
 	}
 
     IEnumerator gameTurn()
     {
-        while (nbTurns > 0)
+        while (turnNumber > 0)
         {
             switch (actualPhase)
             {
@@ -61,15 +64,17 @@ public class GameManager : MonoBehaviour
                     yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.A));
                     int test = eventManager.getEvent();
                     eventManager.applyEventEffect(test, ref playerList);
-                    Debug.Log(test);
                     
                     actualPhase++;
 
                     break;
                 case (int)Phase.Income:
                     for(int i = 0; i < playerNumber; i++)
+                    {
                         playerList[i].cash += playerList[i].cashPerTurn;
-  
+                        playerList[i].cash += playerList[i].visitors; //à vérifier?
+                    }
+
                     actualPhase++;
                     break;
                 case (int)Phase.Building:
@@ -97,7 +102,7 @@ public class GameManager : MonoBehaviour
 
                 case (int)Phase.End:
                     actualPhase = 0;
-                    nbTurns--;
+                    turnNumber--;
                     break;
             }
 
@@ -107,7 +112,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator throwDice()
     {
-        intanciatedObject = (GameObject)Instantiate(prefab, new Vector3(cameraPos.position.x, cameraPos.position.y, cameraPos.position.z + 10), Quaternion.identity);
+        intanciatedObject = (GameObject)Instantiate(prefab, new Vector3(cameraPos.position.x + 2, cameraPos.position.y - 6, cameraPos.position.z - 2), Quaternion.identity);
         intanciatedObject.transform.parent = parent;
 
         diceScript = GetComponentInChildren<Dice>();
@@ -116,5 +121,11 @@ public class GameManager : MonoBehaviour
 
         diceFinished = true;
         diceResult = diceScript.diceResult;
+    }
+
+    public void setInfos(int nbP, int nbT)
+    {
+        playerNumber = nbP;
+        turnNumber = nbT;
     }
 }

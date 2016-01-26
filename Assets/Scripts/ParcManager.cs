@@ -6,6 +6,7 @@ public class ParcManager : MonoBehaviour {
     public int cash;
     public int visitors;
     public int cashPerTurn;
+    public int ID;
     public bool paleontologist;
     public bool spy;
     public int playerIdentity;
@@ -179,6 +180,11 @@ public class ParcManager : MonoBehaviour {
     {
         //copier un dinosaure dans un parc adverse
         spy = false;
+    }
+
+    public void setID(int id)
+    {
+        ID = id;
     }
 
     public void Breach()

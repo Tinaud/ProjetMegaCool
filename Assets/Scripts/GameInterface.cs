@@ -37,7 +37,7 @@ public class GameInterface : MonoBehaviour {
 	
 	}
 
-    public void puchase()
+    public void purchase()
     {
         Purchase.SetActive(true);
     }

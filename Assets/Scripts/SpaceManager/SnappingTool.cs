@@ -16,7 +16,7 @@ public class SnappingTool : MonoBehaviour {
 		
 	void OnMouseDrag()
 	{
-		GameObject b = GameObject.Find ("Game Board");
+		GameObject b = GameObject.Find ("Board_P" + playerNo);
 		board = b.GetComponent<BoardManager> ();
 
 		GetComponent<Renderer> ().material.color = mouseOverColor;

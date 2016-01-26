@@ -23,14 +23,16 @@ public class BoardManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		transform.name = "Game Board";
-		width = 11; height = 15;
+		width = 11;
+		height = 15;
 		tiles = new GameObject[width, height];
-		GenerateBoard();
+		plane = Resources.Load ("Tile") as GameObject;
+		GenerateBoard ();
 		SetActive ();
-		
 		noBoard++;
 	}
+
+
 
 	// Update is called once per frame
 	void Update () {
@@ -38,16 +40,14 @@ public class BoardManager : MonoBehaviour {
 	}
 		
 	public void GenerateBoard() {
-
-		GameObject board = new GameObject("Board_P" + noBoard);
-		board.transform.parent = transform;
+		
 		for (int x = 0; x < width; x++) {
 			for (int z = 0; z < height ; z++) {
 				if (x > 1 || z > 2) {
 					tiles [x, z] = (GameObject)Instantiate (plane);
 					tiles [x, z].transform.name = "Tile_" + x + "_" + z;
-					tiles [x, z].AddComponent<Tile> ();
-					tiles [x, z].transform.parent = board.transform;
+					//tiles [x, z].AddComponent<Tile> ();
+					tiles [x, z].transform.parent = transform;
 
 					tiles [x, z].transform.position = BoardPosition((x+1)/2f, (z+1)/2f);
 					tiles [x, z].transform.localScale = Vector3.one * 0.042f;

@@ -131,6 +131,5 @@ public class Kiosks_creation : MonoBehaviour {
         spri.GetComponentInChildren<Image>().sprite = spr;
         spri.GetComponentInChildren<Image>().rectTransform.localScale = new Vector3(width, height, 1F);
         patateobject = (GameObject)Instantiate(kiosk, (cam.transform.position - new Vector3(0,7,0)), Quaternion.identity);
-        Debug.Log("essai");
     }
 }

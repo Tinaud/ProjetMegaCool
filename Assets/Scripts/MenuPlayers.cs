@@ -19,7 +19,9 @@ public class MenuPlayers : MonoBehaviour {
     public GameObject topTable;
     public GameObject gameInterface;
     public Camera mainCamera;
-    public BoardManager boardManager; 
+    public BoardManager boardManager;
+
+    private GameManager gameManager;
 
 	// Use this for initialization
 	void Start () {
@@ -51,8 +53,7 @@ public class MenuPlayers : MonoBehaviour {
                 Z += -1.67F;
                 mainCamera.transform.position = new Vector3(X, Y, Z);
             }        
-        }
-			
+        } //DETRUIRE LE SCRIPT APRES ANIMATION ??
 	}
 
 	public void player2 ()	{
@@ -60,8 +61,6 @@ public class MenuPlayers : MonoBehaviour {
         players2.SetActive(true);
         players3.SetActive(false);
         players4.SetActive(false);
-		Debug.Log("2 players");
-        //boardManager.nbPlayers = 2;
 	}
 
 	public void player3 ()	{
@@ -69,8 +68,6 @@ public class MenuPlayers : MonoBehaviour {
         players2.SetActive(false);
         players3.SetActive(true);
         players4.SetActive(false);
-        Debug.Log("3 players");
-        //boardManager.nbPlayers = 3;
     }
 
 	public void player4 ()	{
@@ -78,8 +75,6 @@ public class MenuPlayers : MonoBehaviour {
         players2.SetActive(false);
         players3.SetActive(false);
         players4.SetActive(true);
-        Debug.Log("4 players");
-        //boardManager.nbPlayers =4 ;
     }
 
 	public void turn10 ()	{
@@ -87,7 +82,6 @@ public class MenuPlayers : MonoBehaviour {
         turns10.SetActive(true);
         turns15.SetActive(false);
         turns20.SetActive(false);
-        Debug.Log("10 turns");
 	}
 
 	public void turn15 ()	{
@@ -95,7 +89,6 @@ public class MenuPlayers : MonoBehaviour {
         turns10.SetActive(false);
         turns15.SetActive(true);
         turns20.SetActive(false);
-        Debug.Log("15 turns");
 	}
 
 	public void turn20 ()	{
@@ -103,13 +96,15 @@ public class MenuPlayers : MonoBehaviour {
         turns10.SetActive(false);
         turns15.SetActive(false);
         turns20.SetActive(true);
-        Debug.Log("20 turns");
+
 	}
 
     public void PlayButton ()    {
         topTable.SetActive(false);
         playable = true;
-        Debug.Log("rotation863");
+        gameManager = this.gameObject.AddComponent<GameManager>();
+        this.gameObject.AddComponent<Events>();
+        gameManager.setInfos(NbPlayer, NbTurns);
     }
 
     public void optionsmenu()

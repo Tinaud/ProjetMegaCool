@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Tile : MonoBehaviour {
 
-	bool isActive;
+	public bool isActive;
 	bool isAvailable;
 
 	//public enum ObjType {Cage, Dinosaur, Booth, Other};
@@ -30,7 +30,6 @@ public class Tile : MonoBehaviour {
 		
 
 	void Start () {
-		isActive = true;
 	}
 
 	void Update () {

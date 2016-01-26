@@ -10,6 +10,10 @@ public class MenuPlayers : MonoBehaviour {
     public GameObject play;
     public GameObject menu;
     public GameObject option;
+    public GameObject score1;
+    public GameObject score2;
+    public GameObject score3;
+    public GameObject score4;
     public GameObject players2;
     public GameObject players3;
     public GameObject players4;
@@ -30,7 +34,15 @@ public class MenuPlayers : MonoBehaviour {
         X = 0F;
         Y = 0F;
         Z = 0F;
+        topTable.SetActive(true);
+        menu.SetActive(true);
+        score1.SetActive(false);
+        score2.SetActive(false);
+        score3.SetActive(false);
+        score4.SetActive(false);
         gameInterface.SetActive(false);
+        play.SetActive(false);
+        option.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -50,7 +62,15 @@ public class MenuPlayers : MonoBehaviour {
                 Y += 28F;
                 Z += -1.67F;
                 mainCamera.transform.position = new Vector3(X, Y, Z);
-            }        
+            }
+            switch (NbPlayer)
+            {
+                case 4: score4.SetActive(true); goto case 3;
+                case 3: score3.SetActive(true); goto case 2;
+                case 2: score2.SetActive(true); goto case 1;
+                case 1: score1.SetActive(true);
+                break;
+            }
         }
 			
 	}

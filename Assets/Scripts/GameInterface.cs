@@ -16,6 +16,8 @@ public class GameInterface : MonoBehaviour {
     public GameObject Rest;
 
 	// Use this for initialization
+
+    //everything to scrap
 	void Start () {
         Purchase.SetActive(false);
         Tyra.SetActive(false);

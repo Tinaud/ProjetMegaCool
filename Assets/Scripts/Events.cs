@@ -4,11 +4,13 @@ using System.Collections.Generic;
 
 public class Events : MonoBehaviour 
 {
-    public List<string> allEvents2 = new List<string>();
-    private List<int> allEvents = new List<int>();
+    public List<int> allEvents = new List<int>();
+
+    private GameManager gameManager;
 
 	void Awake () 
     {
+        gameManager = GetComponent<GameManager>();
         /*0allEvents.Add("Endangered species,Scientists want to help endangered species! The player that pocess the most dinosaur loses his most expensive (only one). If two or more players are equals, every of them must do this event. Ignore this event if no one have dinosaur."); 
 		1allEvents.Add( "Pay day!,Every player receive 10$!");
         1allEvents.Add( "Pay day!,Every player receive 10$!");
@@ -82,15 +84,6 @@ public class Events : MonoBehaviour
 
     }
 
-    /*public string getEvent()
-    {
-        int patate = Random.Range(0, allEvents.Count);
-        string eventToSend = allEvents2[patate];
-        allEvents.RemoveAt(patate);
-
-        return eventToSend;
-    }*/
-
     public int getEvent()
     {
         int patate = Random.Range(0, allEvents.Count);
@@ -130,7 +123,7 @@ public class Events : MonoBehaviour
                 break;
             case 8:
                 foreach (ParcManager player in playerList)
-                    if(!player.paleontologist) //No dinosaurs
+                    if(!player.paleontologist || !player.noDinosaurs())
                         player.visitors -= 5;
                 break;
             case 9:

@@ -19,7 +19,7 @@ public class ParcManager : MonoBehaviour {
     private int[] booths;
     private GameObject Board;
 
-    void Awake(int identity) {
+    void Awake() {
 
         dinos = new int[] { 0, 0, 0, 0 };
         booths = new int[] { 0, 0, 0, 0, 0, 0 };
@@ -30,9 +30,9 @@ public class ParcManager : MonoBehaviour {
         cashPerTurn = 0;
         paleontologist = false;
         spy = false;
-        Board = new GameObject();
-        Board.AddComponent<BoardManager>();
-        playerIdentity = identity;
+        //Board = new GameObject();
+        //Board.AddComponent<BoardManager>();
+        //playerIdentity = identity;
     }
 
     public Danger dangerLevel
@@ -183,16 +183,13 @@ public class ParcManager : MonoBehaviour {
 
     public void Breach()
     {
-        int temp = 9;
-        for (int i = 1; i < 4; i++)
-        {
-            if (dinos[i] != 0)
-            {
-                temp = i;
-            }
-        }
+        int mostDangerousDinosaur = mostDangerous();
+        /*for (int i = 1; i < 4; i++)
+            if (dinos[i] > 0)
+                temp = i;*/
+
         Debug.Log("BREACH!!!");
-        switch (temp)
+        switch (mostDangerousDinosaur)
         {
             case 0:
                 Debug.Log("Un brontosaure s'est échappé de sa cage! OK.");
@@ -216,35 +213,28 @@ public class ParcManager : MonoBehaviour {
         }
     }
 
-    bool noDinosaurs()
+    public bool noDinosaurs()
     {
-        int temp = 0;
+        int dinosaurNumber = 0;
+
         for (int i = 1; i < 4; i++)
-        {
             if (dinos[i] != 0)
-            {
-                temp += dinos[i];
-            }
-        }
-        if (temp == 0)
+                dinosaurNumber += dinos[i];
+        
+        if (dinosaurNumber == 0)
             return true; //aucun dinosaures dans le parc
         else
             return false; // des dinosaures dans le parc.
     }
 
-    int mostDangerous()
+    public int mostDangerous()
     {
-        int temp = 9;
+        int mostDangerousDinosaur = -1;
+
         for (int i = 1; i < 4; i++)
-        {
-            if (dinos[i] != 0)
-            {
-                temp = i;
-            }
-        }
-        if (temp != 9)
-            return temp; // 0 = bronto, 1 = velo, 2 = trice, 3 = Tyra
-        else
-            return -1; //aucun dinosaur dans le parc
+            if (dinos[i] > 0)
+                mostDangerousDinosaur = i;
+
+        return mostDangerousDinosaur; // 0 = bronto, 1 = velo, 2 = trice, 3 = Tyra
     }
 }

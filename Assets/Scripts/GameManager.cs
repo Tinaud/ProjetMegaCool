@@ -9,13 +9,15 @@ public class GameManager : MonoBehaviour
     public GameObject prefab;
     public GameObject park;
 
-    private bool isFinish;
+    private bool isFinish,
+                 diceFinished;
     private Component[] tempList;
     private Dice diceScript;
     private Events eventManager;
     private GameObject intanciatedObject;
     private int activePlayer,
                 actualPhase,
+                diceResult,
                 nbTurns,
                 playerNumber;
     private List<ParcManager> playerList = new List<ParcManager>();
@@ -31,6 +33,7 @@ public class GameManager : MonoBehaviour
         nbTurns = 10;// GetComponent<MenuPlayers>().NbTurns;
         parent = transform;
         isFinish = false;
+        diceFinished = true;
 
         for (int i = 0; i < playerNumber; i++)
         {
@@ -58,7 +61,7 @@ public class GameManager : MonoBehaviour
                     yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.A));
                     int test = eventManager.getEvent();
                     eventManager.applyEventEffect(test, ref playerList);
-                    Debug.Log(currentEvent);
+                    Debug.Log(test);
                     
                     actualPhase++;
 
@@ -80,14 +83,12 @@ public class GameManager : MonoBehaviour
                         Debug.Log("Dice part!");
                         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.A));
                         {
-                            intanciatedObject = (GameObject)Instantiate(prefab, new Vector3(cameraPos.position.x, cameraPos.position.y, cameraPos.position.z + 10), Quaternion.identity);
-                            intanciatedObject.transform.parent = parent;
+                            diceFinished = false;
+                            StartCoroutine(throwDice());
+                            yield return new WaitUntil(() => diceFinished);
 
-                            diceScript = GetComponentInChildren<Dice>();
-
-                            yield return new WaitWhile(() => diceScript.isSpinning);
-                            Debug.Log(diceScript.diceResult);
-                            if (diceScript.diceResult == 1)
+                            Debug.Log(diceResult);
+                            if (diceResult == 1)
                                 playerList[i].Breach();
                         }
                     }
@@ -102,5 +103,18 @@ public class GameManager : MonoBehaviour
 
             yield return new WaitForSeconds(1f);
         }
+    }
+
+    public IEnumerator throwDice()
+    {
+        intanciatedObject = (GameObject)Instantiate(prefab, new Vector3(cameraPos.position.x, cameraPos.position.y, cameraPos.position.z + 10), Quaternion.identity);
+        intanciatedObject.transform.parent = parent;
+
+        diceScript = GetComponentInChildren<Dice>();
+
+        yield return new WaitWhile(() => diceScript.isSpinning);
+
+        diceFinished = true;
+        diceResult = diceScript.diceResult;
     }
 }

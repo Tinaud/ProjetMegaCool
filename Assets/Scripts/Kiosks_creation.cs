@@ -18,12 +18,13 @@ public class Kiosks_creation : MonoBehaviour {
     public Sprite bron;
     public Sprite tri;
     public Sprite tyr;
-    float wi;
+    public Camera cam;
+    float width;
     float height;
 
 	// Use this for initialization
 	void Start () {
-        wi = 1;
+        width = 1;
         height = 1;
 	}
 	
@@ -34,14 +35,14 @@ public class Kiosks_creation : MonoBehaviour {
 
     public void spykiosk ()
     {
-        wi = .5F;
+        width = .5F;
         height = .5F;
         create(spy);
         patateobject.AddComponent<Spy>();
     }
     public void casinokiosk()
     {
-        wi = .5F;
+        width = .5F;
         height = .5F;
         create(cas);
         patateobject.AddComponent<Casino>();
@@ -50,7 +51,7 @@ public class Kiosks_creation : MonoBehaviour {
 
     public void restaurantkiosk()
     {
-        wi = .5F;
+        width = .5F;
         height = .5F;
         create(res);
         patateobject.AddComponent<Restaurant>();
@@ -58,7 +59,7 @@ public class Kiosks_creation : MonoBehaviour {
 
     public void palekiosk()
     {
-        wi = .5F;
+        width = .5F;
         height = .25F;
         create(pal);
         patateobject.AddComponent<Paleontologist>();
@@ -66,7 +67,7 @@ public class Kiosks_creation : MonoBehaviour {
 
     public void washkiosk()
     {
-        wi = .5F;
+        width = .5F;
         height = .5F;
         create(wash);
         patateobject.AddComponent<Bathroom>();
@@ -74,7 +75,7 @@ public class Kiosks_creation : MonoBehaviour {
 
     public void secukiosk()
     {
-        wi = .5F;
+        width = .5F;
         height = .3F;
         create(sec);
         patateobject.AddComponent<Security>();
@@ -83,7 +84,7 @@ public class Kiosks_creation : MonoBehaviour {
     public void cagecreation()
     {
 
-        wi = .5F;
+        width = .5F;
         height = .3F;
         create(cage);
         patateobject.AddComponent<Cage>();
@@ -92,7 +93,7 @@ public class Kiosks_creation : MonoBehaviour {
     public void veloc()
     {
 
-        wi = .5F;
+        width = .5F;
         height = .3F;
         create(velo);
         patateobject.AddComponent<Velociraptor>();
@@ -101,7 +102,7 @@ public class Kiosks_creation : MonoBehaviour {
     public void bront()
     {
 
-        wi = .5F;
+        width = .5F;
         height = .5F;
         create(bron);
         patateobject.AddComponent<Brontosaurus>();
@@ -110,7 +111,7 @@ public class Kiosks_creation : MonoBehaviour {
     public void trice()
     {
 
-        wi = .5F;
+        width = .5F;
         height = .3F;
         create(tri);
         patateobject.AddComponent<Triceratop>();
@@ -119,7 +120,7 @@ public class Kiosks_creation : MonoBehaviour {
     public void tyran()
     {
 
-        wi = .5F;
+        width = .5F;
         height = .25F;
         create(tyr);
         patateobject.AddComponent<Tyrannosaurus>();
@@ -128,8 +129,8 @@ public class Kiosks_creation : MonoBehaviour {
     void create (Sprite spr)
     {
         spri.GetComponentInChildren<Image>().sprite = spr;
-        spri.GetComponentInChildren<Image>().rectTransform.localScale = new Vector3(wi, height, 1F);
-        patateobject = (GameObject)Instantiate(kiosk, new Vector3(1, 1, 1), Quaternion.identity);
+        spri.GetComponentInChildren<Image>().rectTransform.localScale = new Vector3(width, height, 1F);
+        patateobject = (GameObject)Instantiate(kiosk, (cam.transform.position - new Vector3(0,7,0)), Quaternion.identity);
         Debug.Log("essai");
     }
 }

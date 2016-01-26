@@ -7,7 +7,7 @@ public class SnappingTool : MonoBehaviour {
 
 	bool isGood;
 	public int playerNo = 1;
-	GameObject board;
+	BoardManager board;
 
 	void OnMouseDown()
 	{
@@ -16,35 +16,36 @@ public class SnappingTool : MonoBehaviour {
 		
 	void OnMouseDrag()
 	{
-		board = GameObject.Find ("Board_P" + playerNo);
+		GameObject b = GameObject.Find ("Game Board");
+		board = b.GetComponent<BoardManager> ();
+
 		GetComponent<Renderer> ().material.color = mouseOverColor;
 
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 		Vector3 rayPoint = ray.GetPoint (distance);
-		float X = Mathf.Round (rayPoint.x * 2f);
-		float Z = Mathf.Round (rayPoint.z * 2f);
+		int X = (int)Mathf.Round (rayPoint.x * 2);
+		int Z = (int)Mathf.Round (rayPoint.z * 2);
 
-		if (Mathf.Abs (X) >= 3 || Mathf.Abs (Z) >= 4) {
-			if (Mathf.Abs (X) < 11 && Mathf.Abs (Z) < 15) {
-				//Debug.Log ("tile_" + X + "_" + Z);
-				GameObject tile = GameObject.Find ("Board_P" + playerNo + "/Tile_" + X + "_" + Z);
+		if ((X >= 0 && X < board.Width) && (Z >= 0 && Z < board.Height)) {
+			//Debug.Log ("tile_" + X + "_" + Z);
+			GameObject tile = FindTile (X, Z);
+			if (tile) {
 				rayPoint = tile.transform.position;
 				rayPoint.y = 20.1f;
 				transform.position = rayPoint;
 
-				for (float x = X - 1; x < X + 2; x++) {
-					if (x != 0 && x < 11) {
-						for (float z = Z - 1; z < Z + 2; z++) {
-							if (z != 0 && z < 15) {
-								tile = GameObject.Find ("Board_P" + playerNo + "/Tile_" + x + "_" + z);
-								tile.GetComponent<Tile> ().IsAvailable = false;
-							}
-						}
+				for (int x = X - 1; x < X + 2; x++) {
+					for (int z = Z - 1; z < Z + 2; z++) {
+						if ((x >= 0 && x < board.Width) && (z >= 0 && z < board.Height)) 
+							if (GetScriptOf (x, z))
+								GetScriptOf (x, z).IsActive  = false;
 					}
 				}
 			}
 		}
+	
 	}
+
 
 	void Update()
 	{
@@ -52,7 +53,18 @@ public class SnappingTool : MonoBehaviour {
 	}
 
 	void Start() {
+		
+	}
 
+	public Tile GetScriptOf(int x, int z) {
+		return board.GetTileAt (x, z);
+	}
+
+	public GameObject FindTile(int x, int z) {
+		if (board.GetTileAt (x, z)) {
+			return GameObject.Find ("Board_P" + playerNo + "/Tile_" + x + "_" + z);
+		}
+		return null;
 	}
 				
 }

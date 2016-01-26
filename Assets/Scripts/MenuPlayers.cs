@@ -61,7 +61,7 @@ public class MenuPlayers : MonoBehaviour {
         players3.SetActive(false);
         players4.SetActive(false);
 		Debug.Log("2 players");
-        boardManager.nbPlayers = 2;
+        //boardManager.nbPlayers = 2;
 	}
 
 	public void player3 ()	{
@@ -70,7 +70,7 @@ public class MenuPlayers : MonoBehaviour {
         players3.SetActive(true);
         players4.SetActive(false);
         Debug.Log("3 players");
-        boardManager.nbPlayers = 3;
+        //boardManager.nbPlayers = 3;
     }
 
 	public void player4 ()	{
@@ -79,7 +79,7 @@ public class MenuPlayers : MonoBehaviour {
         players3.SetActive(false);
         players4.SetActive(true);
         Debug.Log("4 players");
-        boardManager.nbPlayers =4 ;
+        //boardManager.nbPlayers =4 ;
     }
 
 	public void turn10 ()	{

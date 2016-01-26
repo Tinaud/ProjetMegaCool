@@ -3,38 +3,33 @@ using System.Collections;
 
 public class Tile : MonoBehaviour {
 
-	//bool IsSelected = false;
-
+	public bool isActive;
 	bool isAvailable;
 
-	public enum ObjType {Cage, Dinosaur, Booth, Other};
-	ObjType type;
+	//public enum ObjType {Cage, Dinosaur, Booth, Other};
+	//ObjType type;
+
+	/*----------------- GETTER & SETTER ------------------*/
 
 	public bool IsAvailable {
 		get { return isAvailable; }
-		set { isAvailable = value; }
 	}
 
-	Board board;
-
-	float x;
-	public float X {
-		get {return x;}
+	public bool IsActive {
+		get { return isActive; }
+		set {isActive = value;}
 	}
 
-	float z;
-	public float Z {
-		get {return z;}
+	public void SetAvailable() {
+		isAvailable = true;
 	}
 
-	public Tile(Board board, float x, float z) {
-		this.board = board;
-		this.x = x;
-		this.z = z;
+	public void SetUnavailable() {
+		isAvailable = false;
 	}
 		
+
 	void Start () {
-		this.isAvailable = true;
 	}
 
 	void Update () {
@@ -47,8 +42,8 @@ public class Tile : MonoBehaviour {
 		}
 		*/
 
-		if (isAvailable)
-			GetComponent<Renderer>().material.color = Color.white;
+		if (isActive)
+			GetComponent<Renderer>().material.color = Color.blue;
 		else
 			GetComponent<Renderer>().material.color = Color.red;
 

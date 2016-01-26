@@ -31,10 +31,15 @@ public class ParcManager : MonoBehaviour {
         cashPerTurn = 0;
         paleontologist = false;
         spy = false;
-        //Board = new GameObject();
-        //Board.AddComponent<BoardManager>();
+
         //playerIdentity = identity;
     }
+
+	void Start() {
+		Board = new GameObject("Board_P" + ID);
+		Board.AddComponent<BoardManager>();
+		Board.transform.parent = transform;
+	}
 
     public Danger dangerLevel
     {

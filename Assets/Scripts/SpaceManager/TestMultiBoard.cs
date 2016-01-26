@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class TestMultiBoard : MonoBehaviour {
 
@@ -13,9 +14,10 @@ public class TestMultiBoard : MonoBehaviour {
 
 	void InstantiateBoards() {
 		for (int i = 0; i < 4; i++) {
-			board [i] = new GameObject ("Board_P" + (i + 1));
+			board [i] = new GameObject ("Player_" + (i+1));
 			board [i].transform.parent = transform;
-			board [i].AddComponent<BoardManager> ();
+			board [i].AddComponent<ParcManager> ();
+			board[i].GetComponent<ParcManager>().setID(i + 1);
 		}
 	}
 

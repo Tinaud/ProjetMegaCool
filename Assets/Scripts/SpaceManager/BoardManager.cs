@@ -1,12 +1,14 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class BoardManager : MonoBehaviour {
 
 	public GameObject plane;
+	
+	public static int noBoard = 1;
 
 	int width;//10
-	int height;
+	int height;//14
 
 	public int Height {
 		get { return height; }
@@ -16,12 +18,8 @@ public class BoardManager : MonoBehaviour {
 		get { return width; }
 	}
 
-//14
-
 	GameObject[,] tiles;
 
-	[Range(1,4)]
-	public int noPlayer = 2;
 
 	// Use this for initialization
 	void Start () {
@@ -30,6 +28,8 @@ public class BoardManager : MonoBehaviour {
 		tiles = new GameObject[width, height];
 		GenerateBoard();
 		SetActive ();
+		
+		noBoard++;
 	}
 
 	// Update is called once per frame
@@ -39,7 +39,7 @@ public class BoardManager : MonoBehaviour {
 		
 	public void GenerateBoard() {
 
-		GameObject board = new GameObject("Board_P" + noPlayer); //P1 = parc.ID
+		GameObject board = new GameObject("Board_P" + noBoard);
 		board.transform.parent = transform;
 		for (int x = 0; x < width; x++) {
 			for (int z = 0; z < height ; z++) {
@@ -90,7 +90,7 @@ public class BoardManager : MonoBehaviour {
 	}
 
 	Vector3 BoardPosition(float x, float z) {
-		switch (noPlayer) {
+		switch (noBoard) {
 		case 2:
 			return new Vector3 (transform.position.x - x, 20.1f, transform.position.z + z);
 		case 3:

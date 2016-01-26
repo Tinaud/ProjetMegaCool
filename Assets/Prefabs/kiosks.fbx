@@ -10,11 +10,11 @@ FBXHeaderExtension:  {
 		Version: 1000
 		Year: 2016
 		Month: 1
-		Day: 17
-		Hour: 12
-		Minute: 40
-		Second: 42
-		Millisecond: 774
+		Day: 26
+		Hour: 15
+		Minute: 24
+		Second: 12
+		Millisecond: 801
 	}
 	Creator: "FBX SDK/FBX Plugins version 2013.3"
 	SceneInfo: "SceneInfo::GlobalInfo", "UserData" {
@@ -30,8 +30,8 @@ FBXHeaderExtension:  {
 			Comment: ""
 		}
 		Properties70:  {
-			P: "DocumentUrl", "KString", "Url", "", "C:\Users\samue\AppData\Local\Temp\BE2F.tmp.fbx"
-			P: "SrcDocumentUrl", "KString", "Url", "", "C:\Users\samue\AppData\Local\Temp\BE2F.tmp.fbx"
+			P: "DocumentUrl", "KString", "Url", "", "C:\Users\samue\AppData\Local\Temp\EF1F.tmp.fbx"
+			P: "SrcDocumentUrl", "KString", "Url", "", "C:\Users\samue\AppData\Local\Temp\EF1F.tmp.fbx"
 			P: "Original", "Compound", "", ""
 			P: "Original|ApplicationVendor", "KString", "", "", ""
 			P: "Original|ApplicationName", "KString", "", "", ""
@@ -73,7 +73,7 @@ GlobalSettings:  {
 
 Documents:  {
 	Count: 1
-	Document: 63320656, "", "Scene" {
+	Document: 64808992, "", "Scene" {
 		Properties70:  {
 			P: "SourceObject", "object", "", ""
 			P: "ActiveAnimStackName", "KString", "", "", ""
@@ -223,9 +223,9 @@ Definitions:  {
 ;------------------------------------------------------------------
 
 Objects:  {
-	Geometry: 1316269424, "Geometry::", "Mesh" {
+	Geometry: 68528992, "Geometry::", "Mesh" {
 		Vertices: *12 {
-			a: 271.271975239885,14,-405.046780627279,271.271975239885,14,-356.574398275433,318.523527215271,14,-356.574398275433,318.523527215271,14,-405.046780627279
+			a: -23.3124117822293,14,-24.808646134163,-23.3124117822293,14,23.6637362176828,23.9391401931566,14,23.6637362176828,23.9391401931566,14,-24.808646134163
 		} 
 		PolygonVertexIndex: *4 {
 			a: 0,1,2,-4
@@ -281,9 +281,9 @@ Objects:  {
 			}
 		}
 	}
-	Geometry: 67152832, "Geometry::", "Mesh" {
+	Geometry: 68529680, "Geometry::", "Mesh" {
 		Vertices: *60 {
-			a: 318.523527215271,-2.55931473724466e-017,-405.046780627279,271.271975239885,-2.20829754448839e-016,-405.046780627279,271.271975239885,14,-405.046780627279,318.523527215271,14,-405.046780627279,271.271975239885,-2.20829754448839e-016,-405.046780627279,271.271975239885,-2.20829754448839e-016,-356.574398275433,271.271975239885,14,-356.574398275433,271.271975239885,14,-405.046780627279,271.271975239885,-2.20829754448839e-016,-356.574398275433,318.523527215271,-2.37283622708717e-016,-356.574398275433,318.523527215271,14,-356.574398275433,271.271975239885,14,-356.574398275433,318.523527215271,-2.37283622708717e-016,-356.574398275433,318.523527215271,-2.55931473724466e-017,-405.046780627279,318.523527215271,14,-405.046780627279,318.523527215271,14,-356.574398275433,271.271975239885,-2.20829754448839e-016,-356.574398275433,271.271975239885,-2.20829754448839e-016,-405.046780627279,318.523527215271,-2.55931473724466e-017,-405.046780627279,318.523527215271,-2.37283622708717e-016,-356.574398275433
+			a: 23.9391401931566,1.95176008085871e-016,-24.808646134163,-23.3124117822293,-6.05989905211718e-020,-24.808646134163,-23.3124117822293,14,-24.808646134163,23.9391401931566,14,-24.808646134163,-23.3124117822293,-6.05989905211718e-020,-24.808646134163,-23.3124117822293,-6.05989905211718e-020,23.6637362176828,-23.3124117822293,14,23.6637362176828,-23.3124117822293,14,-24.808646134163,-23.3124117822293,-6.05989905211718e-020,23.6637362176828,23.9391401931566,-1.65144672503985e-017,23.6637362176828,23.9391401931566,14,23.6637362176828,-23.3124117822293,14,23.6637362176828,23.9391401931566,-1.65144672503985e-017,23.6637362176828,23.9391401931566,1.95176008085871e-016,-24.808646134163,23.9391401931566,14,-24.808646134163,23.9391401931566,14,23.6637362176828,-23.3124117822293,-6.05989905211718e-020,23.6637362176828,-23.3124117822293,-6.05989905211718e-020,-24.808646134163,23.9391401931566,1.95176008085871e-016,-24.808646134163,23.9391401931566,-1.65144672503985e-017,23.6637362176828
 		} 
 		PolygonVertexIndex: *20 {
 			a: 0,1,2,-4,4,5,6,-8,8,9,10,-12,12,13,14,-16,16,17,18,-20
@@ -339,7 +339,7 @@ Objects:  {
 			}
 		}
 	}
-	Model: 1318386608, "Model::Model", "Null" {
+	Model: 69267504, "Model::Model", "Null" {
 		Version: 232
 		Properties70:  {
 			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
@@ -347,7 +347,7 @@ Objects:  {
 		Shading: Y
 		Culling: "CullingOff"
 	}
-	Model: 1318388864, "Model::Group1", "Null" {
+	Model: 69002032, "Model::Group1", "Null" {
 		Version: 232
 		Properties70:  {
 			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
@@ -355,7 +355,7 @@ Objects:  {
 		Shading: Y
 		Culling: "CullingOff"
 	}
-	Model: 67253152, "Model::Group2", "Null" {
+	Model: 69004288, "Model::Group2", "Null" {
 		Version: 232
 		Properties70:  {
 			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
@@ -363,7 +363,7 @@ Objects:  {
 		Shading: Y
 		Culling: "CullingOff"
 	}
-	Model: 67255408, "Model::Mesh1", "Mesh" {
+	Model: 69006544, "Model::Mesh1", "Mesh" {
 		Version: 232
 		Properties70:  {
 			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
@@ -372,7 +372,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Model: 67257664, "Model::Mesh2", "Mesh" {
+	Model: 69009488, "Model::Mesh2", "Mesh" {
 		Version: 232
 		Properties70:  {
 			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
@@ -381,7 +381,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Material: 64649824, "Material::FrontColor", "" {
+	Material: 68830816, "Material::FrontColor", "" {
 		Version: 102
 		ShadingModel: "phong"
 		MultiLayer: 0
@@ -408,31 +408,31 @@ Objects:  {
 Connections:  {
 	
 	;Model::Model, Model::RootNode
-	C: "OO",1318386608,0
+	C: "OO",69267504,0
 	
 	;Model::Group1, Model::Model
-	C: "OO",1318388864,1318386608
+	C: "OO",69002032,69267504
 	
 	;Model::Group2, Model::Group1
-	C: "OO",67253152,1318388864
+	C: "OO",69004288,69002032
 	
 	;Model::Mesh2, Model::Group1
-	C: "OO",67257664,1318388864
+	C: "OO",69009488,69002032
 	
 	;Model::Mesh1, Model::Group2
-	C: "OO",67255408,67253152
+	C: "OO",69006544,69004288
 	
 	;Geometry::, Model::Mesh1
-	C: "OO",1316269424,67255408
+	C: "OO",68528992,69006544
 	
 	;Material::FrontColor, Model::Mesh1
-	C: "OO",64649824,67255408
+	C: "OO",68830816,69006544
 	
 	;Geometry::, Model::Mesh2
-	C: "OO",67152832,67257664
+	C: "OO",68529680,69009488
 	
 	;Material::FrontColor, Model::Mesh2
-	C: "OO",64649824,67257664
+	C: "OO",68830816,69009488
 }
 ;Takes section
 ;----------------------------------------------------

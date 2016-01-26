@@ -47,7 +47,7 @@ public class MenuPlayers : MonoBehaviour {
             }
             if (X > -1F){
                 X += -1F;
-                Y += 6.9F;
+                Y += 28F;
                 Z += -1.67F;
                 mainCamera.transform.position = new Vector3(X, Y, Z);
             }        

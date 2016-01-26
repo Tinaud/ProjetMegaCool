@@ -47,6 +47,9 @@ public class GameManager : MonoBehaviour
         foreach (ParcManager players in tempList)
             playerList.Add(players);
 
+        for (int i = 0; i < playerList.Count; i++)
+            playerList[i].setID(i + 1);
+
         StartCoroutine(gameTurn());
 	}
 

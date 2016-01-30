@@ -36,9 +36,9 @@ public class SnappingTool : MonoBehaviour {
 
 				for (int x = X - 1; x < X + 2; x++) {
 					for (int z = Z - 1; z < Z + 2; z++) {
-						if ((x >= 0 && x < board.Width) && (z >= 0 && z < board.Height)) 
-							if (GetScriptOf (x, z))
-								GetScriptOf (x, z).IsActive  = false;
+						if ((x >= 0 && x < board.Width) && (z >= 0 && z < board.Height))
+						if (GetScriptOf (x, z))
+							GetScriptOf (x, z).SetUnavailable ();
 					}
 				}
 			}

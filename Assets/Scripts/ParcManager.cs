@@ -65,6 +65,11 @@ public class ParcManager : MonoBehaviour {
         set { visitors = value; }
     }
 
+	/*public void PurchaseAt (Vector2 position, Type type) {
+		Board.GetComponent<BoardManager> ().SetNeighbors (position);
+		// Augmenter le nb du type de l'achat (booth++ or dino++)
+	}*/
+
     bool addDino(Dino dinosaurs) // trouver un moyen d'aller chercher le prix des dinosaures directement dans l'objet du dinosaure.
     { 
         switch (dinosaurs) 

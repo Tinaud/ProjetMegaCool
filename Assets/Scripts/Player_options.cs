@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class Kiosks_creation : MonoBehaviour {
+public class Player_options : MonoBehaviour {
 
     public GameObject kiosk;
     GameObject patateobject;

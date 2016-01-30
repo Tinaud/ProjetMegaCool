@@ -1,0 +1,26 @@
+fileFormatVersion: 2
+guid: 2cf430dd8bdd5cb478cb29ff8cb2d281
+timeCreated: 1454186957
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - kiosk: {instanceID: 0}
+  - spri: {instanceID: 0}
+  - pal: {instanceID: 0}
+  - cas: {fileID: 21300000, guid: 954fbf8fb632c7f46b27fe60de479290, type: 3}
+  - spy: {instanceID: 0}
+  - res: {instanceID: 0}
+  - wash: {instanceID: 0}
+  - sec: {instanceID: 0}
+  - cage: {fileID: 21300000, guid: 3a240739b126f884aa85ec37e15ff6a0, type: 3}
+  - velo: {instanceID: 0}
+  - bron: {fileID: 21300000, guid: d749c218b17abd249b6436cf6df7a729, type: 3}
+  - tri: {instanceID: 0}
+  - tyr: {instanceID: 0}
+  - cam: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

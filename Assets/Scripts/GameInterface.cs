@@ -8,28 +8,26 @@ public class GameInterface : MonoBehaviour {
     public GameObject Bron;
     public GameObject Velo;
     public GameObject Tric;
-    public GameObject Secu;
-    public GameObject Wash;
-    public GameObject Casi;
-    public GameObject Spys;
-    public GameObject Pale;
-    public GameObject Rest;
+    public GameObject Cage;
+    public GameObject Kisok1;
+    public GameObject Kiosk2;
+    public GameObject Kiosk3;
+    public GameObject Kiosk4;
 
 	// Use this for initialization
 
     //everything to scrap
 	void Start () {
-        Purchase.SetActive(false);
-        Tyra.SetActive(false);
-        Tric.SetActive(false);
-        Bron.SetActive(false);
-        Velo.SetActive(false);
-        Secu.SetActive(false);
-        Wash.SetActive(false);
-        Casi.SetActive(false);
-        Spys.SetActive(false);
-        Pale.SetActive(false);
-        Rest.SetActive(false);
+        Purchase.SetActive(true);
+        Tyra.SetActive(true);
+        Tric.SetActive(true);
+        Bron.SetActive(true);
+        Velo.SetActive(true);
+        Cage.SetActive(true);
+        Kisok1.SetActive(true);
+        Kiosk2.SetActive(true);
+        Kiosk3.SetActive(true);
+        Kiosk4.SetActive(true);
 	}
 	
 	// Update is called once per frame
@@ -48,12 +46,11 @@ public class GameInterface : MonoBehaviour {
         Tric.SetActive(true);
         Bron.SetActive(true);
         Velo.SetActive(true);
-        Secu.SetActive(false);
-        Wash.SetActive(false);
-        Casi.SetActive(false);
-        Spys.SetActive(false);
-        Pale.SetActive(false);
-        Rest.SetActive(false);
+        Cage.SetActive(false);
+        Kisok1.SetActive(false);
+        Kiosk2.SetActive(false);
+        Kiosk3.SetActive(false);
+        Kiosk4.SetActive(false);
     }
 
     public void kiosk()
@@ -62,11 +59,10 @@ public class GameInterface : MonoBehaviour {
         Tric.SetActive(false);
         Bron.SetActive(false);
         Velo.SetActive(false);
-        Secu.SetActive(true);
-        Wash.SetActive(true);
-        Casi.SetActive(true);
-        Spys.SetActive(true);
-        Pale.SetActive(true);
-        Rest.SetActive(true);
+        Cage.SetActive(true);
+        Kisok1.SetActive(true);
+        Kiosk2.SetActive(true);
+        Kiosk3.SetActive(true);
+        Kiosk4.SetActive(true);
     }
 }

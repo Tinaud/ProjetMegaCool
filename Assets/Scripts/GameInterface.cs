@@ -13,6 +13,11 @@ public class GameInterface : MonoBehaviour {
     public GameObject Kiosk2;
     public GameObject Kiosk3;
     public GameObject Kiosk4;
+    public GameObject kiosk;
+    bool EspaceKiosk1;
+    bool EspaceKiosk2;
+    bool EspaceKiosk3;
+
 
 	// Use this for initialization
 
@@ -28,41 +33,22 @@ public class GameInterface : MonoBehaviour {
         Kiosk2.SetActive(true);
         Kiosk3.SetActive(true);
         Kiosk4.SetActive(true);
+        KioskCard(Kisok1);
+        KioskCard(Kiosk2);
+        KioskCard(Kiosk3);
 	}
 	
 	// Update is called once per frame
-	void Update () {
+ 	void Update () {
 	
 	}
 
-    public void purchase()
+    void KioskCard (GameObject button)
     {
-        Purchase.SetActive(true);
-    }
-
-    public void dino()
-    {
-        Tyra.SetActive(true);
-        Tric.SetActive(true);
-        Bron.SetActive(true);
-        Velo.SetActive(true);
-        Cage.SetActive(false);
-        Kisok1.SetActive(false);
-        Kiosk2.SetActive(false);
-        Kiosk3.SetActive(false);
-        Kiosk4.SetActive(false);
-    }
-
-    public void kiosk()
-    {
-        Tyra.SetActive(false);
-        Tric.SetActive(false);
-        Bron.SetActive(false);
-        Velo.SetActive(false);
-        Cage.SetActive(true);
-        Kisok1.SetActive(true);
-        Kiosk2.SetActive(true);
-        Kiosk3.SetActive(true);
-        Kiosk4.SetActive(true);
+        GameObject patateobject = (GameObject)Instantiate(kiosk);
+        patateobject.transform.parent = Purchase.transform;
+        patateobject.transform.rotation = (button.transform.rotation);
+        patateobject.transform.localScale =new Vector3 (0.8F,0.8F,0.8F);
+        patateobject.transform.position = button.transform.position;
     }
 }

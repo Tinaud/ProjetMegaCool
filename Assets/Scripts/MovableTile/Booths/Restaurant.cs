@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Restaurant : BaseBooth {
 
-    bool isVisible = false;
+    //bool isVisible = false;
 
     public Restaurant() : base (1) {
         this.type = Booth.Restaurant;
@@ -16,7 +16,7 @@ public class Restaurant : BaseBooth {
 		// Coute 2$ et 2 tuiles, +1 visitors, 0 victims
 	}
 
-    public int officialPrice()
+    /*public int officialPrice()
     {
         if (isVisible == false)
             return 5;
@@ -27,5 +27,5 @@ public class Restaurant : BaseBooth {
     public void turnOver()
     {
         isVisible = true;
-    }
+    }*/
 }

@@ -17,7 +17,7 @@ public class BaseBooth : MovableTile {
 			
 							
 
-	bool isVisible = false; // A implementer lorsque le kiosque est face ouverte ou pas 
+	//bool isVisible = false;  place dans les instances enfants 
 
     public BaseBooth(int space) : base(space)
     {
@@ -41,7 +41,7 @@ public class BaseBooth : MovableTile {
 		// Paleontologist (Counter event)
 		
 	}
-    public int officialPrice() {
+    /*public int officialPrice() {
         if (isVisible == false)
             return 5;
         else
@@ -50,7 +50,7 @@ public class BaseBooth : MovableTile {
 
     public void turnOver() {
         isVisible = true;
-    }
+    }*/   //LES DEUX DERNIERES FONCTIONS SONT IMPLEMENTEES DANS LES INSTANCES ENFANTS
 
 	// Convertit l'enum en string
 	public string BoothTypeToString(Booth type) {

@@ -6,11 +6,11 @@ public class GameManager : MonoBehaviour
 {
     enum Phase { Event, Income, Building, Breach, End };
 
-    public GameObject prefab;
-    public GameObject park;
+    public GameObject dice,
+                      park;
 
-    private bool isFinish,
-                 diceFinished;
+    private bool diceFinished,
+                 isFinish;
     private Component[] tempList;
     private Dice diceScript;
     private Events eventManager;
@@ -18,11 +18,12 @@ public class GameManager : MonoBehaviour
     private int activePlayer,
                 actualPhase,
                 diceResult,
-                turnNumber,
-                playerNumber;
+                playerNumber,
+                turnNumber;
     private List<ParcManager> playerList = new List<ParcManager>();
     private string currentEvent;
-    private Transform cameraPos, parent;
+    private Transform cameraPos, 
+                      parent;
 
 	void Start () 
     {
@@ -32,7 +33,7 @@ public class GameManager : MonoBehaviour
         parent = transform;
         isFinish = false;
         diceFinished = true;
-        prefab = (GameObject)Resources.Load("Dé Prefab");
+        dice = (GameObject)Resources.Load("Dé Prefab");
         park = (GameObject)Resources.Load("Joueur");
 
         for (int i = 0; i < playerNumber; i++)
@@ -112,7 +113,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator throwDice()
     {
-        intanciatedObject = (GameObject)Instantiate(prefab, new Vector3(cameraPos.position.x + 2, cameraPos.position.y - 6, cameraPos.position.z - 2), Quaternion.identity);
+        intanciatedObject = (GameObject)Instantiate(dice, new Vector3(cameraPos.position.x + 2, cameraPos.position.y - 6, cameraPos.position.z - 2), Quaternion.identity);
         intanciatedObject.transform.parent = parent;
 
         diceScript = GetComponentInChildren<Dice>();
@@ -127,5 +128,10 @@ public class GameManager : MonoBehaviour
     {
         playerNumber = nbP;
         turnNumber = nbT;
+    }
+
+    public List<ParcManager> getPlayers()
+    {
+        return playerList;
     }
 }

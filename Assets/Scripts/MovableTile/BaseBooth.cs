@@ -17,7 +17,7 @@ public class BaseBooth : MovableTile {
 			
 							
 
-	bool isVisible = false; // A implementer lorsque le kiosque est face ouverte ou pas 
+	bool isVisible = false;
 
     public BaseBooth(int space) : base(space)
     {
@@ -50,7 +50,7 @@ public class BaseBooth : MovableTile {
 
     public void turnOver() {
         isVisible = true;
-    }
+    }  
 
 	// Convertit l'enum en string
 	public string BoothTypeToString(Booth type) {

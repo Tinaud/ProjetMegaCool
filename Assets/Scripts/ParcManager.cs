@@ -9,7 +9,6 @@ public class ParcManager : MonoBehaviour {
     public int ID;
     public bool paleontologist;
     public bool spy;
-    public int playerIdentity;
     public enum Danger { High, Medium_high, Medium, Medium_low, Low };
     private enum Booth { Restaurant, Security, Bathroom, Casino, Spy, Paleontologist };
     private enum Dino { Brontosaurus, Velociraptor, Triceratops, Tyrannosaurus };
@@ -19,8 +18,9 @@ public class ParcManager : MonoBehaviour {
     private int[] dinos;
     private int[] booths;
     private GameObject Board;
+    private Player_options menu;
 
-    void Awake() {
+    void Start() {
 
         dinos = new int[] { 0, 0, 0, 0 };
         booths = new int[] { 0, 0, 0, 0, 0, 0 };
@@ -31,15 +31,22 @@ public class ParcManager : MonoBehaviour {
         cashPerTurn = 0;
         paleontologist = false;
         spy = false;
-
-        //playerIdentity = identity;
+        Board = new GameObject("Board_P" + ID);
+        Board.AddComponent<BoardManager>();
+        Board.transform.parent = transform;
     }
 
-	void Start() {
+    void Build() {
+        menu = new Player_options();
+        //construction
+        Destroy(menu);
+    }
+
+	/*void Start() {
 		Board = new GameObject("Board_P" + ID);
 		Board.AddComponent<BoardManager>();
 		Board.transform.parent = transform;
-	}
+	}*/
 
     public Danger dangerLevel
     {

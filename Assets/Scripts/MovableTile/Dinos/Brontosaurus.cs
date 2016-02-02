@@ -8,7 +8,7 @@ public class Brontosaurus : BaseDinosaur {
 		this.nbVisitorsAdded = 1;
 		this.nbVisitorsEaten = 0;
 
-		Debug.Log ("Amazing ! You have a brontosaurus in your park!");
+		//Debug.Log ("Amazing ! You have a brontosaurus in your park!");
 	}
 
 	public override void ShowDetails () {

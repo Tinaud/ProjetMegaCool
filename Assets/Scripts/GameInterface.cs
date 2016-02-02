@@ -23,25 +23,46 @@ public class GameInterface : MonoBehaviour {
 
     //everything to scrap
 	void Start () {
-        Purchase.SetActive(true);
-        Tyra.SetActive(true);
-        Tric.SetActive(true);
-        Bron.SetActive(true);
-        Velo.SetActive(true);
-        Cage.SetActive(true);
-        Kisok1.SetActive(true);
-        Kiosk2.SetActive(true);
-        Kiosk3.SetActive(true);
-        Kiosk4.SetActive(true);
-        KioskCard(Kisok1);
-        KioskCard(Kiosk2);
-        KioskCard(Kiosk3);
+		ActivePanel ();
 	}
 	
 	// Update is called once per frame
  	void Update () {
 	
 	}
+
+	public void ActivePanel() {
+		Purchase.SetActive (true);
+		Tyra.SetActive (true);
+		Tric.SetActive (true);
+		Bron.SetActive (true);
+		Velo.SetActive (true);
+		Cage.SetActive (true);
+		Kisok1.SetActive (true);
+		Kiosk2.SetActive (true);
+		Kiosk3.SetActive (true);
+		Kiosk4.SetActive (true);
+		KioskCard (Kisok1);
+		KioskCard (Kiosk2);
+		KioskCard (Kiosk3);
+	}
+
+	public void DesactivePanel() {
+		Purchase.SetActive (false);
+		Tyra.SetActive (false);
+		Tric.SetActive (false);
+		Bron.SetActive (false);
+		Velo.SetActive (false);
+		Cage.SetActive (false);
+		Kisok1.SetActive (false);
+		Kiosk2.SetActive (false);
+		Kiosk3.SetActive (false);
+		Kiosk4.SetActive (false);
+		KioskCard (Kisok1);
+		KioskCard (Kiosk2);
+		KioskCard (Kiosk3);
+	}
+
 
     void KioskCard (GameObject button)
     {

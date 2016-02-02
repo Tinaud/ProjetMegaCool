@@ -5,7 +5,7 @@ public class BaseDinosaur : MovableTile {
 
 	protected int nbVisitorsAdded; 	// nombre de visiteurs generes 
 
-	public enum Dino {Brontosaurus, Velociraptor, Triceratop, Tyrannosaurus}; 
+	public enum Dino {Brontosaurus = 0, Velociraptor = 1 , Triceratop = 2, Tyrannosaurus = 3}; 
 	protected Dino type;			// enum ou classes derivees pour les differents types de dino
 									// penser aux specificites de chaque type
 	public Dino Type {

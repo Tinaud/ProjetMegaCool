@@ -24,7 +24,6 @@ public class ParcManager : MonoBehaviour {
     private GameObject Board;
     private Player_options menu;
 
-    void Start() {
     void Start()
     {
         eventTwoBreach = false;
@@ -107,10 +106,8 @@ public class ParcManager : MonoBehaviour {
 	bool addCage() {
 		if (cash >= 5) {
 			cage++;
-			Debug.Log ("Cash : " + cash + "$.");
 			cash -= 5;
 			Debug.Log ("A cage has been added in this parc.");
-			Debug.Log ("Cash : " + cash + "$.");
 			return true;
 		}
 		Debug.Log("Not enough funds!");
@@ -125,9 +122,7 @@ public class ParcManager : MonoBehaviour {
                 if (cash >= 2)
                 {
                     visitors += 1;
-					Debug.Log ("Cash : " + cash + "$.");
                     cash -= 2;
-					Debug.Log ("Cash : " + cash + "$.");
                     dinos[0]++;
 					Debug.Log ("Amazing ! You have a brontosaurus in your park!");
                     return true;
@@ -139,14 +134,10 @@ public class ParcManager : MonoBehaviour {
                 }
 
 		case BaseDinosaur.Dino.Triceratop:
-                if (cash >= 5)
                 int TriceratopsPrice = eventTriceratopPriceDown ? 5 : 15;
                 if (cash >= TriceratopsPrice)
                 {
                     visitors += 5;
-					Debug.Log ("Cash : " + cash + "$.");
-                    cash -= 5;
-					Debug.Log ("Cash : " + cash + "$.");
                     cash -= TriceratopsPrice;
                     dinos[2]++;
 					Debug.Log ("Incredible! You have a triceratop in your park!");
@@ -158,11 +149,10 @@ public class ParcManager : MonoBehaviour {
                     return false;
                 }
 		case BaseDinosaur.Dino.Tyrannosaurus:
-                if (cash >= 25)
+			int TyrannosaurusPrice = eventTyrannosaurusPriceDown ? 15 : 25;
+			if (cash >= TyrannosaurusPrice)
                 {
-					Debug.Log ("Cash : " + cash + "$.");
-                    cash -= 25;
-					Debug.Log ("Cash : " + cash + "$.");
+					cash -= TyrannosaurusPrice;
                     visitors += 10;
                     dinos[3]++;
                     danger--;

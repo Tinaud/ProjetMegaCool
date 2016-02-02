@@ -1,23 +1,23 @@
 fileFormatVersion: 2
 guid: 2cf430dd8bdd5cb478cb29ff8cb2d281
-timeCreated: 1454186957
+timeCreated: 1454277148
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - kiosk: {instanceID: 0}
   - spri: {instanceID: 0}
-  - pal: {instanceID: 0}
+  - pal: {fileID: 21300000, guid: 96430806ed6a4dd4ab510d6caaf44d14, type: 3}
   - cas: {fileID: 21300000, guid: 954fbf8fb632c7f46b27fe60de479290, type: 3}
-  - spy: {instanceID: 0}
-  - res: {instanceID: 0}
-  - wash: {instanceID: 0}
-  - sec: {instanceID: 0}
+  - spy: {fileID: 21300000, guid: 5cb4b6a2e6689844fbaa63322a3b6783, type: 3}
+  - res: {fileID: 21300000, guid: ad757024dd3660d4cb3b09ca6fef92de, type: 3}
+  - wash: {fileID: 21300000, guid: 947b940dbb0630f4683208345e72546c, type: 3}
+  - sec: {fileID: 21300000, guid: 1eefda597c01c0f4ea5437421bea77dc, type: 3}
   - cage: {fileID: 21300000, guid: 3a240739b126f884aa85ec37e15ff6a0, type: 3}
-  - velo: {instanceID: 0}
+  - velo: {fileID: 21300000, guid: e4efb886b20f92b4da91fe4756c41b55, type: 3}
   - bron: {fileID: 21300000, guid: d749c218b17abd249b6436cf6df7a729, type: 3}
-  - tri: {instanceID: 0}
-  - tyr: {instanceID: 0}
+  - tri: {fileID: 21300000, guid: c401d79dd4b00c94a939f78d0b04797d, type: 3}
+  - tyr: {fileID: 21300000, guid: 6394a7bb4c096db4383b781ecec8cee4, type: 3}
   - cam: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}

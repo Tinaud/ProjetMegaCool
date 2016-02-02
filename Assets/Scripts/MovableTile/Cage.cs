@@ -8,7 +8,7 @@ public class Cage : MovableTile {
 	bool isEmpty = true;
 
 	public Cage() : base(5,4) {
-		Debug.Log ("A cage has been added in this parc.");
+		//Debug.Log ("A cage has been added in this parc.");
 	}
 
 	public void AddToCage(BaseDinosaur patate) {

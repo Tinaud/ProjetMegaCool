@@ -8,7 +8,7 @@ public class Tyrannosaurus : BaseDinosaur {
 		this.nbVisitorsAdded = 10;
 		this.nbVisitorsEaten = 5;
 
-		Debug.Log ("OMFG ! This is G-O-R-G-E-O-U-S ! You have a tyrannosaurus in your park!");
+		//Debug.Log ("OMFG ! This is G-O-R-G-E-O-U-S ! You have a tyrannosaurus in your park!");
 	}
 
 	public override void ShowDetails () {

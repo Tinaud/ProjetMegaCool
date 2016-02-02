@@ -10,10 +10,6 @@ public class ParcManager : MonoBehaviour {
     public bool paleontologist;
     public bool spy;
     public enum Danger { High, Medium_high, Medium, Medium_low, Low };
-    private enum Booth { Restaurant, Security, Bathroom, Casino, Spy, Paleontologist };
-    private enum Dino { Brontosaurus, Velociraptor, Triceratops, Tyrannosaurus };
-    private Dino dinosaurs;
-    private Booth booth;
     public Danger danger;
     private int[] dinos;
     private int[] booths;
@@ -24,7 +20,7 @@ public class ParcManager : MonoBehaviour {
 
         dinos = new int[] { 0, 0, 0, 0 };
         booths = new int[] { 0, 0, 0, 0, 0, 0 };
-        cage = 1;
+        cage = 0;
         cash = 15;
         visitors = 0;
         danger = Danger.Medium;
@@ -72,21 +68,49 @@ public class ParcManager : MonoBehaviour {
         set { visitors = value; }
     }
 
-	/*public void PurchaseAt (Vector2 position, Type type) {
-		Board.GetComponent<BoardManager> ().SetNeighbors (position);
-		// Augmenter le nb du type de l'achat (booth++ or dino++)
-	}*/
+	public bool PurchaseAt (int x, int z, int type) {
+		Board.GetComponent<BoardManager> ().SetAvailability (type);
+		if (Board.GetComponent<BoardManager> ().GetTileAt (x, z).IsAvailable) {
+			Board.GetComponent<BoardManager> ().SetTileType (x, z, type);
+			Board.GetComponent<BoardManager> ().SetNeighbors (x, z);
+			addType (type);
+			return true;
+		} 
 
-    bool addDino(Dino dinosaurs) // trouver un moyen d'aller chercher le prix des dinosaures directement dans l'objet du dinosaure.
+		return false;
+	}
+
+	void addType (int type) {
+		if (type == (int)SpaceRules.Type.CageEmpty)
+			addCage ();
+		else if ((type >= (int)SpaceRules.Type.CageBront) && (type <= (int)SpaceRules.Type.CageTyra))
+			addDino (type);
+		else if ((type >= (int)SpaceRules.Type.Restaurant) && (type <= (int)SpaceRules.Type.Paleontologist))
+			addBooth (type);
+		
+	}
+
+	bool addCage() {
+		if (cash >= 5) {
+			cage++;
+			Debug.Log ("A cage has been added in this parc.");
+			return true;
+		}
+		Debug.Log("Not enough funds!");
+		return false;
+	}
+
+    bool addDino(int dinosaurs) // trouver un moyen d'aller chercher le prix des dinosaures directement dans l'objet du dinosaure.
     { 
-        switch (dinosaurs) 
+		switch ((BaseDinosaur.Dino)dinosaurs) 
         {
-            case Dino.Brontosaurus:
+		case BaseDinosaur.Dino.Brontosaurus:
                 if (cash >= 2)
                 {
                     visitors += 1;
                     cash -= 2;
                     dinos[0]++;
+					Debug.Log ("Amazing ! You have a brontosaurus in your park!");
                     return true;
                 }
                 else 
@@ -94,12 +118,13 @@ public class ParcManager : MonoBehaviour {
                     Debug.Log("Not enough funds!");
                     return false;
                 }
-            case Dino.Triceratops:
+		case BaseDinosaur.Dino.Triceratop:
                 if (cash >= 5)
                 {
                     visitors += 5;
                     cash -= 5;
                     dinos[2]++;
+					Debug.Log ("Incredible! You have a triceratop in your park!");
                     return true;
                 }
                 else 
@@ -107,13 +132,14 @@ public class ParcManager : MonoBehaviour {
                     Debug.Log("Not enough funds!");
                     return false;
                 }
-            case Dino.Tyrannosaurus:
+		case BaseDinosaur.Dino.Tyrannosaurus:
                 if (cash >= 25)
                 {
                     cash -= 25;
                     visitors += 10;
                     dinos[3]++;
                     danger--;
+					Debug.Log ("OMFG ! This is G-O-R-G-E-O-U-S ! You have a tyrannosaurus in your park!");
                     return true;
                 }
                 else 
@@ -121,12 +147,13 @@ public class ParcManager : MonoBehaviour {
                     Debug.Log("Not enough funds!");
                     return false;
                 }
-            case Dino.Velociraptor:
+		case BaseDinosaur.Dino.Velociraptor:
                 if (cash >= 5)
                 {
                     cash -= 5;
                     visitors += 2;
                     dinos[1]++;
+					Debug.Log("Woaaaw ! You have a velociraptor in your park!");
                     return true;
                 }
                 else {
@@ -137,32 +164,32 @@ public class ParcManager : MonoBehaviour {
         }
     }
 
-    bool addBooth(Booth booth) 
+    bool addBooth(int booth) 
     {
-        switch (booth) 
+		switch ((BaseBooth.Booth)booth) 
         {
-            case Booth.Restaurant:
+		case BaseBooth.Booth.Restaurant:
                 booths[0]++;
                 visitors += 1;
                 cashPerTurn += 2;
                 cash -= 3; //aller chercher le officialPrice() au lieu du 3
                 return true;
-            case Booth.Security:
+		case BaseBooth.Booth.Security:
                 booths[1]++;
                 danger++;
                 cash -= 3; //aller chercher le officialPrice() au lieu du 3
                 return true;
-            case Booth.Bathroom:
+		case BaseBooth.Booth.Bathroom:
                 booths[2]++;
                 visitors += 3;
                 cash -= 3; //aller chercher le officialPrice() au lieu du 3
                 return true;
-            case Booth.Casino:
+		case BaseBooth.Booth.Casino:
                 booths[3]++;
                 cashPerTurn += 3;
                 cash -= 3; //aller chercher le officialPrice() au lieu du 3
                 return true;
-            case Booth.Spy:
+		case BaseBooth.Booth.Spy:
                 if (booths[4] == 0)
                 {
                     booths[4] = 1;
@@ -175,7 +202,7 @@ public class ParcManager : MonoBehaviour {
                     Debug.Log("il n'existe qu'un seul kiosque d'espionnage");
                     return false;
                 }
-            case Booth.Paleontologist:
+		case BaseBooth.Booth.Paleontologist:
                 if (booths[5] == 0 && paleontologist == false)
                 {
                     booths[5] = 1;

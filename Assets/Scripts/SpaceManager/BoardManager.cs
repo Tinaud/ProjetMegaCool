@@ -23,8 +23,8 @@ public class BoardManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		width = 11;
-		height = 15;
+		width = 12;
+		height = 16;
 		tiles = new GameObject[width, height];
 		plane = Resources.Load ("Tile") as GameObject;
 		GenerateBoard ();
@@ -40,14 +40,14 @@ public class BoardManager : MonoBehaviour {
 		
 	public void GenerateBoard() {
 		
-		for (int x = 0; x < width; x++) {
-			for (int z = 0; z < height ; z++) {
-				if (x > 1 || z > 2) {
+		for (int x = 1; x < width; x++) {
+			for (int z = 1; z < height ; z++) {
+				if (x > 2 || z > 3) {
 					tiles [x, z] = (GameObject)Instantiate (plane);
 					tiles [x, z].transform.name = "Tile_" + x + "_" + z;
 					tiles [x, z].transform.parent = transform;
 					tiles [x, z].GetComponent<Tile> ().Position = new Vector2 (x, z);
-					tiles [x, z].transform.position = BoardPosition((x+1)/2f, (z+1)/2f);
+					tiles [x, z].transform.position = BoardPosition(x/2f, z/2f);
 					tiles [x, z].transform.localScale = Vector3.one * 0.042f;
 					//Debug.Log ("Tile (" + (int)x + "," + (int)z + ") is out of range.");
 				}
@@ -65,14 +65,36 @@ public class BoardManager : MonoBehaviour {
 		return null;
 	}
 
-	public void SetNeighbors(Vector2 position) {
-		Tile at = GetTileAt ((int)position.x, (int)position.y);
+	public void SetAvailability (int type) {
+		//string types = " tiles { ";
+
+		for (int x = 1; x < width; x++) {
+			for (int z = 1; z < height; z++) {
+				if ((x > 2 || z > 3)) {
+					Tile at = GetTileAt (x, z);
+					at.IsAvailable = at.Rule.isAvailable (type);
+					//types += "(" + x + "," + z + ") : " + at.Rule.TileType ;
+				}
+			}
+			//types += ", \n";
+		}
+		//types += " };";
+		//Debug.Log (types);
+	}
+
+	public void SetTileType (int x, int z, int type) {
+		Tile at = GetTileAt (x, z);
+		if (at)
+			at.Rule.TileType = (SpaceRules.Type) type;
+	}
+
+	public void SetNeighbors(int x, int z) {
+		Tile at = GetTileAt (x, z);
 		if (at) {
-			for (int x = (int)at.Position.x - 1; x < (int)at.Position.x + 2; x++) {
-				for (int z = (int)at.Position.y - 1; z < (int)at.Position.y + 2; z++) {
-					if ((x >= 0 && x < width) && (z >= 0 && z < height))
-					if (GetTileAt (x, z))
-						GetTileAt (x, z).Type = at.Type;
+			for (int i = x - 1; i < x + 2; i++) {
+				for (int j = z - 1; j < z + 2; j++) {
+					if ((i >= 0 && i < width) && (j >= 0 && j < height))
+						SetTileType (i, j, (int)at.Rule.TileType);
 				}
 			}
 		}

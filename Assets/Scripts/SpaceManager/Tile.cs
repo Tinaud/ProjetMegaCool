@@ -12,31 +12,24 @@ public class Tile : MonoBehaviour {
 		set { position = value; }
 	}
 
-	public enum ObjType {
-		Empty, 
-		CageEmpty, 
-		CageVelo, 
-		CageTyra, 
-		CageBront,
-		CageTric,
-		Restaurant, 
-		Security,
-		Bathroom, 
-		Casino, 
-		Spy, 
-		Paleontologist
-	};
-	ObjType type;
+	SpaceRules rule;
 
-	public ObjType Type {
-		get { return type; }
-		set { type = value; }
+	public SpaceRules Rule {
+		get {
+			return rule;
+		}
+		set {
+			rule = value;
+		}
 	}
 
 	/*----------------- GETTER & SETTER ------------------*/
 
 	public bool IsAvailable {
 		get { return isAvailable; }
+		set {
+			isAvailable = value;
+		}
 	}
 
 	public void SetAvailable() {
@@ -50,8 +43,8 @@ public class Tile : MonoBehaviour {
 
 	void Start () {
 		isSelected = false;
-		SetAvailable ();
-		type = ObjType.Empty;
+		//SetUnavailable ();
+		rule = new SpaceRules ();
 	}
 
 	void Update () {
@@ -59,8 +52,8 @@ public class Tile : MonoBehaviour {
 		 //Pour la selection des tuiles
 		if (GetComponent<Renderer> ().isVisible) {
 			Vector3 camPos = Camera.main.WorldToScreenPoint (transform.position);
-			camPos.y = CameraOperator.InvertMouseY (camPos.y);
-			isSelected = CameraOperator.selection.Contains (camPos);
+			camPos.y = Player_options.InvertMouseY (camPos.y);
+			isSelected = Player_options.selection.Contains (camPos);
 		}
 			
 		if (isSelected) {

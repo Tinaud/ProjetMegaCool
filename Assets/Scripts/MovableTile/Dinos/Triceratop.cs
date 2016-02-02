@@ -8,7 +8,7 @@ public class Triceratop : BaseDinosaur {
 		this.nbVisitorsAdded = 5;
 		this.nbVisitorsEaten = 2;
 
-		Debug.Log ("Incredible! You have a triceratop in your park!");
+		//Debug.Log ("Incredible! You have a triceratop in your park!");
 	}
 
 	public override void ShowDetails () {

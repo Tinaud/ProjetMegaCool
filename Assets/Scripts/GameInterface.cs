@@ -46,7 +46,7 @@ public class GameInterface : MonoBehaviour {
     void KioskCard (GameObject button)
     {
         GameObject patateobject = (GameObject)Instantiate(kiosk);
-        patateobject.transform.parent = Purchase.transform;
+        patateobject.transform.SetParent(Purchase.transform);
         patateobject.transform.rotation = (button.transform.rotation);
         patateobject.transform.localScale =new Vector3 (0.8F,0.8F,0.8F);
         patateobject.transform.position = button.transform.position;

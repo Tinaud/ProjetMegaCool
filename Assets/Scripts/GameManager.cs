@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
         }
 
         tempList = GetComponentsInChildren<ParcManager>();
-        Debug.Log("gamemanager");
+
         foreach (ParcManager players in tempList)
             playerList.Add(players);
 
@@ -64,11 +64,13 @@ public class GameManager : MonoBehaviour
                     Debug.Log("Event phase");
                     yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.A));
                     int test = eventManager.getEvent();
+
+                    eventManager.restoreEvents(ref playerList);
                     eventManager.applyEventEffect(test, ref playerList);
                     
                     actualPhase++;
-
                     break;
+
                 case (int)Phase.Income:
                     for(int i = 0; i < playerNumber; i++)
                     {
@@ -78,26 +80,38 @@ public class GameManager : MonoBehaviour
 
                     actualPhase++;
                     break;
+
                 case (int)Phase.Building:
-                    Debug.Log("Build Phase");
+                    foreach (ParcManager player in playerList)
+                    {
+                        int buildNumber = (player.eventTwoBuild) ? 2 : 1;
+                        for (int i = 0; i < buildNumber; i++ )
+                            Debug.Log("Build Phase " + player);
+                    }
+
                     actualPhase++;
                     break;
 
                 case (int)Phase.Breach:
-                    for (int i = 0; i < playerNumber; i++)
+                    foreach (ParcManager player in playerList)
                     {
-                        Debug.Log("Dice part!");
-                        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.A));
+                        int breachNumber = (player.eventTwoBreach) ? 2 : 1;
+                        for (int i = 0; i < breachNumber; i++ )
                         {
-                            diceFinished = false;
-                            StartCoroutine(throwDice());
-                            yield return new WaitUntil(() => diceFinished);
+                            Debug.Log("Dice part! " + player.ID);
+                            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.A));
+                            {
+                                diceFinished = false;
+                                StartCoroutine(throwDice());
+                                yield return new WaitUntil(() => diceFinished);
 
-                            Debug.Log(diceResult);
-                            if (diceResult == 1)
-                                playerList[i].Breach();
-                        }
+                                Debug.Log(diceResult);
+                                if (diceResult == 1)
+                                    player.Breach();
+                            }
+                        }                       
                     }
+
                     actualPhase++;
                     break;
 

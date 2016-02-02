@@ -2,6 +2,14 @@
 using System.Collections;
 
 public class ParcManager : MonoBehaviour {
+
+    public bool eventTwoBreach,
+                eventTwoBuild,
+                eventTriceratopPriceDown,
+                eventTyrannosaurusPriceDown,
+                eventDangerDown,
+                eventDangerUp;
+
     public int cage;
     public int cash;
     public int visitors;
@@ -20,7 +28,12 @@ public class ParcManager : MonoBehaviour {
     private GameObject Board;
     private Player_options menu;
 
-    void Start() {
+    void Start()
+    {
+        eventTwoBreach = false;
+        eventTwoBuild = false;
+        eventTriceratopPriceDown = false;
+        eventTyrannosaurusPriceDown = false;
 
         dinos = new int[] { 0, 0, 0, 0 };
         booths = new int[] { 0, 0, 0, 0, 0, 0 };
@@ -95,10 +108,11 @@ public class ParcManager : MonoBehaviour {
                     return false;
                 }
             case Dino.Triceratops:
-                if (cash >= 5)
+                int TriceratopsPrice = eventTriceratopPriceDown ? 5 : 15;
+                if (cash >= TriceratopsPrice)
                 {
                     visitors += 5;
-                    cash -= 5;
+                    cash -= TriceratopsPrice;
                     dinos[2]++;
                     return true;
                 }
@@ -108,9 +122,10 @@ public class ParcManager : MonoBehaviour {
                     return false;
                 }
             case Dino.Tyrannosaurus:
-                if (cash >= 25)
+                int TyrannosaurusPrice = eventTyrannosaurusPriceDown ? 15 : 25;
+                if (cash >= TyrannosaurusPrice)
                 {
-                    cash -= 25;
+                    cash -= TyrannosaurusPrice;
                     visitors += 10;
                     dinos[3]++;
                     danger--;

@@ -10,7 +10,7 @@ public class Velociraptor : BaseDinosaur
         this.nbVisitorsAdded = 2;
         this.nbVisitorsEaten = 1;
 
-        Debug.Log("Woaaaw ! You have a velociraptor in your park!");
+        //Debug.Log("Woaaaw ! You have a velociraptor in your park!");
     }
 
     public override void ShowDetails()

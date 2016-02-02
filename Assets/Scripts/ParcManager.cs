@@ -93,7 +93,10 @@ public class ParcManager : MonoBehaviour {
 	bool addCage() {
 		if (cash >= 5) {
 			cage++;
+			Debug.Log ("Cash : " + cash + "$.");
+			cash -= 5;
 			Debug.Log ("A cage has been added in this parc.");
+			Debug.Log ("Cash : " + cash + "$.");
 			return true;
 		}
 		Debug.Log("Not enough funds!");
@@ -108,7 +111,9 @@ public class ParcManager : MonoBehaviour {
                 if (cash >= 2)
                 {
                     visitors += 1;
+					Debug.Log ("Cash : " + cash + "$.");
                     cash -= 2;
+					Debug.Log ("Cash : " + cash + "$.");
                     dinos[0]++;
 					Debug.Log ("Amazing ! You have a brontosaurus in your park!");
                     return true;
@@ -122,7 +127,9 @@ public class ParcManager : MonoBehaviour {
                 if (cash >= 5)
                 {
                     visitors += 5;
+					Debug.Log ("Cash : " + cash + "$.");
                     cash -= 5;
+					Debug.Log ("Cash : " + cash + "$.");
                     dinos[2]++;
 					Debug.Log ("Incredible! You have a triceratop in your park!");
                     return true;
@@ -135,7 +142,9 @@ public class ParcManager : MonoBehaviour {
 		case BaseDinosaur.Dino.Tyrannosaurus:
                 if (cash >= 25)
                 {
+					Debug.Log ("Cash : " + cash + "$.");
                     cash -= 25;
+					Debug.Log ("Cash : " + cash + "$.");
                     visitors += 10;
                     dinos[3]++;
                     danger--;
@@ -150,7 +159,9 @@ public class ParcManager : MonoBehaviour {
 		case BaseDinosaur.Dino.Velociraptor:
                 if (cash >= 5)
                 {
+					Debug.Log ("Cash : " + cash + "$.");
                     cash -= 5;
+					Debug.Log ("Cash : " + cash + "$.");
                     visitors += 2;
                     dinos[1]++;
 					Debug.Log("Woaaaw ! You have a velociraptor in your park!");

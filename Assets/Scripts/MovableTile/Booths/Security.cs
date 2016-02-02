@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Security : BaseBooth {
 
-    bool isVisible = false;
+    //bool isVisible = false;
 
     public Security() : base (1) {
         this.type = Booth.Security;
@@ -16,7 +16,7 @@ public class Security : BaseBooth {
 		// Coute 2$ et 2 tuiles, +1 visitors, 0 victims
 	}
 
-    public int officialPrice()
+    /*public int officialPrice()
     {
         if (isVisible == false)
             return 5;
@@ -27,5 +27,5 @@ public class Security : BaseBooth {
     public void turnOver()
     {
         isVisible = true;
-    }
+    }*/
 }

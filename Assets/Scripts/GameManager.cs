@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
         }
 
         tempList = GetComponentsInChildren<ParcManager>();
-
+        Debug.Log("gamemanager");
         foreach (ParcManager players in tempList)
             playerList.Add(players);
 

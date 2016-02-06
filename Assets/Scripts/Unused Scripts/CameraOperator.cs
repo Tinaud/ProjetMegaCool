@@ -47,9 +47,9 @@ public class CameraOperator : MonoBehaviour
 				Vector3 tilePos = hit.collider.transform.position;
 				Debug.Log(tilePos.ToString());
 
-				if (parc.PurchaseAt ((int)Mathf.Round (tilePos.x * 2), (int)Mathf.Round (tilePos.z * 2), (int) SpaceRules.Type.CageEmpty)) {
+				/*if (parc.PurchaseAt ((int)Mathf.Round (tilePos.x * 2), (int)Mathf.Round (tilePos.z * 2), (int) SpaceRules.Type.CageEmpty)) {
 					GameObject obj = (GameObject)Instantiate (cube, tilePos, Quaternion.identity);
-				}
+				}*/
 			}
 
 		}

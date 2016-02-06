@@ -66,35 +66,43 @@ public class BoardManager : MonoBehaviour {
 	}
 
 	public void SetAvailability (int type) {
-		//string types = " tiles { ";
+		string types = " tiles { ";
 
 		for (int x = 1; x < width; x++) {
 			for (int z = 1; z < height; z++) {
 				if ((x > 2 || z > 3)) {
 					Tile at = GetTileAt (x, z);
 					at.IsAvailable = at.Rule.isAvailable (type);
-					//types += "(" + x + "," + z + ") : " + at.Rule.TileType ;
+					types += "(" + x + "," + z + ") : " + at.Rule.TileType ;
 				}
 			}
-			//types += ", \n";
+			types += ", \n";
 		}
-		//types += " };";
-		//Debug.Log (types);
+		types += " };";
+		Debug.Log (types);
 	}
 
 	public void SetTileType (int x, int z, int type) {
 		Tile at = GetTileAt (x, z);
-		if (at)
+		if (at && (at.Rule.TileType != (SpaceRules.Type) type))
 			at.Rule.TileType = (SpaceRules.Type) type;
 	}
 
-	public void SetNeighbors(int x, int z) {
+	public void SetCage (int x, int z, int type) {
+		Tile at = GetTileAt (x, z);
+		if (at && (at.Rule.TileType != (SpaceRules.Type)type)) {
+			at.Rule.TileType = (SpaceRules.Type) type;
+			at.Rule.InsideCage = true;
+		}
+	}
+
+	public void SetNeighbors(int x, int z, int type) {
 		Tile at = GetTileAt (x, z);
 		if (at) {
 			for (int i = x - 1; i < x + 2; i++) {
 				for (int j = z - 1; j < z + 2; j++) {
 					if ((i >= 0 && i < width) && (j >= 0 && j < height))
-						SetTileType (i, j, (int)at.Rule.TileType);
+						SetTileType (i, j, type);
 				}
 			}
 		}

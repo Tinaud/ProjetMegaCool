@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ParcManager : MonoBehaviour {
 
@@ -23,6 +24,8 @@ public class ParcManager : MonoBehaviour {
     private int[] booths;
     private GameObject Board;
     private Player_options menu;
+	ArrayList cageList;
+
 
     void Start()
     {
@@ -43,6 +46,7 @@ public class ParcManager : MonoBehaviour {
         Board = new GameObject("Board_P" + ID);
         Board.AddComponent<BoardManager>();
         Board.transform.parent = transform;
+		cageList = new ArrayList ();
     }
 
     void Build() {
@@ -81,26 +85,57 @@ public class ParcManager : MonoBehaviour {
         set { visitors = value; }
     }
 
-	public bool PurchaseAt (int x, int z, int type) {
-		Board.GetComponent<BoardManager> ().SetAvailability (type);
-		if (Board.GetComponent<BoardManager> ().GetTileAt (x, z).IsAvailable) {
-			Board.GetComponent<BoardManager> ().SetTileType (x, z, type);
-			Board.GetComponent<BoardManager> ().SetNeighbors (x, z);
-			addType (type);
+	public bool PurchaseBooth (int x, int z, int boothPatate) {
+	 	if (Board.GetComponent<BoardManager> ().GetTileAt (x, z).IsAvailable) {
+			Board.GetComponent<BoardManager> ().SetTileType (x, z, boothPatate);
+			Board.GetComponent<BoardManager> ().SetNeighbors (x, z, boothPatate);
+			addBooth ((BaseBooth.Booth)boothPatate);
 			return true;
 		} 
-
 		return false;
 	}
 
-	void addType (int type) {
-		if (type == (int)SpaceRules.Type.CageEmpty)
-			addCage ();
-		else if ((type >= (int)SpaceRules.Type.CageBront) && (type <= (int)SpaceRules.Type.CageTyra))
-			addDino (type);
-		else if ((type >= (int)SpaceRules.Type.Restaurant) && (type <= (int)SpaceRules.Type.Paleontologist))
-			addBooth (type);
-		
+	public void SetAvailability(int type) {
+		Board.GetComponent<BoardManager> ().SetAvailability (type);
+	}
+
+	public bool PurchaseDino (int type, Cage cagePatate, BaseDinosaur dinoPatate) {
+		if (cagePatate.AddToCage (dinoPatate)) {
+			foreach (Tile t in (ArrayList)cageList[cagePatate.cageNo]) {
+				Board.GetComponent<BoardManager> ().SetTileType ((int)t.Position.x, (int)t.Position.y, type);
+				Board.GetComponent<BoardManager> ().SetNeighbors ((int)t.Position.x, (int)t.Position.y, type);
+			}
+			addDino (dinoPatate.Type);
+			return true;
+		}
+		return false;
+	}
+
+	public bool PurchaseCage (int x, int z) {
+		ArrayList CageTiles = new ArrayList (4);
+		int type = (int)SpaceRules.Type.CageEmpty;
+
+		for (int i = x; i <= x + 1; i++) {
+			for (int j = z; j <= z + 1; j++) {
+				Tile cur = Board.GetComponent<BoardManager> ().GetTileAt (i, j);
+				if (cur.IsAvailable) {
+					CageTiles.Add (cur);
+				}
+			}
+		}
+		if (CageTiles.Count == 4) {
+			foreach (Tile tile in CageTiles) {
+				//Board.GetComponent<BoardManager> ().SetTileType ((int)tile.Position.x, (int)tile.Position.y, type);
+				Board.GetComponent<BoardManager> ().SetCage ((int)tile.Position.x, (int)tile.Position.y, type);
+				Board.GetComponent<BoardManager> ().SetNeighbors ((int)tile.Position.x, (int)tile.Position.y, type);
+			}
+
+			cageList.Add (CageTiles);
+
+			addCage ();	
+			return true;
+		}
+		return false;
 	}
 
 	bool addCage() {
@@ -114,9 +149,9 @@ public class ParcManager : MonoBehaviour {
 		return false;
 	}
 
-    bool addDino(int dinosaurs) // trouver un moyen d'aller chercher le prix des dinosaures directement dans l'objet du dinosaure.
+	bool addDino(BaseDinosaur.Dino dinosaurs) // trouver un moyen d'aller chercher le prix des dinosaures directement dans l'objet du dinosaure.
     { 
-		switch ((BaseDinosaur.Dino)dinosaurs) 
+		switch (dinosaurs) 
         {
 		case BaseDinosaur.Dino.Brontosaurus:
                 if (cash >= 2)
@@ -148,6 +183,7 @@ public class ParcManager : MonoBehaviour {
                     Debug.Log("Not enough funds!");
                     return false;
                 }
+
 		case BaseDinosaur.Dino.Tyrannosaurus:
 			int TyrannosaurusPrice = eventTyrannosaurusPriceDown ? 15 : 25;
 			if (cash >= TyrannosaurusPrice)
@@ -164,6 +200,7 @@ public class ParcManager : MonoBehaviour {
                     Debug.Log("Not enough funds!");
                     return false;
                 }
+
 		case BaseDinosaur.Dino.Velociraptor:
                 if (cash >= 5)
                 {
@@ -179,13 +216,14 @@ public class ParcManager : MonoBehaviour {
                     Debug.Log("Not enough funds!");
                     return false;
                 }
-            default: Debug.Log("Dinosaure type not recognized"); return false; 
+
+        default: Debug.Log("Dinosaure type not recognized"); return false; 
         }
     }
 
-    bool addBooth(int booth) 
+	bool addBooth(BaseBooth.Booth booth) 
     {
-		switch ((BaseBooth.Booth)booth) 
+		switch (booth) 
         {
 		case BaseBooth.Booth.Restaurant:
                 booths[0]++;

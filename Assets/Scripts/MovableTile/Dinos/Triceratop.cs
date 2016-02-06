@@ -3,10 +3,12 @@ using System.Collections;
 
 public class Triceratop : BaseDinosaur {
 
-	public Triceratop () : base (10, 4) {
-		this.type = Dino.Triceratop;
-		this.nbVisitorsAdded = 5;
-		this.nbVisitorsEaten = 2;
+	void Start() {
+		price = 10;
+
+		type = Dino.Triceratop;
+		nbVisitorsAdded = 5;
+		nbVisitorsEaten = 2;
 
 		//Debug.Log ("Incredible! You have a triceratop in your park!");
 	}
@@ -14,4 +16,5 @@ public class Triceratop : BaseDinosaur {
 	public override void ShowDetails () {
 		// Coute 10$ et 4 tuile, +5 visitors, -2 victims
 	}
+		
 }

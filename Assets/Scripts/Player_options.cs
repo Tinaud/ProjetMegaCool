@@ -29,10 +29,15 @@ public class Player_options : MonoBehaviour {
 	public GameObject gInter;
 	public Texture2D selectionHighLight = null;
 	public static Rect selection = new Rect(0, 0, 0, 0);
-	Vector2 startPos;
-	Vector2 rectSize = new Vector2(22, 22);
+	//Rect alert = new Rect (Screen.width / 2, Screen.height - 200f, 100f, 20f);
+	Vector2 startPos; 
+	Vector2 rectSize; int sizeX = 22, sizeY = 22;
 	public int playerNo = 1;
+	int cageNo = 0;
 	ParcManager parc;
+
+	//float displayTime = 3f;
+	//bool displayMessage = false;
 
 	// Use this for initialization
 	void Start () {
@@ -43,31 +48,77 @@ public class Player_options : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (creating) {
+			if (once) {
+				GameObject b = GameObject.Find ("Player_" + playerNo);
+				parc = b.GetComponent<ParcManager> ();
+				parc.SetAvailability (type);
+				once = false;
+			}
 			InstantiateRect ();
 			CreateObj (type);
 		}
+		/*if(displayMessage) {
+			displayTime -= Time.deltaTime;
+			if (displayTime <= 0)
+				displayMessage = false;
+		}*/
 	}
 
 	void InstantiateRect () {
-		startPos = new Vector2 (Input.mousePosition.x - rectSize.x / 2, InvertMouseY (Input.mousePosition.y) - rectSize.y / 2);
+		if (type == (int)SpaceRules.Type.CageEmpty) {
+			rectSize = new Vector2 (sizeX*2, sizeY*2);
+			startPos = new Vector2 (Input.mousePosition.x - rectSize.x /4, InvertMouseY (Input.mousePosition.y) - rectSize.y / 1.5f);
+		} else {
+			rectSize = new Vector2 (sizeX, sizeY);
+			startPos = new Vector2 (Input.mousePosition.x - rectSize.x / 2, InvertMouseY (Input.mousePosition.y) - rectSize.y / 2);
+		}
 		selection = new Rect (startPos, rectSize);
 	}
 
 	void CreateObj(int t) {
 		if (Input.GetMouseButtonDown (0)) {
-			GameObject b = GameObject.Find ("Player_" + playerNo);
-			parc = b.GetComponent<ParcManager> ();
+			//GameObject b = GameObject.Find ("Player_" + playerNo);
+			//parc = b.GetComponent<ParcManager> ();
 
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			RaycastHit hit;
 			if (Physics.Raycast (ray, out hit)) {
 				Vector3 tilePos = hit.collider.transform.position;
-				//Debug.Log (tilePos.ToString ());
+				int tileX, tileZ;
+				Debug.Log (tilePos.ToString ());
 
-				if (parc.PurchaseAt ((int)Mathf.Round (tilePos.x * 2), (int)Mathf.Round (tilePos.z * 2), t)) {
+				if (t == (int)SpaceRules.Type.CageEmpty) {
+					tileX = (int)hit.collider.GetComponent<Tile> ().Position.x;
+					tileZ = (int)hit.collider.GetComponent<Tile> ().Position.y;
+					if (parc.PurchaseCage (tileX, tileZ)) {
+						tilePos.x += .25f;
+						tilePos.z += .25f;
+						patateobject = (GameObject)Instantiate (kiosk, tilePos, Quaternion.identity);
+						patateobject.transform.localScale = new Vector3 (1, 0.2f, 1);
+						addCompoType (t);
+						patateobject.GetComponent<Cage> ().cageNo = cageNo;
+						creating = false;
+						once = true;
+						cageNo++;
+					}
+				} else if ((t>= (int)SpaceRules.Type.Restaurant) && (t <= (int)SpaceRules.Type.Paleontologist)) {
+					tileX = (int)hit.collider.GetComponent<Tile> ().Position.x;
+					tileZ = (int)hit.collider.GetComponent<Tile> ().Position.y;
+					if (parc.PurchaseBooth (tileX, tileZ, t)) {
+						patateobject = (GameObject)Instantiate (kiosk, tilePos, Quaternion.identity);
+						addCompoType (t);
+						creating = false;
+						once = true;
+					}
+				} else if ((t >= (int)SpaceRules.Type.CageBront) && (t <= (int)SpaceRules.Type.CageTyra)) {
 					patateobject = (GameObject)Instantiate (kiosk, tilePos, Quaternion.identity);
-					addCompoType (type);
-					creating = false;
+					addCompoType (t);
+					BaseDinosaur dinoPatate = patateobject.GetComponent<BaseDinosaur> ();
+					if (parc.PurchaseDino (t, hit.collider.GetComponent<Cage> (),dinoPatate)) {
+						creating = false;
+						once = true;
+					} else
+						Destroy (patateobject);
 				}
 			}
 		}
@@ -83,6 +134,10 @@ public class Player_options : MonoBehaviour {
 	{
 		GUI.color = new Color(1, 1, 1, 0.5f);
 		GUI.DrawTexture(selection, selectionHighLight);
+		/*if (displayMessage) {
+			GUI.Label (alert, " You can't place it there !");
+			GUI.DrawTexture(alert, selectionHighLight);
+		}*/
 	}
 
 
@@ -142,7 +197,6 @@ public class Player_options : MonoBehaviour {
 
 	public void cagecreation()
 	{
-
 		width = .5F;
 		height = .3F;
 		type = (int)SpaceRules.Type.CageEmpty;

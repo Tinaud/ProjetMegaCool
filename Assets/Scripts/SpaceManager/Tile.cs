@@ -15,31 +15,16 @@ public class Tile : MonoBehaviour {
 	SpaceRules rule;
 
 	public SpaceRules Rule {
-		get {
-			return rule;
-		}
-		set {
-			rule = value;
-		}
+		get { return rule; }
+		set { rule = value; }
 	}
 
 	/*----------------- GETTER & SETTER ------------------*/
 
 	public bool IsAvailable {
 		get { return isAvailable; }
-		set {
-			isAvailable = value;
-		}
+		set {isAvailable = value;}
 	}
-
-	public void SetAvailable() {
-		isAvailable = true;
-	}
-
-	public void SetUnavailable() {
-		isAvailable = false;
-	}
-		
 
 	void Start () {
 		isSelected = false;

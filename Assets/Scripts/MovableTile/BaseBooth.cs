@@ -11,24 +11,16 @@ public class BaseBooth : MovableTile {
 							// penser aux specificites de chaque type
 
 	public Booth Type {
-		get {return type;}
+		get { return type; }
+		set { type = value; }
 	}
+		
+	protected bool isFaceDown;
 
-			
-							
-
-	bool isVisible = false;
-
-    public BaseBooth(int space) : base(space)
-    {
-        //this.price = officialPrice();
-
-    }
-
-    /*public BaseBooth (Booth type) : base(Price, Space) { // Par defaut un kiosque coute 3$ et 1 tuile 
-		this.type = type;
-		Debug.Log ("Booth " + BoothTypeToString(type) + " has been added in your park.");
-	}*/
+	void Start() {
+		isFaceDown = false;
+		price = officialPrice ();
+	}
 		
 	// Pour afficher les specificites propres a chaque kiosque au moment de l'achat
 	public override void ShowDetails () {
@@ -41,40 +33,16 @@ public class BaseBooth : MovableTile {
 		// Paleontologist (Counter event)
 		
 	}
-    public int officialPrice() {
-        if (isVisible == false)
-            return 5;
-        else
+
+   protected int officialPrice() {
+		if (isFaceDown)
             return 3;
+        else
+            return 5;
     }
 
     public void turnOver() {
-        isVisible = true;
+		isFaceDown = true;
     }  
 
-	// Convertit l'enum en string
-	public string BoothTypeToString(Booth type) {
-		switch (type) {
-		case Booth.Restaurant:
-			return "Restaurant";
-		
-		case Booth.Security:
-			return "Security";
-
-		case Booth.Bathroom:
-			return "Bathroom";
-
-		case Booth.Casino:
-			return "Casino";
-
-		case Booth.Spy:
-			return "Spy";
-
-		case Booth.Paleontologist:
-			return "Paleontologist";
-
-		default:
-			return "UNKNOWN TYPE !"; 
-		}
-	}
 }

@@ -59,12 +59,9 @@ public class MenuPlayers : MonoBehaviour {
                 playable = false;
                 gameInterface.SetActive(true);
             }
-            if (X > -1F){
-                X += -1F;
-                Y += 28F;
-                Z += -1.67F;
-                mainCamera.transform.position = new Vector3(X, Y, Z);
-            }
+
+            StartCoroutine(animation());
+            
             switch (NbPlayer)
             {
                 case 4: score4.SetActive(true); goto case 3;
@@ -137,5 +134,18 @@ public class MenuPlayers : MonoBehaviour {
     {
         menu.SetActive(true);
         option.SetActive(false);
+    }
+
+    IEnumerator animation()
+    {
+        while (X > -1F)
+        {
+            X += -1F;
+            Y += 28F;
+            Z += -1.67F;
+            mainCamera.transform.position = new Vector3(X, Y, Z);
+        }
+
+        yield return 0;
     }
 }

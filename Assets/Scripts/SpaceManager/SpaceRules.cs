@@ -18,6 +18,13 @@ public class SpaceRules
 	};
 	Type type;
 
+	bool insideCage;
+
+	public bool InsideCage {
+		get { return insideCage; }
+		set { insideCage = value; }
+	}
+
 	public Type TileType {
 		get { return type; }
 		set { type = value; }
@@ -26,10 +33,11 @@ public class SpaceRules
 	public SpaceRules ()
 	{
 		type = Type.Empty;
+		insideCage = false;
 	}
 
 	bool canPlaceDino(int dinoType) {
-		if (this.type == Type.CageEmpty || (int)this.type == dinoType)
+		if (insideCage)
 			return true;
 		else 
 			return false;

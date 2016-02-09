@@ -5,28 +5,34 @@ using System.Collections;
 
 public class ScoreBoard : MonoBehaviour {
 
+    public bool playersSet = false;
     private int visitors;
     private int cash;
-    List<ParcManager> playerlist = new List<ParcManager>();
+    public List<ParcManager> playerlist = new List<ParcManager>();
     public Text Cash;
     public Text Visitors;
     public int player;
 
+    void OnEnable()
+    {
+        setPlayerList();
+    }
 
-	// Use this for initialization
-	void Start () {
-        Debug.Log("scoreboard");
+	void Update () 
+    {
+        if (playersSet)
+        {
+            cash = playerlist[player].cash;
+            visitors = playerlist[player].visitors;
+
+            Cash.text = "Cash: " + cash + " $";
+            Visitors.text = "Visitors: " + visitors;
+        }
+	}
+
+    void setPlayerList()
+    {
         playerlist = Camera.main.GetComponent<GameManager>().getPlayers();
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-
-        cash = playerlist[player].cash;
-        visitors = playerlist[player].visitors;
-        Cash.text = "Cash: " + cash + " $";
-        Visitors.text = "Visitors: " + visitors;
-	
-	}
+        playersSet = true;
+    }
 }

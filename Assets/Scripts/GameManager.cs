@@ -6,16 +6,15 @@ public class GameManager : MonoBehaviour
 {
     enum Phase { Event, Income, Building, Breach, End };
 
-    public GameObject dice,
-                      park;
-
     private bool diceFinished,
                  firstTurn,
                  isFinish;
     private Component[] tempList;
     private Dice diceScript;
     private Events eventManager;
-    private GameObject intanciatedObject;
+    private GameObject dice,
+                       intanciatedObject,
+                       park;
     private int activePlayer,
                 actualPhase,
                 diceResult,
@@ -111,7 +110,7 @@ public class GameManager : MonoBehaviour
                                     dice = (GameObject)Resources.Load("dice_10");
                                     break;
                                 case ParcManager.Danger.Medium:
-                                    dice = (GameObject)Resources.Load("dice_8");
+                                    dice = (GameObject)Resources.Load("DiceBox");
                                     break;
                                 case ParcManager.Danger.Medium_high:
                                     dice = (GameObject)Resources.Load("Dé6");

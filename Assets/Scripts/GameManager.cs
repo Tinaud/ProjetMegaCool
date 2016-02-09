@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
                       park;
 
     private bool diceFinished,
+                 firstTurn,
                  isFinish;
     private Component[] tempList;
     private Dice diceScript;
@@ -32,8 +33,8 @@ public class GameManager : MonoBehaviour
         eventManager = GetComponent<Events>();
         parent = transform;
         isFinish = false;
+        firstTurn = true;
         diceFinished = true;
-        dice = (GameObject)Resources.Load("Dé Prefab");
         park = (GameObject)Resources.Load("Joueur");
 
         for (int i = 0; i < playerNumber; i++)
@@ -67,8 +68,9 @@ public class GameManager : MonoBehaviour
 
                     eventManager.restoreEvents(ref playerList);
                     eventManager.applyEventEffect(test, ref playerList);
-                    
-                    actualPhase++;
+
+                    actualPhase += firstTurn ? 2 : 1;
+                    firstTurn = false;
                     break;
 
                 case (int)Phase.Income:
@@ -86,7 +88,7 @@ public class GameManager : MonoBehaviour
                     {
                         int buildNumber = (player.eventTwoBuild) ? 2 : 1;
                         for (int i = 0; i < buildNumber; i++ )
-                            Debug.Log("Build Phase " + player);
+                            Debug.Log("Build Phase " + player.ID);
                     }
 
                     actualPhase++;
@@ -99,6 +101,26 @@ public class GameManager : MonoBehaviour
                         for (int i = 0; i < breachNumber; i++ )
                         {
                             Debug.Log("Dice part! " + player.ID);
+
+                            switch(player.dangerLevel)
+                            {
+                                case ParcManager.Danger.Low:
+                                    dice = (GameObject)Resources.Load("Dé12");
+                                    break;
+                                case ParcManager.Danger.Medium_low:
+                                    dice = (GameObject)Resources.Load("Dé10");
+                                    break;
+                                case ParcManager.Danger.Medium:
+                                    dice = (GameObject)Resources.Load("Dé8");
+                                    break;
+                                case ParcManager.Danger.Medium_high:
+                                    dice = (GameObject)Resources.Load("Dé6");
+                                    break;
+                                case ParcManager.Danger.High:
+                                    dice = (GameObject)Resources.Load("Dé4");
+                                    break;
+                            }
+
                             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.A));
                             {
                                 diceFinished = false;
@@ -132,10 +154,10 @@ public class GameManager : MonoBehaviour
 
         diceScript = GetComponentInChildren<Dice>();
 
-        yield return new WaitWhile(() => diceScript.isSpinning);
-
-        diceFinished = true;
+        yield return new WaitUntil(() => diceScript.isFinished);
+        
         diceResult = diceScript.diceResult;
+        diceFinished = true;
     }
 
     public void setInfos(int nbP, int nbT)

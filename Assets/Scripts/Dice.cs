@@ -3,16 +3,17 @@ using System.Collections;
 
 public class Dice : MonoBehaviour 
 {
-    public bool isSpinning;
+    public bool isFinished;
     public int diceResult;
 
-    private int patate;  //Random Number
+    private bool isSpinning;
     private Transform dice;
     
     void Awake()
     {
         dice = GetComponent<Transform>();
         isSpinning = true;
+        isFinished = false;
         StartCoroutine(MyCoroutine());
     }
 
@@ -24,14 +25,12 @@ public class Dice : MonoBehaviour
 
     IEnumerator MyCoroutine()
     {
-        ThrowDice();
         yield return new WaitForSeconds(2F);
-        StopDice();
+        isSpinning = false;
 
-        patate = Random.Range(1, 7);
-        diceResult = patate;
+        diceResult = Random.Range(1, 7);
 
-        switch (patate)
+        switch (diceResult)
         {
             case 2:
                 dice.localEulerAngles = new Vector3(Random.Range(-10, 10), Random.Range(80, 100), Random.Range(170, 190));
@@ -53,17 +52,8 @@ public class Dice : MonoBehaviour
                 break;
         }
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
+        isFinished = true;
         Destroy(this.gameObject);
-    }
-
-    void ThrowDice()
-    {
-        isSpinning = true;
-    }
-
-    void StopDice()
-    {
-        isSpinning = false;
     }
 }

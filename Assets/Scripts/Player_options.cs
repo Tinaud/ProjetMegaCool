@@ -127,7 +127,7 @@ public class Player_options : MonoBehaviour {
 	void OnGUI()
 	{
 		GUI.color = new Color(1, 1, 1, 0.5f);
-		GUI.DrawTexture(selection, selectionHighLight);
+		//GUI.DrawTexture(selection, selectionHighLight);
 		/*if (displayMessage) {
 			GUI.Label (alert, " You can't place it there !");
 			GUI.DrawTexture(alert, selectionHighLight);

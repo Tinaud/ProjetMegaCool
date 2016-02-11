@@ -98,7 +98,8 @@ public class Events : MonoBehaviour
         switch(eventNumber)
         {
             case 0:
-                //Debug.Log("Endangered species,Scientists want to help endangered species! The player that pocess the most dinosaur loses his most expensive (only one). If two or more players are equals, every of them must do this event. Ignore this event if no one have dinosaur.");
+                //
+                Debug.Log("Endangered species,Scientists want to help endangered species! The player that pocess the most dinosaur loses his most expensive (only one). If two or more players are equals, every of them must do this event. Ignore this event if no one have dinosaur.");
                 break;
             case 1:
                 Debug.Log("Pay day!,Every player receive 10$!");
@@ -151,10 +152,12 @@ public class Events : MonoBehaviour
                         player.visitors -= 5;
                 break;
             case 9:
-                //Debug.Log("Proliferation,Your dinosaurs will have new born soon! You can buy a second dinosaur only for this turn if you already have that same dinosaur in your park.");
+                //
+                Debug.Log("Proliferation,Your dinosaurs will have new born soon! You can buy a second dinosaur only for this turn if you already have that same dinosaur in your park.");
                 break;
             case 10:
-                //Debug.Log("The mysterious men in white,A mysterious man in a white suit is interested by your growing business. Every players may choose a free booth for his park! Starting with the player which has the least visitors, every player build one of the face-up booth. If there is a tie, you proceed clock-wise from the active first player. The event ends when all the players have built a free booth or there is no more face-up booths available. Three new face-up booths are revealed.");
+                //
+                Debug.Log("The mysterious men in white,A mysterious man in a white suit is interested by your growing business. Every players may choose a free booth for his park! Starting with the player which has the least visitors, every player build one of the face-up booth. If there is a tie, you proceed clock-wise from the active first player. The event ends when all the players have built a free booth or there is no more face-up booths available. Three new face-up booths are revealed.");
                 break;
             case 11:
                 Debug.Log("Know-it-all Joe,A mad know-it-all Joe enters your park angry. He is upset because, he says, you don't treat your dinosaurs respectfully. He then proceed to sabotage one of your cage this turn. You suffer immediately the effect of a breach in your park (but you will skip the breach phase this turn). Ignore this event if you have a paleontologist booth in your park or if you have no dinosaurs in your park.");
@@ -171,10 +174,12 @@ public class Events : MonoBehaviour
                 }
                 break;
             case 13:
-                //Debug.Log("Accumulation of defecation,The player that have the most dinosaurs in his park is incapable to clean every enclosure. His guests are disgusted and 3 of them leave his park. If two or more players are equals, every of them must do this event. Ignore this event if no one have dinosaur.");
+                //
+                Debug.Log("Accumulation of defecation,The player that have the most dinosaurs in his park is incapable to clean every enclosure. His guests are disgusted and 3 of them leave his park. If two or more players are equals, every of them must do this event. Ignore this event if no one have dinosaur.");
                 break;
             case 14:
-                //Debug.Log("Metals abundance,You can build as many cages as you want during this turn, as long as you have the money and space in your park! You can then continue the normal building phase by buying something else.");
+                //
+                Debug.Log("Metals abundance,You can build as many cages as you want during this turn, as long as you have the money and space in your park! You can then continue the normal building phase by buying something else.");
                 break;
             case 15:
                 Debug.Log("Archaeological research : Triceratops,Spectacular discoveries have happened in the archaeological world. Triceratops's price is reduced by 5$ only for this turn.");
@@ -214,7 +219,7 @@ public class Events : MonoBehaviour
 
     public IEnumerator throwDice(ParcManager player)
     {
-        GameObject dice = (GameObject)Resources.Load("Dé Prefab");
+        GameObject dice = (GameObject)Resources.Load("Dé6");
         Transform cameraPos = Camera.main.transform;
 
         GameObject intanciatedObject = (GameObject)Instantiate(dice, new Vector3(cameraPos.position.x + 2, cameraPos.position.y - 6, cameraPos.position.z - 2), Quaternion.identity);
@@ -222,7 +227,7 @@ public class Events : MonoBehaviour
 
         Dice diceScript = GetComponentInChildren<Dice>();
 
-        yield return new WaitWhile(() => diceScript.isSpinning);
+        yield return new WaitUntil(() => diceScript.isFinished);
 
         player.visitors += diceScript.diceResult;
     }

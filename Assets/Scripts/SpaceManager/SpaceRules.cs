@@ -36,13 +36,6 @@ public class SpaceRules
 		insideCage = false;
 	}
 
-	bool canPlaceDino(int dinoType) {
-		if (insideCage)
-			return true;
-		else 
-			return false;
-	}
-
 	bool canPlaceBooth(int boothType) {
 		if (this.type == Type.Empty || (int)this.type == boothType)
 			return true;
@@ -50,18 +43,16 @@ public class SpaceRules
 			return false;
 	}
 
-	bool canPlaceCage() {
-		if (this.type == Type.Empty || this.type == Type.CageEmpty)
+	bool canPlaceCage(int cageType) {
+		if (this.type == Type.Empty || (int)this.type == cageType)
 			return true;
 		else 
 			return false;
 	}
 
 	public bool isAvailable(int type) {
-		if (type == (int)Type.CageEmpty)
-			return canPlaceCage ();
-		else if ((type >= (int)Type.CageBront) && (type <= (int)Type.CageTyra))
-			return canPlaceDino (type);
+		if (type == (int)Type.CageEmpty || (type >= (int)Type.CageBront && type <= (int)Type.CageTyra))
+			return canPlaceCage (type);
 		else if ((type >= (int)Type.Restaurant) && (type <= (int)Type.Paleontologist))
 			return canPlaceBooth (type);
 

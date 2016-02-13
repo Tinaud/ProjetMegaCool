@@ -87,21 +87,24 @@ public class Player_options : MonoBehaviour {
 				int tileX, tileZ;
 				Debug.Log (tilePos.ToString ());
 
-				if (t == (int)SpaceRules.Type.CageEmpty) {
+				if (t == (int)SpaceRules.Type.CageEmpty) // Creer une cage vide  
+				{
 					tileX = (int)hit.collider.GetComponent<Tile> ().Position.x;
 					tileZ = (int)hit.collider.GetComponent<Tile> ().Position.y;
 					if (parc.PurchaseCage (tileX, tileZ)) {
 						tilePos.x += .25f;
 						tilePos.z += .25f;
 						patateobject = (GameObject)Instantiate (kiosk, tilePos, Quaternion.identity);
-						patateobject.transform.localScale = new Vector3 (1, 0.2f, 1);
+						patateobject.transform.localScale = new Vector3 (1, .2f, 1);
 						addCompoType (t);
 						patateobject.GetComponent<Cage> ().cageNo = cageNo;
 						creating = false;
 						once = true;
 						cageNo++;
 					}
-				} else if ((t>= (int)SpaceRules.Type.Restaurant) && (t <= (int)SpaceRules.Type.Paleontologist)) {
+				} 
+				else if ((t>= (int)SpaceRules.Type.Restaurant) && (t <= (int)SpaceRules.Type.Paleontologist)) // Creer un kiosque
+				{
 					tileX = (int)hit.collider.GetComponent<Tile> ().Position.x;
 					tileZ = (int)hit.collider.GetComponent<Tile> ().Position.y;
 					if (parc.PurchaseBooth (tileX, tileZ, t)) {
@@ -110,16 +113,7 @@ public class Player_options : MonoBehaviour {
 						creating = false;
 						once = true;
 					}
-				} else if ((t >= (int)SpaceRules.Type.CageBront) && (t <= (int)SpaceRules.Type.CageTyra)) {
-					patateobject = (GameObject)Instantiate (kiosk, tilePos, Quaternion.identity);
-					addCompoType (t);
-					BaseDinosaur dinoPatate = patateobject.GetComponent<BaseDinosaur> ();
-					if (parc.PurchaseDino (t, hit.collider.GetComponent<Cage> (),dinoPatate)) {
-						creating = false;
-						once = true;
-					} else
-						Destroy (patateobject);
-				}
+				} 
 			}
 		}
 			
@@ -255,7 +249,7 @@ public class Player_options : MonoBehaviour {
 		switch ((SpaceRules.Type)type) {
 		 
 			case SpaceRules.Type.CageEmpty:
-				patateobject.AddComponent<Cage> ();
+			patateobject.AddComponent<Cage> ();
 				break;
 			case SpaceRules.Type.CageBront:
 				patateobject.AddComponent<Brontosaurus> ();

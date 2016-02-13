@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Cage : MovableTile{
 
-	Renderer rend;
 	public int cageNo;
 
 	public enum CageType { 
@@ -14,6 +13,11 @@ public class Cage : MovableTile{
 		CageTyra = 3
 	}; 
 	CageType type;
+
+	public CageType Type {
+		get { return type; }
+		set { type = value; }
+	}
 
 	ArrayList dinosaurs;
 	int capacity;
@@ -48,7 +52,7 @@ public class Cage : MovableTile{
 		dinosaurs = new ArrayList ();
 		isFull = false;
 		type = CageType.CageEmpty;
-		rend = GetComponent<Renderer> ();
+		gameObject.AddComponent<Renderer> ();
 	}
 
 	// Pour afficher les specificites propres a chaque dinosaure au moment de l'achat
@@ -58,7 +62,7 @@ public class Cage : MovableTile{
 			isFull = true;
 
 		//Pour la selection des tuiles
-		if (rend.isVisible) {
+		if (GetComponent<Renderer> ().isVisible) {
 			Vector3 camPos = Camera.main.WorldToScreenPoint (transform.position);
 			camPos.y = Player_options.InvertMouseY (camPos.y);
 			isSelected = Player_options.selection.Contains (camPos);
@@ -66,12 +70,12 @@ public class Cage : MovableTile{
 
 		if (isSelected) {
 			if (!isFull)
-				rend.material.color = Color.green;
+				GetComponent<Renderer> ().material.color = Color.green;
 			else
-				rend.material.color = Color.red;
+				GetComponent<Renderer> ().material.color = Color.red;
 		}
 		else
-			rend.material.color = Color.white;
+			GetComponent<Renderer> ().material.color = Color.white;
 	}
 
 	int officialCapacity() {

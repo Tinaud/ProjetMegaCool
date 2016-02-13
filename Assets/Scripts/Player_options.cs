@@ -76,6 +76,34 @@ public class Player_options : MonoBehaviour {
 		selection = new Rect (startPos, rectSize);
 	}
 
+    public void cageIsEmpty()
+    {
+        Cage cacage;
+        if (Input.GetMouseButtonDown(0))
+        {
+            //GameObject b = GameObject.Find ("Player_" + playerNo);
+            //parc = b.GetComponent<ParcManager> ();
+
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                cacage = hit.collider.GetComponent<Cage>();
+                if (cacage != null)
+                {
+                    if (!cacage.IsFull && cacage.Type == Cage.CageType.CageEmpty)
+                    {
+                        gInter.GetComponent<GameInterface>().DinoPanel();
+                    }
+                    else if (!cacage.IsFull)
+                    {
+                        //afficher le type de la cage et sa capacité.
+                    }
+                }
+            }
+        }
+    }
+
 	void CreateObj(int t) {
 		if (Input.GetMouseButtonDown (0)) {
 			//GameObject b = GameObject.Find ("Player_" + playerNo);
@@ -88,34 +116,40 @@ public class Player_options : MonoBehaviour {
 				int tileX, tileZ;
 				Debug.Log (tilePos.ToString ());
 
-				if (t == (int)SpaceRules.Type.CageEmpty) // Creer une cage vide  
-				{
-					tileX = (int)hit.collider.GetComponent<Tile> ().Position.x;
-					tileZ = (int)hit.collider.GetComponent<Tile> ().Position.y;
-					if (parc.PurchaseCage (tileX, tileZ)) {
-						tilePos.x += .25f;
-						tilePos.z += .25f;
-						patateobject = (GameObject)Instantiate (kiosk, tilePos, Quaternion.identity);
-						patateobject.transform.localScale = new Vector3 (1, .2f, 1);
-						addCompoType (t);
-						patateobject.GetComponent<Cage> ().cageNo = cageNo;
-						creating = false;
-						once = true;
-						cageNo++;
-					}
-				} 
-				else if ((t>= (int)SpaceRules.Type.Restaurant) && (t <= (int)SpaceRules.Type.Paleontologist)) // Creer un kiosque
-				{
-					tileX = (int)hit.collider.GetComponent<Tile> ().Position.x;
-					tileZ = (int)hit.collider.GetComponent<Tile> ().Position.y;
-					if (parc.PurchaseBooth (tileX, tileZ, t)) {
-						patateobject = (GameObject)Instantiate (kiosk, tilePos, Quaternion.identity);
-						addCompoType (t);
-						creating = false;
-						once = true;
-					}
-				} 
-			}
+                if (t == (int)SpaceRules.Type.CageEmpty) // Creer une cage vide  
+                {
+                    tileX = (int)hit.collider.GetComponent<Tile>().Position.x;
+                    tileZ = (int)hit.collider.GetComponent<Tile>().Position.y;
+                    if (parc.PurchaseCage(tileX, tileZ))
+                    {
+                        tilePos.x += .25f;
+                        tilePos.z += .25f;
+                        patateobject = (GameObject)Instantiate(kiosk, tilePos, Quaternion.identity);
+                        patateobject.transform.localScale = new Vector3(1, .2f, 1);
+                        addCompoType(t);
+                        patateobject.GetComponent<Cage>().cageNo = cageNo;
+                        creating = false;
+                        once = true;
+                        cageNo++;
+                    }
+                }
+                else if ((t >= (int)SpaceRules.Type.Restaurant) && (t <= (int)SpaceRules.Type.Paleontologist)) // Creer un kiosque
+                {
+                    tileX = (int)hit.collider.GetComponent<Tile>().Position.x;
+                    tileZ = (int)hit.collider.GetComponent<Tile>().Position.y;
+                    if (parc.PurchaseBooth(tileX, tileZ, t))
+                    {
+                        patateobject = (GameObject)Instantiate(kiosk, tilePos, Quaternion.identity);
+                        addCompoType(t);
+                        creating = false;
+                        once = true;
+                    }
+                }
+                else if ((t >= (int)SpaceRules.Type.CageBront) && (t <= (int)SpaceRules.Type.CageTyra))
+                {
+
+                }
+            }
 		}
 			
 	}

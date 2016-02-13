@@ -6,6 +6,7 @@ public class Player_options : MonoBehaviour {
 
 	public GameObject kiosk;
 	GameObject patateobject;
+    BaseDinosaur patateDinosaur;
 	public Canvas spri;
 	public Sprite pal;
 	public Sprite cas;
@@ -252,16 +253,16 @@ public class Player_options : MonoBehaviour {
 			patateobject.AddComponent<Cage> ();
 				break;
 			case SpaceRules.Type.CageBront:
-				patateobject.AddComponent<Brontosaurus> ();
+				patateDinosaur = new Brontosaurus();
 				break;
-			case SpaceRules.Type.CageVelo: 
-				patateobject.AddComponent<Velociraptor> ();
+			case SpaceRules.Type.CageVelo:
+                patateDinosaur = new Velociraptor();
 				break;
 			case SpaceRules.Type.CageTric:
-				patateobject.AddComponent<Triceratop> ();
+                patateDinosaur = new Triceratop();
 				break;
 			case SpaceRules.Type.CageTyra:
-				patateobject.AddComponent<Tyrannosaurus> ();
+                patateDinosaur = new Tyrannosaurus();
 				break;
 			case SpaceRules.Type.Restaurant : 
 				patateobject.AddComponent<Restaurant> ();

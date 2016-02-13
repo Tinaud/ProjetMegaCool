@@ -3,13 +3,8 @@ using System.Collections;
 
 public class Velociraptor : BaseDinosaur
 {
-	void Start() {
-		price = 5;
-
+	public Velociraptor(): base(5, 2, 1) {
 		type = Dino.Velociraptor;
-		nbVisitorsAdded = 2;
-		nbVisitorsEaten = 1;
-
 		//Debug.Log("Woaaaw ! You have a velociraptor in your park!");
 	}
 

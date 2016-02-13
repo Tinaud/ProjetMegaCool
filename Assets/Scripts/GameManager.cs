@@ -22,31 +22,29 @@ public class GameManager : MonoBehaviour
                 turnNumber;
     private List<ParcManager> playerList = new List<ParcManager>();
     private string currentEvent;
-    private Transform cameraPos, 
-                      parent;
+    private Transform cameraPos;
 
 	void Start () 
     {
         actualPhase = (int)Phase.Event;
         cameraPos = Camera.main.transform;
         eventManager = GetComponent<Events>();
-        parent = transform;
-        isFinish = false;
-        firstTurn = true;
         diceFinished = true;
+        firstTurn = true; 
+        isFinish = false;
         park = (GameObject)Resources.Load("Joueur");
 
         for (int i = 0; i < playerNumber; i++)
         {
             Debug.Log("Player created! :D");
             intanciatedObject = (GameObject)Instantiate(park, new Vector3(cameraPos.position.x, cameraPos.position.y, cameraPos.position.z + 10), Quaternion.identity);
-            intanciatedObject.transform.parent = parent;
+            intanciatedObject.transform.parent = transform;
         }
 
         tempList = GetComponentsInChildren<ParcManager>();
 
-        foreach (ParcManager players in tempList)
-            playerList.Add(players);
+        foreach (ParcManager player in tempList)
+            playerList.Add(player);
 
         for (int i = 0; i < playerList.Count; i++)
             playerList[i].setID(i + 1);
@@ -63,20 +61,20 @@ public class GameManager : MonoBehaviour
                 case (int)Phase.Event:
                     Debug.Log("Event phase");
                     yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.A));
-                    int test = eventManager.getEvent();
+                    int eventNumber = eventManager.getEvent();
 
                     eventManager.restoreEvents(ref playerList);
-                    eventManager.applyEventEffect(test, ref playerList);
+                    eventManager.applyEventEffect(eventNumber, ref playerList);
 
                     actualPhase += firstTurn ? 2 : 1;
                     firstTurn = false;
                     break;
 
                 case (int)Phase.Income:
-                    for(int i = 0; i < playerNumber; i++)
+                    foreach(ParcManager player in playerList)
                     {
-                        playerList[i].cash += playerList[i].cashPerTurn;
-                        playerList[i].cash += playerList[i].visitors; //à vérifier?
+                        player.cash += player.cashPerTurn;
+                        player.cash += player.visitors; //à vérifier?
                     }
 
                     actualPhase++;
@@ -149,7 +147,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator throwDice()
     {
         intanciatedObject = (GameObject)Instantiate(dice, new Vector3(cameraPos.position.x + 2, cameraPos.position.y - 6, cameraPos.position.z - 2), Quaternion.identity);
-        intanciatedObject.transform.parent = parent;
+        intanciatedObject.transform.parent = transform;
 
         diceScript = GetComponentInChildren<Dice>();
 

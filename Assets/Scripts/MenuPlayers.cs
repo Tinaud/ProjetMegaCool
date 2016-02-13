@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MenuPlayers : MonoBehaviour {
-
+public class MenuPlayers : MonoBehaviour 
+{
     public int NbPlayer, NbTurns;
     float X, Y, Z;
     public bool playable;
@@ -28,7 +28,8 @@ public class MenuPlayers : MonoBehaviour {
     private GameManager gameManager;
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+    {
 		NbPlayer = 0;
 		NbTurns = 0	;
         playable = false;
@@ -48,7 +49,8 @@ public class MenuPlayers : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+    {
 		if (NbPlayer != 0 && NbTurns != 0)
 			play.SetActive(true);
         if (playable)
@@ -59,69 +61,86 @@ public class MenuPlayers : MonoBehaviour {
                 playable = false;
                 gameInterface.SetActive(true);
             }
-
-            StartCoroutine(animation());
             
-            switch (NbPlayer)
-            {
-                case 4: score4.SetActive(true); goto case 3;
-                case 3: score3.SetActive(true); goto case 2;
-                case 2: score2.SetActive(true); goto case 1;
-                case 1: score1.SetActive(true);
-                break;
-            }        
+            //StartCoroutine(animation());
+            
+            //switch (NbPlayer)
+            //{
+            //    case 4: score4.SetActive(true); goto case 3;
+            //    case 3: score3.SetActive(true); goto case 2;
+            //    case 2: score2.SetActive(true); goto case 1;
+            //    case 1: score1.SetActive(true);
+            //    break;
+            //}        
         } //DETRUIRE LE SCRIPT APRES ANIMATION ??
 	}
 
-	public void player2 ()	{
+	public void player2 ()	
+    {
 		NbPlayer = 2;
         players2.SetActive(true);
         players3.SetActive(false);
         players4.SetActive(false);
 	}
 
-	public void player3 ()	{
+	public void player3 ()	
+    {
         NbPlayer = 3;
         players2.SetActive(false);
         players3.SetActive(true);
         players4.SetActive(false);
     }
 
-	public void player4 ()	{
+	public void player4 ()	
+    {
         NbPlayer = 4;
         players2.SetActive(false);
         players3.SetActive(false);
         players4.SetActive(true);
     }
 
-	public void turn10 ()	{
+	public void turn10 ()	
+    {
         NbTurns = 10;
         turns10.SetActive(true);
         turns15.SetActive(false);
         turns20.SetActive(false);
 	}
 
-	public void turn15 ()	{
+	public void turn15 ()	
+    {
         NbTurns = 15;
         turns10.SetActive(false);
         turns15.SetActive(true);
         turns20.SetActive(false);
 	}
 
-	public void turn20 ()	{
+	public void turn20 ()	
+    {
         NbTurns = 20;
         turns10.SetActive(false);
         turns15.SetActive(false);
         turns20.SetActive(true);
-
 	}
 
-    public void PlayButton ()    {
+    public void PlayButton ()    
+    {
         topTable.SetActive(false);
         playable = true;
         gameManager = this.gameObject.AddComponent<GameManager>();
         this.gameObject.AddComponent<Events>();
         gameManager.setInfos(NbPlayer, NbTurns);
+
+        StartCoroutine(animation());
+
+        switch (NbPlayer)
+        {
+            case 4: score4.SetActive(true); goto case 3;
+            case 3: score3.SetActive(true); goto case 2;
+            case 2: score2.SetActive(true); goto case 1;
+            case 1: score1.SetActive(true);
+            break;
+        }        
     }
 
     public void optionsmenu()
@@ -140,9 +159,9 @@ public class MenuPlayers : MonoBehaviour {
     {
         while (X > -1F)
         {
-            X += -1F;
+            X -= 1F;
             Y += 28F;
-            Z += -1.67F;
+            Z -= 1.67F;
             mainCamera.transform.position = new Vector3(X, Y, Z);
         }
 

@@ -95,7 +95,7 @@ public class Player_options : MonoBehaviour {
 						tilePos.x += .25f;
 						tilePos.z += .25f;
 						patateobject = (GameObject)Instantiate (kiosk, tilePos, Quaternion.identity);
-						patateobject.transform.localScale = new Vector3 (1, .2f, 1);
+						patateobject.transform.localScale = new Vector3 (.5f, .2f, .5f);
 						addCompoType (t);
 						patateobject.GetComponent<Cage> ().cageNo = cageNo;
 						creating = false;

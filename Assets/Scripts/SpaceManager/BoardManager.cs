@@ -74,6 +74,7 @@ public class BoardManager : MonoBehaviour {
 					Tile at = GetTileAt (x, z);
 					at.IsAvailable = at.Rule.isAvailable (type);
 					types += "(" + x + "," + z + ") : " + at.Rule.TileType ;
+					types += "[" + at.Rule.IsOccupied + "] - ";
 				}
 			}
 			types += ", \n";
@@ -88,12 +89,10 @@ public class BoardManager : MonoBehaviour {
 			at.Rule.TileType = (SpaceRules.Type) type;
 	}
 
-	public void SetCage (int x, int z, int type) {
+	public void SetOccupiedTile (int x, int z, int type) {
 		Tile at = GetTileAt (x, z);
-		if (at && (at.Rule.TileType != (SpaceRules.Type)type)) {
-			at.Rule.TileType = (SpaceRules.Type) type;
-			at.Rule.InsideCage = true;
-		}
+		at.Rule.TileType = (SpaceRules.Type) type;
+		at.Rule.IsOccupied = true;
 	}
 
 	public void SetNeighbors(int x, int z, int type) {

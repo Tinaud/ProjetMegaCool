@@ -3,13 +3,8 @@ using System.Collections;
 
 public class Triceratop : BaseDinosaur {
 
-	void Start() {
-		price = 10;
-
+	public Triceratop() : base(10, 5, 2) {
 		type = Dino.Triceratop;
-		nbVisitorsAdded = 5;
-		nbVisitorsEaten = 2;
-
 		//Debug.Log ("Incredible! You have a triceratop in your park!");
 	}
 

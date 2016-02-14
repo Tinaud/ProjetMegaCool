@@ -24,7 +24,6 @@ public class ParcManager : MonoBehaviour {
     private int[] booths;
     private GameObject Board;
     private Player_options menu;
-	ArrayList cageList;
 
 
     void Start()
@@ -46,7 +45,6 @@ public class ParcManager : MonoBehaviour {
         Board = new GameObject("Board_P" + ID);
         Board.AddComponent<BoardManager>();
         Board.transform.parent = transform;
-		cageList = new ArrayList ();
     }
 
     void Build() {
@@ -99,9 +97,10 @@ public class ParcManager : MonoBehaviour {
 		Board.GetComponent<BoardManager> ().SetAvailability (type);
 	}
 
-	/*public bool PurchaseDino (int type, Cage cagePatate, BaseDinosaur dinoPatate) {
+	public bool PurchaseDino (Cage cagePatate, BaseDinosaur dinoPatate) {
+		int type = (int)dinoPatate.Type; 
 		if (cagePatate.AddToCage (dinoPatate)) {
-			foreach (Tile t in (ArrayList)cageList[cagePatate.cageNo]) {
+			foreach (Tile t in (ArrayList)cagePatate.Tiles) {
 				Board.GetComponent<BoardManager> ().SetTileType ((int)t.Position.x, (int)t.Position.y, type);
 				Board.GetComponent<BoardManager> ().SetNeighbors ((int)t.Position.x, (int)t.Position.y, type);
 			}
@@ -109,10 +108,9 @@ public class ParcManager : MonoBehaviour {
 			return true;
 		}
 		return false;
-	}*/
+	}
 
-	public bool PurchaseCage (int x, int z) {
-		ArrayList CageTiles = new ArrayList (4);
+	public bool PurchaseCage (int x, int z, ref ArrayList CageTiles) {
 		int type = (int)SpaceRules.Type.CageEmpty;
 
 		for (int i = x; i <= x + 1; i++) {
@@ -133,9 +131,6 @@ public class ParcManager : MonoBehaviour {
 				Board.GetComponent<BoardManager> ().SetNeighbors ((int)tile.Position.x, (int)tile.Position.y, type);
 				Debug.Log (tile.Rule.TileType.ToString ());
 			}
-
-			cageList.Add (CageTiles);
-
 			addCage ();	
 			return true;
 		}

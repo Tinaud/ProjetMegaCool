@@ -3,7 +3,12 @@ using System.Collections;
 
 public class Cage : MovableTile{
 
-	public int cageNo;
+	ArrayList tiles;
+
+	public ArrayList Tiles {
+		get {return tiles;}
+		set {tiles = value;}
+	}
 
 	public enum CageType { 
 		CageEmpty = 10, 
@@ -31,7 +36,7 @@ public class Cage : MovableTile{
 	bool isSelected;
 
 	public bool AddToCage(BaseDinosaur dinoPatate) {
-		if (dinosaurs.Count == capacity) {
+		if (dinosaurs.Count != capacity) {
 			if (type == CageType.CageEmpty) {
 				type = (CageType)dinoPatate.Type;
 				dinosaurs.Capacity = SetCapacity ();
@@ -48,6 +53,7 @@ public class Cage : MovableTile{
 		price = 5;
 		capacity = 1;
 		dinosaurs = new ArrayList ();
+		tiles = new ArrayList (4);
 		isFull = false;
 		gameObject.AddComponent<Renderer> ();
 	}

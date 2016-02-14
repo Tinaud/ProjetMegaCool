@@ -25,6 +25,7 @@ public class Player_options : MonoBehaviour {
 
 	/*-------CameraOperator++-------*/
 	bool creating = false;
+	bool checkingCage = false;
 	bool once = true;
 	int type;
 	public GameObject gInter;
@@ -34,8 +35,8 @@ public class Player_options : MonoBehaviour {
 	Vector2 startPos; 
 	Vector2 rectSize; int sizeX = 22, sizeY = 22;
 	public int playerNo = 1;
-	int cageNo = 0;
 	ParcManager parc;
+	Cage cacage;
 
 	//float displayTime = 3f;
 	//bool displayMessage = false;
@@ -58,11 +59,9 @@ public class Player_options : MonoBehaviour {
 			InstantiateRect ();
 			CreateObj (type);
 		}
-		/*if(displayMessage) {
-			displayTime -= Time.deltaTime;
-			if (displayTime <= 0)
-				displayMessage = false;
-		}*/
+		if(checkingCage) {
+			cageIsEmpty ();
+		}
 	}
 
 	void InstantiateRect () {
@@ -76,9 +75,12 @@ public class Player_options : MonoBehaviour {
 		selection = new Rect (startPos, rectSize);
 	}
 
+	public void checkCage() {
+		checkingCage = true;
+	}
+
     public void cageIsEmpty()
     {
-        Cage cacage;
         if (Input.GetMouseButtonDown(0))
         {
             //GameObject b = GameObject.Find ("Player_" + playerNo);
@@ -88,7 +90,9 @@ public class Player_options : MonoBehaviour {
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                cacage = hit.collider.GetComponent<Cage>();
+				cacage = hit.collider.gameObject.GetComponent<Cage>();
+				foreach (Tile p in cacage.Tiles)
+					Debug.Log ("("+p.Position.ToString()+"), ");
                 if (cacage != null)
                 {
                     if (!cacage.IsFull && cacage.Type == Cage.CageType.CageEmpty)
@@ -99,6 +103,7 @@ public class Player_options : MonoBehaviour {
                     {
                         //afficher le type de la cage et sa capacité.
                     }
+					checkingCage = false;
                 }
             }
         }
@@ -120,17 +125,19 @@ public class Player_options : MonoBehaviour {
                 {
                     tileX = (int)hit.collider.GetComponent<Tile>().Position.x;
                     tileZ = (int)hit.collider.GetComponent<Tile>().Position.y;
-                    if (parc.PurchaseCage(tileX, tileZ))
+					ArrayList cageTiles = new ArrayList (4);
+					if (parc.PurchaseCage(tileX, tileZ, ref cageTiles))
                     {
                         tilePos.x += .25f;
                         tilePos.z += .25f;
                         patateobject = (GameObject)Instantiate(kiosk, tilePos, Quaternion.identity);
-                        patateobject.transform.localScale = new Vector3(1, .2f, 1);
+                        patateobject.transform.localScale = new Vector3(.75f, .2f, .75f);
                         addCompoType(t);
-                        patateobject.GetComponent<Cage>().cageNo = cageNo;
+						patateobject.GetComponent<Cage> ().Tiles.Add(cageTiles.Clone()) ;
+						foreach (Tile p in patateobject.GetComponent<Cage> ().Tiles)
+							Debug.Log ("("+p.Position.ToString()+"), ");
                         creating = false;
                         once = true;
-                        cageNo++;
                     }
                 }
                 else if ((t >= (int)SpaceRules.Type.Restaurant) && (t <= (int)SpaceRules.Type.Paleontologist)) // Creer un kiosque
@@ -144,10 +151,6 @@ public class Player_options : MonoBehaviour {
                         creating = false;
                         once = true;
                     }
-                }
-                else if ((t >= (int)SpaceRules.Type.CageBront) && (t <= (int)SpaceRules.Type.CageTyra))
-                {
-
                 }
             }
 		}
@@ -235,10 +238,12 @@ public class Player_options : MonoBehaviour {
 
 	public void veloc()
 	{
-
 		width = .5F;
 		height = .3F;
 		type = (int)SpaceRules.Type.CageVelo;
+		GameObject b = GameObject.Find ("Player_" + playerNo);
+		parc = b.GetComponent<ParcManager> ();
+		parc.PurchaseDino (cacage, new Velociraptor ());
 		create(velo);
 		//patateobject.AddComponent<Velociraptor>();
 	}
@@ -249,6 +254,9 @@ public class Player_options : MonoBehaviour {
 		width = .5F;
 		height = .5F;
 		type = (int)SpaceRules.Type.CageBront;
+		GameObject b = GameObject.Find ("Player_" + playerNo);
+		parc = b.GetComponent<ParcManager> ();
+		parc.PurchaseDino (cacage, new Brontosaurus ());
 		create(bron);
 		//patateobject.AddComponent<Brontosaurus>();
 	}
@@ -259,6 +267,9 @@ public class Player_options : MonoBehaviour {
 		width = .5F;
 		height = .3F;
 		type = (int)SpaceRules.Type.CageTric;
+		GameObject b = GameObject.Find ("Player_" + playerNo);
+		parc = b.GetComponent<ParcManager> ();
+		parc.PurchaseDino (cacage, new Triceratop ());
 		create(tri);
 		//patateobject.AddComponent<Triceratop>();
 	}
@@ -269,6 +280,9 @@ public class Player_options : MonoBehaviour {
 		width = .5F;
 		height = .25F;
 		type = (int)SpaceRules.Type.CageTyra;
+		GameObject b = GameObject.Find ("Player_" + playerNo);
+		parc = b.GetComponent<ParcManager> ();
+		parc.PurchaseDino (cacage, new Tyrannosaurus ());
 		create(tyr);
 		//patateobject.AddComponent<Tyrannosaurus>();
 	}
@@ -284,19 +298,7 @@ public class Player_options : MonoBehaviour {
 		switch ((SpaceRules.Type)type) {
 		 
 			case SpaceRules.Type.CageEmpty:
-			patateobject.AddComponent<Cage> ();
-				break;
-			case SpaceRules.Type.CageBront:
-				patateDinosaur = new Brontosaurus();
-				break;
-			case SpaceRules.Type.CageVelo:
-                patateDinosaur = new Velociraptor();
-				break;
-			case SpaceRules.Type.CageTric:
-                patateDinosaur = new Triceratop();
-				break;
-			case SpaceRules.Type.CageTyra:
-                patateDinosaur = new Tyrannosaurus();
+				patateobject.AddComponent<Cage> ();
 				break;
 			case SpaceRules.Type.Restaurant : 
 				patateobject.AddComponent<Restaurant> ();

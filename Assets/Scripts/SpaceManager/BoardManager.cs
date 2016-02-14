@@ -72,7 +72,7 @@ public class BoardManager : MonoBehaviour {
 			for (int z = 1; z < height; z++) {
 				if ((x > 2 || z > 3)) {
 					Tile at = GetTileAt (x, z);
-					at.IsAvailable = at.Rule.isAvailable (type);
+					at.IsAvailable = at.Rule.isAvailable(type);
 					types += "(" + x + "," + z + ") : " + at.Rule.TileType ;
 					types += "[" + at.Rule.IsOccupied + "] - ";
 				}

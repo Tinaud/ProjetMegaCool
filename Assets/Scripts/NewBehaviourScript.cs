@@ -19,7 +19,7 @@ public class NewBehaviourScript : MonoBehaviour
 	void Update () 
     {
         if (isSpinning)
-            transform.Rotate(7 * Random.value, 7 * Random.value, 7 * Random.value);
+            transform.Rotate(9 * Random.value, 9 * Random.value, 9 * Random.value);
 	}
 
     IEnumerator ThrowDice()

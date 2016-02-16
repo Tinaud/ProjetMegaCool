@@ -100,7 +100,7 @@ public class ParcManager : MonoBehaviour {
 	public bool PurchaseDino (Cage cagePatate, BaseDinosaur dinoPatate) {
 		int type = (int)dinoPatate.Type; 
 		if (cagePatate.AddToCage (dinoPatate)) {
-			foreach (Tile t in (ArrayList)cagePatate.Tiles) {
+			foreach (Tile t in (List<Tile>)cagePatate.Tiles) {
 				Board.GetComponent<BoardManager> ().SetTileType ((int)t.Position.x, (int)t.Position.y, type);
 				Board.GetComponent<BoardManager> ().SetNeighbors ((int)t.Position.x, (int)t.Position.y, type);
 			}
@@ -110,7 +110,7 @@ public class ParcManager : MonoBehaviour {
 		return false;
 	}
 
-	public bool PurchaseCage (int x, int z, ref ArrayList CageTiles) {
+	public bool PurchaseCage (int x, int z, ref List<Tile> CageTiles) {
 		int type = (int)SpaceRules.Type.CageEmpty;
 
 		for (int i = x; i <= x + 1; i++) {
@@ -119,7 +119,7 @@ public class ParcManager : MonoBehaviour {
 				if (cur.IsAvailable) {
 					if (cur.Rule.TileType >= SpaceRules.Type.CageBront && cur.Rule.TileType <= SpaceRules.Type.CageTyra)
 						type = (int)cur.Rule.TileType;
-					Debug.Log (type);
+					//Debug.Log (type);
 					CageTiles.Add (cur);
 				}
 			}

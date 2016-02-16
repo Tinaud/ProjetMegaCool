@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Cage : MovableTile{
 
-	ArrayList tiles;
+	List<Tile> tiles;
 
-	public ArrayList Tiles {
+	public List<Tile> Tiles {
 		get {return tiles;}
 		set {tiles = value;}
 	}
@@ -17,15 +18,19 @@ public class Cage : MovableTile{
 		CageTric = 2,
 		CageTyra = 3
 	}; 
-	CageType type;
+	CageType type = CageType.CageEmpty;
 
 	public CageType Type {
 		get { return type; }
 		set { type = value; }
 	}
 
-	ArrayList dinosaurs;
-	int capacity;
+	List<BaseDinosaur> dinosaurs;
+
+	public List<BaseDinosaur> Dinosaurs {
+		get {return dinosaurs;}
+		set {dinosaurs = value;}
+	}
 
 	bool isFull;
 
@@ -36,7 +41,7 @@ public class Cage : MovableTile{
 	bool isSelected;
 
 	public bool AddToCage(BaseDinosaur dinoPatate) {
-		if (dinosaurs.Count != capacity) {
+		if (!isFull) {
 			if (type == CageType.CageEmpty) {
 				type = (CageType)dinoPatate.Type;
 				dinosaurs.Capacity = SetCapacity ();
@@ -44,23 +49,22 @@ public class Cage : MovableTile{
 			dinosaurs.Add (dinoPatate);
 			return true;
 		}
-		isFull = true;
 		return false;
 	}
 
 	void Start() {
-		type = CageType.CageEmpty;
 		price = 5;
-		capacity = 1;
-		dinosaurs = new ArrayList ();
-		tiles = new ArrayList (4);
+		dinosaurs = new List<BaseDinosaur> (SetCapacity());
 		isFull = false;
-		gameObject.AddComponent<Renderer> ();
+		//gameObject.AddComponent<Renderer> ();
 	}
 
 	// Pour afficher les specificites propres a chaque dinosaure au moment de l'achat
 
 	void Update() {
+		if (dinosaurs.Count == dinosaurs.Capacity)
+			isFull = true;
+
 		//Pour la selection des tuiles
 		if (GetComponent<Renderer> ().isVisible) {
 			Vector3 camPos = Camera.main.WorldToScreenPoint (transform.position);

@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Player_options : MonoBehaviour {
 
 	public GameObject kiosk;
 	GameObject patateobject;
+	public GameObject capacityText;
+	public GameObject cageType;
     BaseDinosaur patateDinosaur;
 	public Canvas spri;
 	public Sprite pal;
@@ -91,8 +94,8 @@ public class Player_options : MonoBehaviour {
             if (Physics.Raycast(ray, out hit))
             {
 				cacage = hit.collider.gameObject.GetComponent<Cage>();
-				foreach (Tile p in cacage.Tiles)
-					Debug.Log ("("+p.Position.ToString()+"), ");
+				//foreach (Tile p in cacage.Tiles)
+					//Debug.Log ("("+p.Position.ToString()+"), ");
                 if (cacage != null)
                 {
                     if (!cacage.IsFull && cacage.Type == Cage.CageType.CageEmpty)
@@ -102,12 +105,41 @@ public class Player_options : MonoBehaviour {
                     else if (!cacage.IsFull)
                     {
                         //afficher le type de la cage et sa capacité.
+						type = (int)cacage.Type;
+						setImageDino ();
+						Text countDino = capacityText.GetComponent<Text>();
+						countDino.text = cacage.Dinosaurs.Count + "/" + cacage.Dinosaurs.Capacity;
+						gInter.GetComponent<GameInterface>().DinoOneChoice();
                     }
 					checkingCage = false;
                 }
             }
         }
     }
+
+	void setImageDino() 
+	{
+		Image img; 
+
+		switch ((SpaceRules.Type)type) {
+		case SpaceRules.Type.CageBront:
+			img = cageType.GetComponentInChildren<Image> ();
+			img.sprite = bron;
+			break;
+		case SpaceRules.Type.CageVelo:
+			img = cageType.GetComponentInChildren<Image> ();
+			img.sprite = velo;
+			break;
+		case SpaceRules.Type.CageTyra:
+			img = cageType.GetComponentInChildren<Image> ();
+			img.sprite = tyr;
+			break;
+		case SpaceRules.Type.CageTric:
+			img = cageType.GetComponentInChildren<Image> ();
+			img.sprite = tri;
+			break;
+		}
+	}
 
 	void CreateObj(int t) {
 		if (Input.GetMouseButtonDown (0)) {
@@ -125,7 +157,7 @@ public class Player_options : MonoBehaviour {
                 {
                     tileX = (int)hit.collider.GetComponent<Tile>().Position.x;
                     tileZ = (int)hit.collider.GetComponent<Tile>().Position.y;
-					ArrayList cageTiles = new ArrayList (4);
+					List<Tile> cageTiles = new List<Tile> (4);
 					if (parc.PurchaseCage(tileX, tileZ, ref cageTiles))
                     {
                         tilePos.x += .25f;
@@ -133,9 +165,14 @@ public class Player_options : MonoBehaviour {
                         patateobject = (GameObject)Instantiate(kiosk, tilePos, Quaternion.identity);
                         patateobject.transform.localScale = new Vector3(.75f, .2f, .75f);
                         addCompoType(t);
-						patateobject.GetComponent<Cage> ().Tiles.Add(cageTiles.Clone()) ;
-						foreach (Tile p in patateobject.GetComponent<Cage> ().Tiles)
-							Debug.Log ("("+p.Position.ToString()+"), ");
+						patateobject.GetComponent<Cage> ().Tiles = new List<Tile> (cageTiles);
+						if (cageTiles[0].Rule.TileType >= SpaceRules.Type.CageBront && cageTiles[0].Rule.TileType <= SpaceRules.Type.CageTyra) {
+							int tamp = (int)cageTiles [0].Rule.TileType;
+							patateobject.GetComponent<Cage> ().Type = (Cage.CageType)tamp;
+						}
+						Debug.Log ("Creation cage de type : " + patateobject.GetComponent<Cage> ().Type);
+						//foreach (Tile p in patateobject.GetComponent<Cage> ().Tiles)
+							//Debug.Log ("("+p.Position.ToString()+"), ");
                         creating = false;
                         once = true;
                     }
@@ -245,6 +282,7 @@ public class Player_options : MonoBehaviour {
 		parc = b.GetComponent<ParcManager> ();
 		parc.PurchaseDino (cacage, new Velociraptor ());
 		create(velo);
+		gInter.GetComponent<GameInterface>().allInactive();
 		//patateobject.AddComponent<Velociraptor>();
 	}
 
@@ -258,6 +296,7 @@ public class Player_options : MonoBehaviour {
 		parc = b.GetComponent<ParcManager> ();
 		parc.PurchaseDino (cacage, new Brontosaurus ());
 		create(bron);
+		gInter.GetComponent<GameInterface>().allInactive();
 		//patateobject.AddComponent<Brontosaurus>();
 	}
 
@@ -271,6 +310,7 @@ public class Player_options : MonoBehaviour {
 		parc = b.GetComponent<ParcManager> ();
 		parc.PurchaseDino (cacage, new Triceratop ());
 		create(tri);
+		gInter.GetComponent<GameInterface>().allInactive();
 		//patateobject.AddComponent<Triceratop>();
 	}
 
@@ -284,7 +324,26 @@ public class Player_options : MonoBehaviour {
 		parc = b.GetComponent<ParcManager> ();
 		parc.PurchaseDino (cacage, new Tyrannosaurus ());
 		create(tyr);
+		gInter.GetComponent<GameInterface>().allInactive();
 		//patateobject.AddComponent<Tyrannosaurus>();
+	}
+
+	public void chooseDino()
+	{
+		switch ((SpaceRules.Type)type) {
+		case SpaceRules.Type.CageBront:
+			bront ();
+			break;
+		case SpaceRules.Type.CageVelo:
+			veloc ();
+			break;
+		case SpaceRules.Type.CageTyra:
+			tyran ();
+			break;
+		case SpaceRules.Type.CageTric:
+			trice ();
+			break;
+		}
 	}
 
 	void create (Sprite spr)

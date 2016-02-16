@@ -34,11 +34,16 @@ public class GameManager : MonoBehaviour
         isFinish = false;
         park = (GameObject)Resources.Load("Joueur");
 
+        TestMultiBoard test = GetComponent<TestMultiBoard>();
+        GameObject[] test2 = test.getBoard();
+        Debug.Log(test2[1].GetComponent<ParcManager>().cash);
         for (int i = 0; i < playerNumber; i++)
         {
             Debug.Log("Player created! :D");
-            intanciatedObject = (GameObject)Instantiate(park, new Vector3(cameraPos.position.x, cameraPos.position.y, cameraPos.position.z + 10), Quaternion.identity);
-            intanciatedObject.transform.parent = transform;
+            //intanciatedObject = (GameObject)Instantiate(park, new Vector3(cameraPos.position.x, cameraPos.position.y, cameraPos.position.z + 10), Quaternion.identity);
+            //intanciatedObject.transform.parent = transform;
+
+
         }
 
         tempList = GetComponentsInChildren<ParcManager>();

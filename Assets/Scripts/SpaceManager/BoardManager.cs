@@ -47,8 +47,8 @@ public class BoardManager : MonoBehaviour {
 					tiles [x, z].transform.name = "Tile_" + x + "_" + z;
 					tiles [x, z].transform.parent = transform;
 					tiles [x, z].GetComponent<Tile> ().Position = new Vector2 (x, z);
-					tiles [x, z].transform.position = BoardPosition(x/2f, z/2f);
-					tiles [x, z].transform.localScale = Vector3.one * 0.042f;
+					tiles [x, z].transform.position = BoardPosition(x/3.6f, z/3.6f);
+                    tiles[x, z].transform.localScale = Vector3.one * 0.021f;// 0.042f;
 					//Debug.Log ("Tile (" + (int)x + "," + (int)z + ") is out of range.");
 				}
 			}
@@ -73,7 +73,7 @@ public class BoardManager : MonoBehaviour {
 			for (int z = 1; z < height; z++) {
 				if ((x > 2 || z > 3)) {
 					Tile at = GetTileAt (x, z);
-					at.IsAvailable = at.Rule.isAvailable (type);
+					at.IsAvailable = at.Rule.isAvailable(type);
 					types += "(" + x + "," + z + ") : " + at.Rule.TileType ;
 					types += "[" + at.Rule.IsOccupied + "] - ";
 				}

@@ -47,8 +47,8 @@ public class BoardManager : MonoBehaviour {
 					tiles [x, z].transform.name = "Tile_" + x + "_" + z;
 					tiles [x, z].transform.parent = transform;
 					tiles [x, z].GetComponent<Tile> ().Position = new Vector2 (x, z);
-					tiles [x, z].transform.position = BoardPosition(x/3.5f, z/3.5f);
-                    tiles[x, z].transform.localScale = Vector3.one * 0.023f;// 0.042f;
+					tiles [x, z].transform.position = BoardPosition(x/3.6f, z/3.6f);
+                    tiles[x, z].transform.localScale = Vector3.one * 0.021f;// 0.042f;
 					//Debug.Log ("Tile (" + (int)x + "," + (int)z + ") is out of range.");
 				}
 			}

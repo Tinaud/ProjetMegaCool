@@ -21,8 +21,8 @@ public class TestMultiBoard : MonoBehaviour {
 		}
 	}
 
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public GameObject[] getBoard()
+    {
+        return board;
+    }
 }

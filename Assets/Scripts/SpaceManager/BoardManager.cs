@@ -70,7 +70,7 @@ public class BoardManager : MonoBehaviour {
 
 		for (int x = 1; x < width; x++) {
 			for (int z = 1; z < height; z++) {
-				if ((x > 2 || z > 3)) {
+				if ((x > 3 || z > 2)) {
 					Tile at = GetTileAt (x, z);
 					at.IsAvailable = at.Rule.isAvailable(type);
 					types += "(" + x + "," + z + ") : " + at.Rule.TileType ;

@@ -12,8 +12,9 @@ public class GameManager : MonoBehaviour
     private Component[] tempList;
     private Dice diceScript;
     private Events eventManager;
-    private GameObject dice,
-                       intanciatedObject,
+    private GameObject board,
+                       dice,
+                       instanciatedObject,
                        park;
     private int activePlayer,
                 actualPhase,
@@ -34,25 +35,20 @@ public class GameManager : MonoBehaviour
         isFinish = false;
         park = (GameObject)Resources.Load("Joueur");
 
-        TestMultiBoard test = GetComponent<TestMultiBoard>();
-        GameObject[] test2 = test.getBoard();
-        Debug.Log(test2[1].GetComponent<ParcManager>().cash);
+        board = GameObject.Find("Board");
+        tempList = board.GetComponentsInChildren<ParcManager>();
+
         for (int i = 0; i < playerNumber; i++)
         {
             Debug.Log("Player created! :D");
-            //intanciatedObject = (GameObject)Instantiate(park, new Vector3(cameraPos.position.x, cameraPos.position.y, cameraPos.position.z + 10), Quaternion.identity);
-            //intanciatedObject.transform.parent = transform;
 
+            instanciatedObject = (GameObject)Instantiate(park, new Vector3(cameraPos.position.x + 2, cameraPos.position.y - 6, cameraPos.position.z - 2), Quaternion.identity);
+            instanciatedObject.transform.parent = board.transform;
+            instanciatedObject.name = "Player_" + i;
 
-        }
-
-        tempList = GetComponentsInChildren<ParcManager>();
-
-        foreach (ParcManager player in tempList)
-            playerList.Add(player);
-
-        for (int i = 0; i < playerList.Count; i++)
+            playerList.Add(instanciatedObject.GetComponent<ParcManager>());
             playerList[i].setID(i + 1);
+        }
 
         StartCoroutine(gameTurn());
 	}
@@ -151,8 +147,8 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator throwDice()
     {
-        intanciatedObject = (GameObject)Instantiate(dice, new Vector3(cameraPos.position.x + 2, cameraPos.position.y - 6, cameraPos.position.z - 2), Quaternion.identity);
-        intanciatedObject.transform.parent = transform;
+        instanciatedObject = (GameObject)Instantiate(dice, new Vector3(cameraPos.position.x + 2, cameraPos.position.y - 6, cameraPos.position.z - 2), Quaternion.identity);
+        instanciatedObject.transform.parent = transform;
 
         diceScript = GetComponentInChildren<Dice>();
 

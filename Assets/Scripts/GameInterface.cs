@@ -6,6 +6,7 @@ public class GameInterface : MonoBehaviour {
     public GameObject text;
     public GameObject booth;
     public GameObject dino;
+	public GameObject dinoOneChoice;
     bool EspaceKiosk1;
     bool EspaceKiosk2;
     bool EspaceKiosk3;
@@ -15,9 +16,7 @@ public class GameInterface : MonoBehaviour {
 
     //everything to scrap
 	void Start () {
-		text.SetActive(false);
-		booth.SetActive(false);
-		dino.SetActive(false);
+		allInactive ();
 	}
 	
 	// Update is called once per frame
@@ -25,30 +24,47 @@ public class GameInterface : MonoBehaviour {
 	
 	}
 
+	public void allInactive() {
+		text.SetActive(false);
+		booth.SetActive(false);
+		dino.SetActive(false);
+		dinoOneChoice.SetActive(false);
+	}
+
 	public void BoothPanel() {
 		text.SetActive(false);
 		booth.SetActive(true);
-		dino.SetActive(false);		
+		dino.SetActive(false);	
+		dinoOneChoice.SetActive(false);
 	}
 
 	public void DinoPanel() {
 		text.SetActive(false);
 		booth.SetActive(false);
-		dino.SetActive(true);		
+		dino.SetActive(true);	
+		dinoOneChoice.SetActive(false);
 	}
 
 	public void cageselect() {
 		text.SetActive(true);
 		booth.SetActive(false);
 		dino.SetActive(false);	
+		dinoOneChoice.SetActive(false);
 	}
 
 	public void cage() {
 		text.SetActive(false);
 		booth.SetActive(false);
 		dino.SetActive(false);	
+		dinoOneChoice.SetActive(false);
 	}
 
+	public void DinoOneChoice() {
+		dinoOneChoice.SetActive(true);	
+		booth.SetActive(false);
+		text.SetActive(false);
+		dino.SetActive(false);	
+	}
 
     /*void KioskCard (GameObject button)
     {

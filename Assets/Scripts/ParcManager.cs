@@ -87,7 +87,7 @@ public class ParcManager : MonoBehaviour {
 
 	public bool PurchaseBooth (int x, int z, int boothPatate) {
 	 	if (Board.GetComponent<BoardManager> ().GetTileAt (x, z).IsAvailable) {
-			Board.GetComponent<BoardManager> ().SetTileType (x, z, boothPatate);
+			Board.GetComponent<BoardManager> ().SetOccupiedTile (x, z, boothPatate);
 			Board.GetComponent<BoardManager> ().SetNeighbors (x, z, boothPatate);
 			addBooth ((BaseBooth.Booth)boothPatate);
 			return true;
@@ -129,7 +129,7 @@ public class ParcManager : MonoBehaviour {
 		if (CageTiles.Count == 4) {
 			foreach (Tile tile in CageTiles) {
 				//Board.GetComponent<BoardManager> ().SetTileType ((int)tile.Position.x, (int)tile.Position.y, type);
-				Board.GetComponent<BoardManager> ().SetCage ((int)tile.Position.x, (int)tile.Position.y, type);
+				Board.GetComponent<BoardManager> ().SetOccupiedTile((int)tile.Position.x, (int)tile.Position.y, type);
 				Board.GetComponent<BoardManager> ().SetNeighbors ((int)tile.Position.x, (int)tile.Position.y, type);
 				Debug.Log (tile.Rule.TileType.ToString ());
 			}

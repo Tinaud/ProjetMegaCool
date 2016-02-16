@@ -3,13 +3,8 @@ using System.Collections;
 
 public class Brontosaurus : BaseDinosaur {
 
-	void Start() {
-		price = 2;
-
+	public Brontosaurus(): base(2, 1, 0) {
 		type = Dino.Brontosaurus;
-		nbVisitorsAdded = 1;
-		nbVisitorsEaten = 0;
-
 		//Debug.Log ("Amazing ! You have a brontosaurus in your park!");
 	}
 

@@ -18,11 +18,11 @@ public class SpaceRules
 	};
 	Type type;
 
-	bool insideCage;
+	bool isOccupied;
 
-	public bool InsideCage {
-		get { return insideCage; }
-		set { insideCage = value; }
+	public bool IsOccupied {
+		get { return isOccupied; }
+		set { isOccupied = value; }
 	}
 
 	public Type TileType {
@@ -33,18 +33,18 @@ public class SpaceRules
 	public SpaceRules ()
 	{
 		type = Type.Empty;
-		insideCage = false;
+		isOccupied = false;
 	}
 
 	bool canPlaceBooth(int boothType) {
-		if (this.type == Type.Empty || (int)this.type == boothType)
+		if (!isOccupied && (this.type == Type.Empty || (int)this.type == boothType))
 			return true;
 		else 
 			return false;
 	}
 
 	bool canPlaceCage(int cageType) {
-		if (this.type == Type.Empty || (int)this.type == cageType)
+		if (!isOccupied && (this.type == Type.Empty || (int)this.type == cageType))
 			return true;
 		else 
 			return false;

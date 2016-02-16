@@ -31,36 +31,30 @@ public class Cage : MovableTile{
 	bool isSelected;
 
 	public bool AddToCage(BaseDinosaur dinoPatate) {
-		if (!isFull) {
-			if (type == (CageType)dinoPatate.Type || type == CageType.CageEmpty) {
-				if (type == CageType.CageEmpty) {
-					type = (CageType)dinoPatate.Type;
-					capacity = officialCapacity ();
-					dinosaurs.Capacity = capacity;
-
-				}
-				dinosaurs.Add (dinoPatate);
-				return true;
+		if (dinosaurs.Count == capacity) {
+			if (type == CageType.CageEmpty) {
+				type = (CageType)dinoPatate.Type;
+				dinosaurs.Capacity = SetCapacity ();
 			}
+			dinosaurs.Add (dinoPatate);
+			return true;
 		}
+		isFull = true;
 		return false;
 	}
 
 	void Start() {
+		type = CageType.CageEmpty;
 		price = 5;
-		capacity = 4;
+		capacity = 1;
 		dinosaurs = new ArrayList ();
 		isFull = false;
-		type = CageType.CageEmpty;
 		gameObject.AddComponent<Renderer> ();
 	}
 
 	// Pour afficher les specificites propres a chaque dinosaure au moment de l'achat
 
 	void Update() {
-		if (dinosaurs.Count == capacity)
-			isFull = true;
-
 		//Pour la selection des tuiles
 		if (GetComponent<Renderer> ().isVisible) {
 			Vector3 camPos = Camera.main.WorldToScreenPoint (transform.position);
@@ -78,16 +72,14 @@ public class Cage : MovableTile{
 			GetComponent<Renderer> ().material.color = Color.white;
 	}
 
-	int officialCapacity() {
+	int SetCapacity() {
 		switch (type) {
 		case CageType.CageBront: 
 			return 2;
-		case CageType.CageTric:
-			return 1;
-		case CageType.CageTyra:
-			return 1;
-		default :
+		case CageType.CageVelo:
 			return 4;
+		default :
+			return 1;
 		}
 	}
 }

@@ -4,7 +4,7 @@ using System.Collections;
 public class BoardManager : MonoBehaviour {
 
 	public GameObject plane;
-	
+
 	public static int noBoard = 1;
 
 	int width;//10
@@ -23,8 +23,8 @@ public class BoardManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		width = 12;
-		height = 16;
+		width = 16;
+		height = 12;
 		tiles = new GameObject[width, height];
 		plane = Resources.Load ("Tile") as GameObject;
 		GenerateBoard ();
@@ -37,25 +37,24 @@ public class BoardManager : MonoBehaviour {
 	void Update () {
 
 	}
-		
+
 	public void GenerateBoard() {
 
 		for (int x = 1; x < width; x++) {
 			for (int z = 1; z < height ; z++) {
-				if (x > 2 || z > 3) {
+				if (x > 3 || z > 2) {
 					tiles [x, z] = (GameObject)Instantiate (plane);
 					tiles [x, z].transform.name = "Tile_" + x + "_" + z;
 					tiles [x, z].transform.parent = transform;
 					tiles [x, z].GetComponent<Tile> ().Position = new Vector2 (x, z);
 					tiles [x, z].transform.position = BoardPosition(x/3.6f, z/3.6f);
-                    tiles[x, z].transform.localScale = Vector3.one * 0.021f;// 0.042f;
+					tiles[x, z].transform.localScale = Vector3.one * 0.021f;// 0.042f;
 					//Debug.Log ("Tile (" + (int)x + "," + (int)z + ") is out of range.");
 				}
 			}
 		}
 		//Debug.Log ("Board created with " + (width * height) + " tiles.");
 	}
-
 
 	public Tile GetTileAt (int x, int z) {
 		if (tiles [x, z]) {
@@ -111,13 +110,13 @@ public class BoardManager : MonoBehaviour {
 	Vector3 BoardPosition(float x, float z) {
 		switch (noBoard) {
 		case 2:
-			return new Vector3 (transform.position.x - x, 20.1f, transform.position.z + z);
+			return new Vector3(transform.position.x - x - 1.28f, 20.8f, transform.position.z + z - 1.73f);
 		case 3:
-			return new Vector3 (transform.position.x - x, 20.1f, transform.position.z - z);
+			return new Vector3(transform.position.x - x - 1.28f, 20.8f, transform.position.z - z - 1.73f);
 		case 4:
-			return new Vector3 (transform.position.x + x, 20.1f, transform.position.z - z);
+			return new Vector3(transform.position.x + x - 1.28f, 20.8f, transform.position.z - z - 1.73f);
 		default:
-			return new Vector3 (transform.position.x + x, 20.1f, transform.position.z + z);
+			return new Vector3(transform.position.x + x - 1.28f, 20.8f, transform.position.z + z - 1.73f);
 		}
 	}
 }

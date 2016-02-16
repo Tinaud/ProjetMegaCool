@@ -159,10 +159,10 @@ public class Player_options : MonoBehaviour {
 					List<Tile> cageTiles = new List<Tile> (4);
 					if (parc.PurchaseCage(tileX, tileZ, ref cageTiles))
                     {
-                        tilePos.x += .25f;
-                        tilePos.z += .25f;
+                        tilePos.x += .125f;
+                        tilePos.z += .125f;
                         patateobject = (GameObject)Instantiate(kiosk, tilePos, Quaternion.identity);
-                        patateobject.transform.localScale = new Vector3(.75f, .2f, .75f);
+                        patateobject.transform.localScale = new Vector3(.5f, .2f, .5f);
                         addCompoType(t);
 						patateobject.GetComponent<Cage> ().Tiles = new List<Tile> (cageTiles);
 						if (cageTiles[0].Rule.TileType >= SpaceRules.Type.CageBront && cageTiles[0].Rule.TileType <= SpaceRules.Type.CageTyra) {

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BoardManager : MonoBehaviour {
+public class OldBoardManager : MonoBehaviour {
 
 	public GameObject plane;
 

@@ -31,7 +31,6 @@ public class Player_options : MonoBehaviour {
 	bool checkingCage = false;
 	bool once = true;
 	int type;
-	public GameObject gInter;
 	public Texture2D selectionHighLight = null;
 	public static Rect selection = new Rect(0, 0, 0, 0);
 	//Rect alert = new Rect (Screen.width / 2, Screen.height - 200f, 100f, 20f);
@@ -100,7 +99,7 @@ public class Player_options : MonoBehaviour {
                 {
                     if (!cacage.IsFull && cacage.Type == Cage.CageType.CageEmpty)
                     {
-                        gInter.GetComponent<GameInterface>().DinoPanel();
+                        this.GetComponent<GameInterface>().DinoPanel();
                     }
                     else if (!cacage.IsFull)
                     {
@@ -109,7 +108,7 @@ public class Player_options : MonoBehaviour {
 						setImageDino ();
 						Text countDino = capacityText.GetComponent<Text>();
 						countDino.text = cacage.Dinosaurs.Count + "/" + cacage.Dinosaurs.Capacity;
-						gInter.GetComponent<GameInterface>().DinoOneChoice();
+						this.GetComponent<GameInterface>().DinoOneChoice();
                     }
 					checkingCage = false;
                 }
@@ -282,7 +281,7 @@ public class Player_options : MonoBehaviour {
 		parc = b.GetComponent<ParcManager> ();
 		parc.PurchaseDino (cacage, new Velociraptor ());
 		create(velo);
-		gInter.GetComponent<GameInterface>().allInactive();
+		this.GetComponent<GameInterface>().allInactive();
 		//patateobject.AddComponent<Velociraptor>();
 	}
 
@@ -296,7 +295,7 @@ public class Player_options : MonoBehaviour {
 		parc = b.GetComponent<ParcManager> ();
 		parc.PurchaseDino (cacage, new Brontosaurus ());
 		create(bron);
-		gInter.GetComponent<GameInterface>().allInactive();
+		this.GetComponent<GameInterface>().allInactive();
 		//patateobject.AddComponent<Brontosaurus>();
 	}
 
@@ -310,7 +309,7 @@ public class Player_options : MonoBehaviour {
 		parc = b.GetComponent<ParcManager> ();
 		parc.PurchaseDino (cacage, new Triceratop ());
 		create(tri);
-		gInter.GetComponent<GameInterface>().allInactive();
+		this.GetComponent<GameInterface>().allInactive();
 		//patateobject.AddComponent<Triceratop>();
 	}
 
@@ -324,7 +323,7 @@ public class Player_options : MonoBehaviour {
 		parc = b.GetComponent<ParcManager> ();
 		parc.PurchaseDino (cacage, new Tyrannosaurus ());
 		create(tyr);
-		gInter.GetComponent<GameInterface>().allInactive();
+		this.GetComponent<GameInterface>().allInactive();
 		//patateobject.AddComponent<Tyrannosaurus>();
 	}
 

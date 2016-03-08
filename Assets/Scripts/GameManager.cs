@@ -10,10 +10,9 @@ public class GameManager : MonoBehaviour
                  firstTurn,
                  isFinish;
     private Component[] tempList;
-    private Dice diceScript;
     private Events eventManager;
     private GameObject board,
-                       dice,
+                       diceBox,
                        instanciatedObject,
                        park;
     private int activePlayer,
@@ -99,30 +98,12 @@ public class GameManager : MonoBehaviour
                         for (int i = 0; i < breachNumber; i++ )
                         {
                             Debug.Log("Dice part! " + player.ID);
-
-                            switch(player.dangerLevel)
-                            {
-                                case ParcManager.Danger.Low:
-                                    dice = (GameObject)Resources.Load("dice_12");
-                                    break;
-                                case ParcManager.Danger.Medium_low:
-                                    dice = (GameObject)Resources.Load("dice_10");
-                                    break;
-                                case ParcManager.Danger.Medium:
-                                    dice = (GameObject)Resources.Load("DiceBox");
-                                    break;
-                                case ParcManager.Danger.Medium_high:
-                                    dice = (GameObject)Resources.Load("Dé6");
-                                    break;
-                                case ParcManager.Danger.High:
-                                    dice = (GameObject)Resources.Load("dice_4");
-                                    break;
-                            }
+                            diceBox = (GameObject)Resources.Load("DiceBox");
 
                             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.A));
                             {
                                 diceFinished = false;
-                                StartCoroutine(throwDice());
+                                StartCoroutine(throwDice(player));
                                 yield return new WaitUntil(() => diceFinished);
 
                                 Debug.Log(diceResult);
@@ -145,16 +126,45 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public IEnumerator throwDice()
+    public IEnumerator throwDice(ParcManager player)
     {
-        instanciatedObject = (GameObject)Instantiate(dice, new Vector3(cameraPos.position.x + 2, cameraPos.position.y - 6, cameraPos.position.z - 2), Quaternion.identity);
+        NewBehaviourScript diceScript = null;
+        string name;
+        GameObject thrownDice;
+
+        instanciatedObject = (GameObject)Instantiate(diceBox, new Vector3(cameraPos.position.x, cameraPos.position.y - 6, cameraPos.position.z), Quaternion.identity);
         instanciatedObject.transform.parent = transform;
 
-        diceScript = GetComponentInChildren<Dice>();
+        switch (player.dangerLevel)
+        {
+            case ParcManager.Danger.Low:
+                name = "dice_12";
+                break;
+            case ParcManager.Danger.Medium_low:
+                name = "dice_10";
+                break;
+            case ParcManager.Danger.Medium:
+                name = "dice_8";
+                break;
+            case ParcManager.Danger.Medium_high:
+                name = "dice_6";
+                break;
+            default:
+                name = "dice_4";
+                break;
+        }
 
-        yield return new WaitUntil(() => diceScript.isFinished);
-        
-        diceResult = diceScript.diceResult;
+        foreach (Transform child in instanciatedObject.transform)
+            if (child.name == name)
+            {
+                thrownDice = child.gameObject;
+                thrownDice.SetActive(true);
+                diceScript = thrownDice.GetComponent<NewBehaviourScript>();
+            }
+            
+        yield return new WaitWhile(() => diceScript.isMoving);
+        diceResult = instanciatedObject.GetComponentInChildren<testTrigger>().getDiceResult();
+       
         diceFinished = true;
     }
 

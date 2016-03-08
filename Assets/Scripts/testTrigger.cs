@@ -3,18 +3,15 @@ using System.Collections;
 
 public class testTrigger : MonoBehaviour 
 {
-	void Start () 
-    {
-	
-	}
-
-	void Update () 
-    {
-	
-	}
+    private int diceResult;
 
     void OnTriggerEnter(Collider collider)
     {
-        Debug.Log(collider.name);
+        diceResult = int.Parse(collider.name);
+    }
+
+    public int getDiceResult()
+    {
+        return diceResult;
     }
 }

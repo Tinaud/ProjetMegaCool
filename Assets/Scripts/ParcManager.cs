@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class ParcManager : MonoBehaviour {
 
@@ -24,7 +25,6 @@ public class ParcManager : MonoBehaviour {
     private int[] booths;
     private GameObject Board;
     private Player_options menu;
-
 
     void Start()
     {
@@ -68,19 +68,43 @@ public class ParcManager : MonoBehaviour {
     public int CashFlow
     {
         get { return cashPerTurn; }
-        set { cashPerTurn = value; }
+        set
+        {
+            int tampon = value - cashPerTurn;
+            cashPerTurn = value;
+            if (tampon != 0)
+            {
+                StartCoroutine(PopupCashFlow(tampon));
+            }
+        }
     }
 
     public int CashMoney
     {
         get { return cash; }
-        set { cash = value; }
+        set 
+        {
+            int tampon = value - cash;
+            cash = value;
+            if (tampon != 0)
+            {
+                StartCoroutine(PopupCashMoney(tampon));
+            }
+        }
     }
 
     public int nbVisitors
     {
         get { return visitors; }
-        set { visitors = value; }
+        set 
+        {
+            int tampon = value - visitors;
+            visitors = value;
+            if (tampon != 0)
+            {
+                StartCoroutine(PopupNbVisitors(tampon));
+            }
+        }
     }
 
 	public bool PurchaseBooth (int x, int z, int boothPatate) {
@@ -342,5 +366,63 @@ public class ParcManager : MonoBehaviour {
                 mostDangerousDinosaur = i;
 
         return mostDangerousDinosaur; // 0 = bronto, 1 = velo, 2 = trice, 3 = Tyra
+    }
+
+    IEnumerator PopupCashMoney(int tampon)
+    {
+        GameObject popup = (GameObject)Instantiate(Resources.Load("Popup"), new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), Quaternion.identity);
+        popup.transform.parent = GameObject.Find("GameInterface").transform;
+        Text TextPopup = popup.GetComponentInChildren<Text>();
+        if (tampon > 0)
+        {
+            TextPopup.color = Color.yellow;
+            TextPopup.text = "+ " + tampon + " $";
+        }
+        else
+        {
+            TextPopup.color = Color.red;
+            TextPopup.text = "- " + Mathf.Abs(tampon) + " $";
+        }
+        yield return new WaitForSeconds(5);
+        DestroyObject(popup);
+        Debug.Log(TextPopup);
+    }
+
+    IEnumerator PopupCashFlow(int tampon)
+    {
+        GameObject popup = (GameObject)Instantiate(Resources.Load("Popup"), new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), Quaternion.identity);
+        popup.transform.parent = GameObject.Find("GameInterface").transform;
+        Text TextPopup = popup.GetComponentInChildren<Text>();
+        if (tampon > 0)
+        {
+            TextPopup.color = Color.green;
+            TextPopup.text = "+ " + tampon + " $ per turn";
+        }
+        else
+        {
+            TextPopup.color = Color.red;
+            TextPopup.text = "- " + Mathf.Abs(tampon) + " $ per turn";
+        }
+        yield return new WaitForSeconds(5);
+        DestroyObject(popup);
+    }
+
+    IEnumerator PopupNbVisitors(int tampon)
+    {
+        GameObject popup = (GameObject)Instantiate(Resources.Load("Popup"), new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), Quaternion.identity);
+        popup.transform.parent = GameObject.Find("GameInterface").transform;
+        Text TextPopup = popup.GetComponentInChildren<Text>();
+        if (tampon > 0)
+        {
+            TextPopup.color = Color.blue;
+            TextPopup.text = "+ " + tampon + " visitors";
+        }
+        else
+        {
+            TextPopup.color = Color.red;
+            TextPopup.text = "- " + Mathf.Abs(tampon) + " visitors";
+        }
+        yield return new WaitForSeconds(5);
+        DestroyObject(popup);
     }
 }

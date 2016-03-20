@@ -99,7 +99,7 @@ public class Events : MonoBehaviour
     {
         GameObject EventDisplay = GameObject.Find("GameInterface");
         Text eventInfo = (Text) EventDisplay.GetComponent("Text");
-        
+        //eventNumber = 12;
         string eventTitle;
         string eventText;
         switch(eventNumber)
@@ -119,7 +119,7 @@ public class Events : MonoBehaviour
                 eventText = eventDescription[1];
                 eventInfo.text = "Event : " + eventTitle + "\n" + eventText;
                 foreach (ParcManager player in playerList)
-                    player.cash += 10;
+                    player.CashMoney += 10;
                 break;
             case 2:
                 Debug.Log("Power outage,There are power outage in the parks, every player raise his danger level by 1 for this turn only.");
@@ -173,7 +173,7 @@ public class Events : MonoBehaviour
                 eventText = eventDescription[1];
                 eventInfo.text = "Event : " + eventTitle + "\n" + eventText;
                 foreach (ParcManager player in playerList)
-                    player.visitors += 5;
+                    player.nbVisitors += 5;
                 break;
             case 7:
                 Debug.Log("Tax return,The government loves you! You can have two actions this turn for the building phase. You only have to do the breach once.");
@@ -192,7 +192,7 @@ public class Events : MonoBehaviour
                 eventInfo.text = "Event : " + eventTitle + "\n" + eventText;
                 foreach (ParcManager player in playerList)
                     if(!player.paleontologist || !player.noDinosaurs())
-                        player.visitors -= 5;
+                        player.nbVisitors -= 5;
                 break;
             case 9:
                 //
@@ -228,8 +228,8 @@ public class Events : MonoBehaviour
                 eventInfo.text = "Event : " + eventTitle + "\n" + eventText;
                 foreach (ParcManager player in playerList)
                 {
-                    player.visitors += 5;
-                    player.cash += 5;
+                    player.nbVisitors += 5;
+                    player.CashMoney += 5;
                 }
                 break;
             case 13:
@@ -304,6 +304,6 @@ public class Events : MonoBehaviour
 
         yield return new WaitUntil(() => diceScript.isFinished);
 
-        player.visitors += diceScript.diceResult;
+        player.nbVisitors += diceScript.diceResult;
     }
 }

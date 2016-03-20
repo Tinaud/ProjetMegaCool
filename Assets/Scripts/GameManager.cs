@@ -73,8 +73,8 @@ public class GameManager : MonoBehaviour
                 case (int)Phase.Income:
                     foreach(ParcManager player in playerList)
                     {
-                        player.cash += player.cashPerTurn;
-                        player.cash += player.visitors; //à vérifier?
+                        player.CashMoney += player.cashPerTurn;
+                        player.CashMoney += player.visitors; //à vérifier?
                     }
 
                     actualPhase++;

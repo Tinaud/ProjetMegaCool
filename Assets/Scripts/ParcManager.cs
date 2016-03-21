@@ -370,8 +370,9 @@ public class ParcManager : MonoBehaviour {
 
     IEnumerator PopupCashMoney(int tampon)
     {
-        GameObject popup = (GameObject)Instantiate(Resources.Load("Popup"), new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), Quaternion.identity);
-        popup.transform.parent = GameObject.Find("GameInterface").transform;
+        GameObject PlayerCanvas = GameObject.Find("player" + ID);
+        GameObject popup = (GameObject)Instantiate(Resources.Load("Popup"), new Vector3(PlayerCanvas.transform.position.x, PlayerCanvas.transform.position.y-0.8f, PlayerCanvas.transform.position.z), PlayerCanvas.transform.rotation);
+        popup.transform.parent = PlayerCanvas.transform;
         Text TextPopup = popup.GetComponentInChildren<Text>();
         if (tampon > 0)
         {
@@ -390,8 +391,9 @@ public class ParcManager : MonoBehaviour {
 
     IEnumerator PopupCashFlow(int tampon)
     {
-        GameObject popup = (GameObject)Instantiate(Resources.Load("Popup"), new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), Quaternion.identity);
-        popup.transform.parent = GameObject.Find("GameInterface").transform;
+        GameObject PlayerCanvas = GameObject.Find("player" + ID);
+        GameObject popup = (GameObject)Instantiate(Resources.Load("Popup"), new Vector3(PlayerCanvas.transform.position.x, PlayerCanvas.transform.position.y-1, PlayerCanvas.transform.position.z), PlayerCanvas.transform.rotation);
+        popup.transform.parent = PlayerCanvas.transform;
         Text TextPopup = popup.GetComponentInChildren<Text>();
         if (tampon > 0)
         {
@@ -409,8 +411,9 @@ public class ParcManager : MonoBehaviour {
 
     IEnumerator PopupNbVisitors(int tampon)
     {
-        GameObject popup = (GameObject)Instantiate(Resources.Load("Popup"), new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), Quaternion.identity);
-        popup.transform.parent = GameObject.Find("GameInterface").transform;
+        GameObject PlayerCanvas = GameObject.Find("player" + ID);
+        GameObject popup = (GameObject)Instantiate(Resources.Load("Popup"), new Vector3(PlayerCanvas.transform.position.x, PlayerCanvas.transform.position.y-1, PlayerCanvas.transform.position.z), PlayerCanvas.transform.rotation);
+        popup.transform.parent = PlayerCanvas.transform;
         Text TextPopup = popup.GetComponentInChildren<Text>();
         if (tampon > 0)
         {

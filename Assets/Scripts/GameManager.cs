@@ -8,19 +8,21 @@ public class GameManager : MonoBehaviour
 
     private bool diceFinished,
                  firstTurn,
-                 isFinish;
+                 isFinish,
+                 panelFound;
     private Component[] tempList;
     private Events eventManager;
     private GameObject board,
                        diceBox,
                        instanciatedObject,
+                       panel,
                        park;
     private int activePlayer,
                 actualPhase,
                 diceResult,
                 playerNumber,
                 turnNumber;
-    private List<ParcManager> playerList = new List<ParcManager>();
+    public List<ParcManager> playerList = new List<ParcManager>();
     private string currentEvent;
     private Transform cameraPos;
 
@@ -33,7 +35,7 @@ public class GameManager : MonoBehaviour
         firstTurn = true; 
         isFinish = false;
         park = (GameObject)Resources.Load("Joueur");
-
+        panelFound = false;
         board = GameObject.Find("Board");
         tempList = board.GetComponentsInChildren<ParcManager>();
 
@@ -54,6 +56,8 @@ public class GameManager : MonoBehaviour
 
     IEnumerator gameTurn()
     {
+        yield return new WaitWhile(() => this.GetComponent<MenuPlayers>().playable);
+
         while (turnNumber > 0)
         {
             switch (actualPhase)
@@ -84,8 +88,15 @@ public class GameManager : MonoBehaviour
                     foreach (ParcManager player in playerList)
                     {
                         int buildNumber = (player.eventTwoBuild) ? 2 : 1;
+                        
                         for (int i = 0; i < buildNumber; i++ )
+                        {
                             Debug.Log("Build Phase " + player.ID);
+                            panel.SetActive(true);
+                            yield return new WaitForSeconds(10f);
+                            panel.SetActive(false);
+                            yield return new WaitForSeconds(2f);
+                        } 
                     }
 
                     actualPhase++;
@@ -177,5 +188,18 @@ public class GameManager : MonoBehaviour
     public List<ParcManager> getPlayers()
     {
         return playerList;
+    }
+
+    void Update()
+    {
+        if (!panelFound)
+        {
+            panel = GameObject.FindGameObjectWithTag("Panel");
+            if (panel != null)
+            {
+                panelFound = true;
+                panel.SetActive(false);
+            }  
+        }
     }
 }

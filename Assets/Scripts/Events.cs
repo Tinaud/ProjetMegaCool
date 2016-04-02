@@ -97,7 +97,7 @@ public class Events : MonoBehaviour
 
     public void applyEventEffect(int eventNumber, ref List<ParcManager> playerList)
     {
-        GameObject EventDisplay = GameObject.Find("GameInterface");
+        GameObject EventDisplay = GameObject.FindGameObjectWithTag("GameInterface");
         Text eventInfo = (Text) EventDisplay.GetComponent("Text");
         //eventNumber = 12;
         string eventTitle;
@@ -185,6 +185,7 @@ public class Events : MonoBehaviour
                     player.eventTwoBuild = true;
                 break;
             case 8:
+                //
                 Debug.Log("King of the jungle,Your dinosaurs are making a roar contest and your guests are afraid! Everyone lose 5 guests in their park. Ignore this event if you have a paleontologist booth in your park.");
                 eventDescription = "King of the jungle,Your dinosaurs are making a roar contest and your guests are afraid! Everyone lose 5 guests in their park. Ignore this event if you have a paleontologist booth in your park.".Split(',');
                 eventTitle = eventDescription[0];

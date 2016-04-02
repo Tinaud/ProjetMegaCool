@@ -386,7 +386,6 @@ public class ParcManager : MonoBehaviour {
         }
         yield return new WaitForSeconds(5);
         DestroyObject(popup);
-        Debug.Log(TextPopup);
     }
 
     IEnumerator PopupCashFlow(int tampon)

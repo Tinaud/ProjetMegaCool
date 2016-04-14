@@ -88,12 +88,12 @@ public class GameManager : MonoBehaviour
                     foreach (ParcManager player in playerList)
                     {
                         int buildNumber = (player.eventTwoBuild) ? 2 : 1;
-                        
+                        GetComponentInChildren<Player_options>().playerNo = player.ID - 1;
                         for (int i = 0; i < buildNumber; i++ )
                         {
                             Debug.Log("Build Phase " + player.ID);
                             panel.SetActive(true);
-                            yield return new WaitForSeconds(10f);
+                            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
                             panel.SetActive(false);
                             yield return new WaitForSeconds(2f);
                         } 

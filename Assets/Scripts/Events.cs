@@ -185,15 +185,19 @@ public class Events : MonoBehaviour
                     player.eventTwoBuild = true;
                 break;
             case 8:
-                //
                 Debug.Log("King of the jungle,Your dinosaurs are making a roar contest and your guests are afraid! Everyone lose 5 guests in their park. Ignore this event if you have a paleontologist booth in your park.");
                 eventDescription = "King of the jungle,Your dinosaurs are making a roar contest and your guests are afraid! Everyone lose 5 guests in their park. Ignore this event if you have a paleontologist booth in your park.".Split(',');
                 eventTitle = eventDescription[0];
                 eventText = eventDescription[1];
                 eventInfo.text = "Event : " + eventTitle + "\n" + eventText;
                 foreach (ParcManager player in playerList)
-                    if(!player.paleontologist || !player.noDinosaurs())
-                        player.nbVisitors -= 5;
+                    if (!player.paleontologist || !player.noDinosaurs())
+                    {
+                        if (player.nbVisitors < 5)
+                            player.nbVisitors = 0;
+                        else
+                            player.nbVisitors -= 5;
+                    }  
                 break;
             case 9:
                 //

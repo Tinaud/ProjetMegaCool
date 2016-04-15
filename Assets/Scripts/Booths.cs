@@ -50,9 +50,9 @@ public class Booths : MonoBehaviour {
     public int getBooth()
     {
         int patate = Random.Range(0, allBooths.Count);
-        int eventToSend = allBooths[patate];
+        int boothToSend = allBooths[patate];
         allBooths.RemoveAt(patate);
 
-        return eventToSend;
+        return boothToSend;
     }
 }

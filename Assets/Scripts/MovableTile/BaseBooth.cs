@@ -43,6 +43,7 @@ public class BaseBooth : MovableTile {
 
     public void turnOver() {
 		isFaceDown = true;
+        price = officialPrice();
     }  
 
 }

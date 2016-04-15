@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class Booths : MonoBehaviour {
 
     public List<int> allBooths = new List<int>();
+    public List<int> faceUpBooths = new List<int>();
 
     private GameManager gameManager;
+
+    string[] boothInfo;
 
     void Start()
     {
@@ -55,4 +59,65 @@ public class Booths : MonoBehaviour {
 
         return boothToSend;
     }
+
+    public List<int> getFaceUpBooths(int nb)
+    {
+        for (int i = 0; i < nb; i++)
+        {
+            int patate = Random.Range(0, allBooths.Count);
+            int boothToSendFaceUp = allBooths[patate];
+            allBooths.RemoveAt(patate);
+
+            faceUpBooths.Add(boothToSendFaceUp);
+        }
+
+        return faceUpBooths;
+    }
+
+    public void boothsInfo(int boothNumber)
+    {
+        string boothName;
+        string boothDescription;
+
+        switch (boothNumber)
+        {
+            case 0:
+                Debug.Log("Restaurant,This restaurant adds 1 visitor to your parc and generate 2 $ per turn.");
+                boothInfo = "Restaurant,This restaurant adds 1 visitor to your parc and generate 2 $ per turn.".Split(',');
+                boothName = boothInfo[0];
+                boothDescription = boothInfo[1];
+                break;
+            case 1:
+                Debug.Log("Security, This guard is securing your park against dinosaur breaches.");
+                boothInfo = "Security, This guard is securing your park against dinosaur breaches.".Split(',');
+                boothName = boothInfo[0];
+                boothDescription = boothInfo[1];
+                break;
+            case 2:
+                Debug.Log("Bathroom, This clean new bathroom brings 3 new visitors around your park.");
+                boothInfo = "Bathroom, This clean new bathroom brings 3 new visitors around your park.".Split(',');
+                boothName = boothInfo[0];
+                boothDescription = boothInfo[1];
+                break;
+            case 3:
+                Debug.Log("Casino, This arcade helps you generate 3 $ per turn.");
+                boothInfo = "Casino, This arcade helps you generate 3 $ per turn.".Split(',');
+                boothName = boothInfo[0];
+                boothDescription = boothInfo[1];
+                break;
+            case 4:
+                Debug.Log("Spy, You have recruited ingenious spies to clone one of your enemy's dinosaur (single use effect).");
+                boothInfo = "Spy, You have recruited ingenious spies to clone one of your enemy's dinosaur (single use effect).".Split(',');
+                boothName = boothInfo[0];
+                boothDescription = boothInfo[1];
+                break;
+            case 5:
+                Debug.Log("Paleontologist, You have recruited a wise paleontologist! He will help you counter some unfortunate events that could ruin your park.");
+                boothInfo = "Paleontologist, You have recruited a wise paleontologist! He will help you counter some unfortunate events that could ruin your park.".Split(',');
+                boothName = boothInfo[0];
+                boothDescription = boothInfo[1];
+                break;
+        }
+    }
+
 }

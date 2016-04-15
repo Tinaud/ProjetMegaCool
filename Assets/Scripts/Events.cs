@@ -240,7 +240,7 @@ public class Events : MonoBehaviour
             case 13:
                 //
                 Debug.Log("Big pile of poop,The player that have the most dinosaurs in his park is incapable to clean every enclosure. His guests are disgusted and 3 of them leave his park. If two or more players are equals, every of them must do this event. Ignore this event if no one have dinosaur.");
-                eventDescription = "Big pile of poop,The player that have the most dinosaurs in his park is incapable to clean every enclosure. His guests are disgusted and 3 of them leave his park. If two or more players are equals; every of them must do this event. Ignore this event if no one have dinosaur.".Split(',');
+                eventDescription = "Big pile of poop,The player that have the most dinosaurs in his park is incapable to clean every enclosure. His guests are disgusted and 3 of them leave his park. If two or more players are equals; every one of them must do this event. Ignore this event if no one have dinosaur.".Split(',');
                 eventTitle = eventDescription[0];
                 eventText = eventDescription[1];
                 eventInfo.text = "Event : " + eventTitle + "\n" + eventText;

@@ -211,7 +211,7 @@ public class GameManager : MonoBehaviour
         faceUpBooths = BoothInfo.getFaceUpBooths(nb);
         for (int i=0; i < faceUpBooths.Count; i++)
         {
-            BoothInfo.boothsInfo(faceUpBooths[i]);
+            realDeal.Add(BoothInfo.boothsInfo(faceUpBooths[i]));
         }
     } 
 }

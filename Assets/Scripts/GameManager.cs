@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     public List<ParcManager> playerList = new List<ParcManager>();
     private string currentEvent;
     private Transform cameraPos;
+    private Booths BoothInfo;
 
 	void Start () 
     {
@@ -202,4 +203,15 @@ public class GameManager : MonoBehaviour
             }  
         }
     }
+
+    public void boothsUpdate(int nb)
+    {
+        List<int> faceUpBooths;
+        List<BaseBooth> realDeal;
+        faceUpBooths = BoothInfo.getFaceUpBooths(nb);
+        for (int i=0; i < faceUpBooths.Count; i++)
+        {
+            BoothInfo.boothsInfo(faceUpBooths[i]);
+        }
+    } 
 }

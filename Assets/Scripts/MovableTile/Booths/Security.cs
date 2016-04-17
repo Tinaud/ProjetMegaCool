@@ -11,7 +11,10 @@ public class Security : BaseBooth {
 		nbVisitorsAdded = 0;
 		CashPerTurn = 0;
 
-		Debug.Log("Watch out ! You have a safe new Security booth in your park!");
+        boothName = "Security";
+        boothDescription = "This guard is securing your park against dinosaur breaches.";
+        
+        Debug.Log("Watch out ! You have a safe new Security booth in your park!");
 	}
 
     public override void ShowDetails () {

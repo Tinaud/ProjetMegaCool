@@ -5,6 +5,8 @@ public class BaseBooth : MovableTile {
 
     protected int nbVisitorsAdded;  // nombre de visiteurs generes 
     protected int CashPerTurn;  // nombre de visiteurs pouvant etre manges par le dino
+    protected string boothName;
+    protected string boothDescription;
 
     public enum Booth {Restaurant = 4, Security = 5, Bathroom = 6, Casino = 7, Spy = 8, Paleontologist = 9}; 
 	protected Booth type;				// enum ou classes derivees pour les differents types de kiosques

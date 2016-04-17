@@ -11,7 +11,10 @@ public class Bathroom : BaseBooth {
 		nbVisitorsAdded = 3;
 		CashPerTurn = 0;
 
-		Debug.Log("Finally ! You have a clean new Bathroom in your park!");
+        boothName = "Bathroom";
+        boothDescription = "This clean new bathroom brings 3 new visitors around your park.";
+
+        Debug.Log("Finally ! You have a clean new Bathroom in your park!");
 	}
 		
     public override void ShowDetails () {

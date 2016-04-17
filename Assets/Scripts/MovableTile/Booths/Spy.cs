@@ -11,7 +11,10 @@ public class Spy : BaseBooth {
 		nbVisitorsAdded = 0;
 		CashPerTurn = 0;
 
-		Debug.Log("sshhhhh ! You have a sneaky new Spy in your park!");
+        boothName = "Spy";
+        boothDescription = "You have recruited ingenious spies to clone one of your enemy's dinosaur (single use effect).";
+
+        Debug.Log("sshhhhh ! You have a sneaky new Spy in your park!");
 	}
 		
     public override void ShowDetails () {

@@ -11,7 +11,10 @@ public class Paleontologist : BaseBooth {
 		nbVisitorsAdded = 0;
 		CashPerTurn = 0;
 
-		Debug.Log("Nice ! You have a bright new Paleontologist working in your park!");
+        boothName = "Paleontologist";
+        boothDescription = "You have recruited a wise paleontologist! He will help you counter some unfortunate events that could ruin your park.";
+
+        Debug.Log("Nice ! You have a bright new Paleontologist working in your park!");
 	}
     	
 	public override void ShowDetails () {

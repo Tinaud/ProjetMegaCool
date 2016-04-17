@@ -11,7 +11,10 @@ public class Restaurant : BaseBooth {
 		nbVisitorsAdded = 1;
 		CashPerTurn = 2;
 
-		Debug.Log("NomNomNom ! You have a shiny new Restaurant in your park!");
+        boothName = "Restaurant";
+        boothDescription = "This restaurant adds 1 visitor to your parc and generate 2 $ per turn.";
+
+        Debug.Log("NomNomNom ! You have a shiny new Restaurant in your park!");
 	}
 
     public override void ShowDetails () {

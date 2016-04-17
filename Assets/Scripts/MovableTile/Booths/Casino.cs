@@ -11,7 +11,10 @@ public class Casino : BaseBooth {
 		nbVisitorsAdded = 0;
 		CashPerTurn = 2;
 
-		Debug.Log("Nyaahhh ! You have a super new Casino in your park!");
+        boothName = "Casino";
+        boothDescription = "This arcade helps you generate 3 $ per turn.";
+
+        Debug.Log("Nyaahhh ! You have a super new Casino in your park!");
 	}
 
     public override void ShowDetails () {

@@ -10,8 +10,6 @@ public class Booths : MonoBehaviour {
 
     private GameManager gameManager;
 
-    string[] boothInfo;
-
     void Start()
     {
         /*
@@ -76,52 +74,37 @@ public class Booths : MonoBehaviour {
 
     public BaseBooth boothsInfo(int boothNumber)
     {
-        string boothName;
-        string boothDescription;
-
         switch (boothNumber)
         {
             case 0:
                 Debug.Log("Restaurant,This restaurant adds 1 visitor to your parc and generate 2 $ per turn.");
-                boothInfo = "Restaurant,This restaurant adds 1 visitor to your parc and generate 2 $ per turn.".Split(',');
-                boothName = boothInfo[0];
-                boothDescription = boothInfo[1];
                 Restaurant restaurant = new Restaurant();
+                restaurant.turnOver();
                 return restaurant;
             case 1:
                 Debug.Log("Security, This guard is securing your park against dinosaur breaches.");
-                boothInfo = "Security, This guard is securing your park against dinosaur breaches.".Split(',');
-                boothName = boothInfo[0];
-                boothDescription = boothInfo[1];
                 Security security = new Security();
+                security.turnOver();
                 return security;                
             case 2:
                 Debug.Log("Bathroom, This clean new bathroom brings 3 new visitors around your park.");
-                boothInfo = "Bathroom, This clean new bathroom brings 3 new visitors around your park.".Split(',');
-                boothName = boothInfo[0];
-                boothDescription = boothInfo[1];
                 Bathroom bathroom = new Bathroom();
+                bathroom.turnOver();
                 return bathroom;
             case 3:
                 Debug.Log("Casino, This arcade helps you generate 3 $ per turn.");
-                boothInfo = "Casino, This arcade helps you generate 3 $ per turn.".Split(',');
-                boothName = boothInfo[0];
-                boothDescription = boothInfo[1];
                 Casino casino = new Casino();
+                casino.turnOver();
                 return casino;
             case 4:
                 Debug.Log("Spy, You have recruited ingenious spies to clone one of your enemy's dinosaur (single use effect).");
-                boothInfo = "Spy, You have recruited ingenious spies to clone one of your enemy's dinosaur (single use effect).".Split(',');
-                boothName = boothInfo[0];
-                boothDescription = boothInfo[1];
                 Spy spy = new Spy();
+                spy.turnOver();
                 return spy;
             case 5:
                 Debug.Log("Paleontologist, You have recruited a wise paleontologist! He will help you counter some unfortunate events that could ruin your park.");
-                boothInfo = "Paleontologist, You have recruited a wise paleontologist! He will help you counter some unfortunate events that could ruin your park.".Split(',');
-                boothName = boothInfo[0];
-                boothDescription = boothInfo[1];
                 Paleontologist paleontologist = new Paleontologist();
+                paleontologist.turnOver();
                 return paleontologist;
             default:
                 Debug.Log("invalid boothId");

@@ -129,6 +129,7 @@ public class MenuPlayers : MonoBehaviour
         playable = true;
         gameManager = this.gameObject.AddComponent<GameManager>();
         this.gameObject.AddComponent<Events>();
+        this.gameObject.AddComponent<Booths>();
         gameManager.setInfos(NbPlayer, NbTurns);
 
         StartCoroutine(animation());

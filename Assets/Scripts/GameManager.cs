@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
         actualPhase = (int)Phase.Event;
         cameraPos = Camera.main.transform;
         eventManager = GetComponent<Events>();
+        BoothInfo = GetComponent<Booths>();
+        Debug.Log(BoothInfo);
         diceFinished = true;
         firstTurn = true; 
         isFinish = false;
@@ -217,6 +219,7 @@ public class GameManager : MonoBehaviour
     public void faceUpBoothsUpdate(int nb)
     {
         List<int> getInfoFaceUpBooths;
+        Debug.Log(nb);
         getInfoFaceUpBooths = BoothInfo.getFaceUpBooths(nb);
         for (int i=0; i < faceUpBooths.Count; i++)
         {

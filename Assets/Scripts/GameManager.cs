@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
                     int boothsUp = faceUpBooths.Count;
                     if (boothsUp != 3)
                     {
-                        int toTurn = boothsUp - 3;
+                        int toTurn = 3 - boothsUp;
                         faceUpBoothsUpdate(toTurn);
                     }
 
@@ -219,7 +219,6 @@ public class GameManager : MonoBehaviour
     public void faceUpBoothsUpdate(int nb)
     {
         List<int> getInfoFaceUpBooths;
-        Debug.Log(nb);
         getInfoFaceUpBooths = BoothInfo.getFaceUpBooths(nb);
         for (int i=0; i < faceUpBooths.Count; i++)
         {

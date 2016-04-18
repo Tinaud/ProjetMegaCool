@@ -10,7 +10,7 @@ public class Booths : MonoBehaviour {
 
     private GameManager gameManager;
 
-    void Start()
+    void Awake()
     {
         /*
         0allBooths.Add("Restaurant,This burger joint adds 1 visitor to your parc and generate 2 $ per turn.");

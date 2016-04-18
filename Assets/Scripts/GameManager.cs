@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     private string currentEvent;
     private Transform cameraPos;
     private Booths BoothInfo;
-    private List<BaseBooth> faceUpBooths = new List<BaseBooth>();
+    public List<BaseBooth> faceUpBooths = new List<BaseBooth>();
 
     void Start () 
     {
@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
         panelFound = false;
         board = GameObject.Find("Board");
         tempList = board.GetComponentsInChildren<ParcManager>();
-        faceUpBoothsUpdate(3);
+        faceUpBooths = BoothInfo.getFaceUpBooths(3);
 
 
         for (int i = 0; i < playerNumber; i++)
@@ -77,10 +77,11 @@ public class GameManager : MonoBehaviour
                     eventManager.applyEventEffect(eventNumber, ref playerList);
 
                     int boothsUp = faceUpBooths.Count;
+                    Debug.Log("boothsUp : " + boothsUp);
                     if (boothsUp != 3)
                     {
                         int toTurn = 3 - boothsUp;
-                        faceUpBoothsUpdate(toTurn);
+                        faceUpBooths =  BoothInfo.getFaceUpBooths(toTurn);
                     }
 
                     actualPhase += firstTurn ? 2 : 1;
@@ -216,7 +217,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void faceUpBoothsUpdate(int nb)
+    /*public void faceUpBoothsUpdate(int nb)
     {
         List<int> getInfoFaceUpBooths;
         getInfoFaceUpBooths = BoothInfo.getFaceUpBooths(nb);
@@ -224,5 +225,5 @@ public class GameManager : MonoBehaviour
         {
             faceUpBooths.Add(BoothInfo.boothsInfo(getInfoFaceUpBooths[i]));
         }
-    } 
+    }*/ 
 }

@@ -48,18 +48,65 @@ public class Booths : MonoBehaviour {
         allBooths.Add(5); allBooths.Add(5); allBooths.Add(5); allBooths.Add(5); allBooths.Add(5);
     }
 
-    // Update is called once per frame
-    public int getBooth()
+    /*public int getBooth()
     {
         int patate = Random.Range(0, allBooths.Count);
         int boothToSend = allBooths[patate];
         allBooths.RemoveAt(patate);
 
         return boothToSend;
+    }*/
+
+    public BaseBooth getFaceDowbBooth()
+    {
+        int patate = Random.Range(0, allBooths.Count);
+        int boothToSendFaceDown = allBooths[patate];
+        allBooths.RemoveAt(patate);
+
+        switch (boothToSendFaceDown)
+            {
+                case 0:
+                    Debug.Log("Restaurant,This restaurant adds 1 visitor to your parc and generate 2 $ per turn.");
+                    Restaurant restaurant = new Restaurant();
+                    restaurant.turnOver();
+                    return restaurant;
+                case 1:
+                    Debug.Log("Security, This guard is securing your park against dinosaur breaches.");
+                    Security security = new Security();
+                    security.turnOver();
+                    return security;
+                case 2:
+                    Debug.Log("Bathroom, This clean new bathroom brings 3 new visitors around your park.");
+                    Bathroom bathroom = new Bathroom();
+                    bathroom.turnOver();
+                    return bathroom;
+                case 3:
+                    Debug.Log("Casino, This arcade helps you generate 3 $ per turn.");
+                    Casino casino = new Casino();
+                    casino.turnOver();
+                    return casino;
+                case 4:
+                    Debug.Log("Spy, You have recruited ingenious spies to clone one of your enemy's dinosaur (single use effect).");
+                    Spy spy = new Spy();
+                    spy.turnOver();
+                    return spy;
+                case 5:
+                    Debug.Log("Paleontologist, You have recruited a wise paleontologist! He will help you counter some unfortunate events that could ruin your park.");
+                    Paleontologist paleontologist = new Paleontologist();
+                    paleontologist.turnOver();
+                    return paleontologist;
+                default:
+                    Debug.Log("invalid boothId");
+                    return null;
+            }
+
     }
 
-    public List<int> getFaceUpBooths(int nb)
+    public List<BaseBooth> getFaceUpBooths(int nb)
     {
+
+        List<BaseBooth> faceUpBoothsList = new List<BaseBooth>();
+
         for (int i = 0; i < nb; i++)
         {
             int patate = Random.Range(0, allBooths.Count);
@@ -69,47 +116,58 @@ public class Booths : MonoBehaviour {
             faceUpBooths.Add(boothToSendFaceUp);
         }
 
-        return faceUpBooths;
+        foreach (int boothID in faceUpBooths)
+        {
+            switch (boothID)
+            {
+                case 0:
+                    Debug.Log("Restaurant,This restaurant adds 1 visitor to your parc and generate 2 $ per turn.");
+                    Restaurant restaurant = new Restaurant();
+                    restaurant.turnOver();
+                    faceUpBoothsList.Add(restaurant);
+                    break;
+                case 1:
+                    Debug.Log("Security, This guard is securing your park against dinosaur breaches.");
+                    Security security = new Security();
+                    security.turnOver();
+                    faceUpBoothsList.Add(security);
+                    break;
+                case 2:
+                    Debug.Log("Bathroom, This clean new bathroom brings 3 new visitors around your park.");
+                    Bathroom bathroom = new Bathroom();
+                    bathroom.turnOver();
+                    faceUpBoothsList.Add(bathroom);
+                    break;
+                case 3:
+                    Debug.Log("Casino, This arcade helps you generate 3 $ per turn.");
+                    Casino casino = new Casino();
+                    casino.turnOver();
+                    faceUpBoothsList.Add(casino);
+                    break;
+                case 4:
+                    Debug.Log("Spy, You have recruited ingenious spies to clone one of your enemy's dinosaur (single use effect).");
+                    Spy spy = new Spy();
+                    spy.turnOver();
+                    faceUpBoothsList.Add(spy);
+                    break;
+                case 5:
+                    Debug.Log("Paleontologist, You have recruited a wise paleontologist! He will help you counter some unfortunate events that could ruin your park.");
+                    Paleontologist paleontologist = new Paleontologist();
+                    paleontologist.turnOver();
+                    faceUpBoothsList.Add(paleontologist);
+                    break;
+                default:
+                    Debug.Log("invalid boothId");
+                    break;
+            }
+        }
+
+        return faceUpBoothsList;
     }
 
-    public BaseBooth boothsInfo(int boothNumber)
+    /*public BaseBooth boothsInfo(int boothNumber)
     {
-        switch (boothNumber)
-        {
-            case 0:
-                Debug.Log("Restaurant,This restaurant adds 1 visitor to your parc and generate 2 $ per turn.");
-                Restaurant restaurant = new Restaurant();
-                restaurant.turnOver();
-                return restaurant;
-            case 1:
-                Debug.Log("Security, This guard is securing your park against dinosaur breaches.");
-                Security security = new Security();
-                security.turnOver();
-                return security;                
-            case 2:
-                Debug.Log("Bathroom, This clean new bathroom brings 3 new visitors around your park.");
-                Bathroom bathroom = new Bathroom();
-                bathroom.turnOver();
-                return bathroom;
-            case 3:
-                Debug.Log("Casino, This arcade helps you generate 3 $ per turn.");
-                Casino casino = new Casino();
-                casino.turnOver();
-                return casino;
-            case 4:
-                Debug.Log("Spy, You have recruited ingenious spies to clone one of your enemy's dinosaur (single use effect).");
-                Spy spy = new Spy();
-                spy.turnOver();
-                return spy;
-            case 5:
-                Debug.Log("Paleontologist, You have recruited a wise paleontologist! He will help you counter some unfortunate events that could ruin your park.");
-                Paleontologist paleontologist = new Paleontologist();
-                paleontologist.turnOver();
-                return paleontologist;
-            default:
-                Debug.Log("invalid boothId");
-                return null;
-        }
-    }
+        
+    }*/
 
 }

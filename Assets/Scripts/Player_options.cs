@@ -23,6 +23,7 @@ public class Player_options : MonoBehaviour {
 	public Sprite tri;
 	public Sprite tyr;
 	public Camera cam;
+    public GameManager gameManager;
 	float width;
 	float height;
 
@@ -38,6 +39,7 @@ public class Player_options : MonoBehaviour {
 	Vector2 rectSize; int sizeX = 22, sizeY = 22;
 	public int playerNo = 1;
 	ParcManager parc;
+
 	Cage cacage;
 
 	//float displayTime = 3f;
@@ -47,6 +49,8 @@ public class Player_options : MonoBehaviour {
 	void Start () {
 		width = 1;
 		height = 1;
+
+        gameManager = GetComponentInParent<GameManager>();
 	}
 
 	// Update is called once per frame
